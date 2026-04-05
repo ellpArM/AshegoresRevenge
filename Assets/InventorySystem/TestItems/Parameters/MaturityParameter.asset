@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b020cd648e8a08c41a3f3b30443ae5cf, type: 3}
   m_Name: MaturityParameter
   m_EditorClassIdentifier: 
-  <parameterName>k__BackingField: 
+  <parameterName>k__BackingField: Maturity

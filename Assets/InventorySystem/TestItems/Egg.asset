@@ -17,3 +17,7 @@ MonoBehaviour:
   <Name>k__BackingField: Egg
   <Description>k__BackingField: Cool egg
   <ItemImage>k__BackingField: {fileID: -4072622106568590741, guid: 9cb020a1da965aa46b5b622823c48875, type: 3}
+  <DefaultParametersList>k__BackingField:
+  - itemParameter: {fileID: 11400000, guid: 7b4f4cad693632143be0eac825d9de12, type: 2}
+    value: 100
+  <actionSFX>k__BackingField: {fileID: 0}

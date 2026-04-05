@@ -17,4 +17,8 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <Description>k__BackingField: PEW PEW PEW
   <ItemImage>k__BackingField: {fileID: 7735313862770517139, guid: 6d9168395da8ced41b8e8fed91480fdd, type: 3}
-  modifiersData: []
+  <DefaultParametersList>k__BackingField: []
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 889a1c49f6ea3c94c82bd25184f025b0, type: 2}
+    value: 1
+  <actionSFX>k__BackingField: {fileID: 0}
