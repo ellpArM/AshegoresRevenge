@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60dffb23cf48265419250c4d16dbb50b, type: 3}
+  m_Name: ElementIconLibrary
+  m_EditorClassIdentifier: 
+  icons:
+  - element: 0
+    icon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+    elementalProjectilePrefab: {fileID: 0}
+    sfxOnUse: {fileID: 0}
+  - element: 1
+    icon: {fileID: 5208024241582667449, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+    elementalProjectilePrefab: {fileID: 0}
+    sfxOnUse: {fileID: 0}
+  - element: 2
+    icon: {fileID: -7105074764738127781, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+    elementalProjectilePrefab: {fileID: 0}
+    sfxOnUse: {fileID: 0}
+  - element: 3
+    icon: {fileID: -1562093178560388313, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+    elementalProjectilePrefab: {fileID: 0}
+    sfxOnUse: {fileID: 0}
+  - element: 5
+    icon: {fileID: -8694565044806487079, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+    elementalProjectilePrefab: {fileID: 0}
+    sfxOnUse: {fileID: 0}

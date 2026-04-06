@@ -1,0 +1,141 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class TroopsField : MonoBehaviour
+{
+    [Header("Field Settings")]
+    public List<Transform> fieldPositions = new List<Transform>();
+    public Transform spawnPoint;
+    public float moveDuration = 0.5f;
+
+    private List<FightingEntity> cardsOnField = new List<FightingEntity>();
+    private Dictionary<FightingEntity, Transform> cardToPosition = new Dictionary<FightingEntity, Transform>();
+    private HashSet<Transform> occupiedPositions = new HashSet<Transform>();
+
+    public IEnumerator AddCard(FightingEntity card, bool setPosition = true)
+    {
+        if (card == null)
+            yield break;
+
+        Transform freeSlot = FindFreePosition();
+        if (freeSlot == null)
+        {
+            Debug.LogWarning("No free position available on TroopsField!");
+            yield break;
+        }
+
+        cardsOnField.Add(card);
+        cardToPosition[card] = freeSlot;
+        occupiedPositions.Add(freeSlot);
+
+        // Place card at spawn point and animate move to target
+        if(setPosition)
+            card.transform.position = spawnPoint.position;
+        yield return StartCoroutine(MoveCardToPosition(card, freeSlot.position));
+        card.troopsField = this;
+    }
+    public IEnumerator ReasignPositions(FightingEntity card)
+    {
+        Transform freeSlot = FindFreePosition();
+        if (freeSlot == null)
+        {
+            Debug.LogWarning("No free position available on TroopsField!");
+            yield break;
+        }
+        cardToPosition[card] = freeSlot;
+        occupiedPositions.Add(freeSlot);
+        card.transform.position = spawnPoint.position;
+        yield return StartCoroutine(MoveCardToPosition(card, freeSlot.position));
+    }
+
+    internal void AddSummonedCard(FightingEntity minionCard)
+    {
+        cardsOnField.Add(minionCard);
+        minionCard.troopsField = this;
+    }
+
+    public void RemoveCard(FightingEntity card)
+    {
+        if (card == null)
+            return;
+
+        if (cardToPosition.ContainsKey(card))
+        {
+            occupiedPositions.Remove(cardToPosition[card]);
+            cardToPosition.Remove(card);
+        }
+
+        cardsOnField.Remove(card);
+    }
+    private Transform FindFreePosition()
+    {
+        foreach (var pos in fieldPositions)
+        {
+            if (!occupiedPositions.Contains(pos))
+                return pos;
+        }
+        return null;
+    }
+
+    private IEnumerator MoveCardToPosition(FightingEntity card, Vector3 targetPosition)
+    {
+        Vector3 startPosition = card.transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < moveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / moveDuration);
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+            card.transform.position = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            yield return null;
+        }
+
+        card.transform.position = targetPosition;
+    }
+
+    public List<FightingEntity> GetCards()
+    {
+        return cardsOnField;
+    }
+
+    private IEnumerator MoveCard(FightingEntity card, Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = card.transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            card.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        card.transform.position = targetPosition;
+    }
+
+    internal void ClearPositions()
+    {
+        occupiedPositions.Clear();
+    }
+
+    public bool AllHeroesDefeated()
+    {
+        // Extract only the HeroInstances
+        var heroes = cardsOnField
+            .Select(c => c as HeroEntity)
+            .Where(h => h != null)
+            .ToList();
+
+        if (heroes.Count == 0)
+            return false;
+
+        return heroes.All(h => h.isDefeated);
+
+        //return cardsOnField.Count > 0 && cardsOnField.Where(x => x as HeroCard && !(x as HeroInstance).isDefeated).Count() == 0;
+    }
+}

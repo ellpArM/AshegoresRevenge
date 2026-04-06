@@ -1659,7 +1659,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5615227149331858651, guid: dfb9f031ae980dc4b9e48414a98986d5, type: 3}
+  m_Sprite: {fileID: -883731238352582941, guid: 8d689b10bdc70e947bf609a6a2fc16d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1682,7 +1682,6 @@ GameObject:
   - component: {fileID: 630673985}
   - component: {fileID: 630673984}
   - component: {fileID: 630673983}
-  - component: {fileID: 630673982}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1690,19 +1689,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &630673982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630673981}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8c2979fcdedf5469862894e910eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!135 &630673983
 SphereCollider:
   m_ObjectHideFlags: 0
