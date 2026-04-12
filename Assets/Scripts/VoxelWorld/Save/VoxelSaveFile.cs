@@ -9,6 +9,7 @@ public class VoxelSaveFile
     public List<AtlasSaveData> atlases = new();
     public List<VoxelDefSaveData> voxels = new();
     public List<ChunkSaveData> chunks = new();
+    public List<WorldEntitySaveData> entities = new();
 }
 
 [Serializable]

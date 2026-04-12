@@ -37,6 +37,10 @@ public class WaveSpawner : MonoBehaviour
     {
         yield return StartCoroutine(SpawnWave(enemyCount));
     }
+    public IEnumerator SpawnWaveCoroutine(FightingEntity[] enemies)
+    {
+        yield return StartCoroutine(SpawnWave(enemies));
+    }
     public IEnumerator SpawnBossCoroutine()
     {
         yield return StartCoroutine(SpawnBoss());
@@ -53,6 +57,21 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < enemyCount; i++)
         {
             yield return StartCoroutine(SpawnRandomEnemyCard());
+        }
+
+        waveActive = false;
+    }
+    private IEnumerator SpawnWave(FightingEntity[] enemies)
+    {
+        if (waveActive)
+            yield break;
+
+        waveActive = true;
+        currentWave++;
+
+        foreach (var entity in enemies)
+        {
+            yield return StartCoroutine(SpawnSpecificEntity(entity));
         }
 
         waveActive = false;
@@ -74,10 +93,23 @@ public class WaveSpawner : MonoBehaviour
         {
             //cardInstance.SetCardData(randomCard);
             entity.troopsField = enemyField;
-            yield return StartCoroutine(enemyField.AddCard(entity));
+            yield return StartCoroutine(enemyField.AddEntity(entity));
         }
 
         waveActive = false;
+    }
+    private IEnumerator SpawnSpecificEntity(FightingEntity entity)
+    {
+        GameObject newCardGO = Instantiate(entity, transform.position, Quaternion.identity).gameObject;
+        newCardGO.name = entity.name;
+        FightingEntity cardInstance = newCardGO.GetComponent<FightingEntity>();
+        cardInstance.ScalePower(healthScale, damageScale);
+
+        if (cardInstance != null)
+        {
+            cardInstance.troopsField = enemyField;
+            yield return StartCoroutine(enemyField.AddEntity(cardInstance));
+        }
     }
 
     private IEnumerator SpawnRandomEnemyCard()
@@ -93,7 +125,7 @@ public class WaveSpawner : MonoBehaviour
         {
             //cardInstance.SetCardData(randomCard);
             cardInstance.troopsField = enemyField;
-            yield return StartCoroutine(enemyField.AddCard(cardInstance));
+            yield return StartCoroutine(enemyField.AddEntity(cardInstance));
         }
     }
 }

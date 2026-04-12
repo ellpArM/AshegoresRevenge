@@ -1,5 +1,7 @@
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 public interface IMapGenerator
 {
@@ -13,6 +15,8 @@ public class World : MonoBehaviour
     public VoxelDatabase voxelDatabase;
     public VoxelDatabase VoxelDatabase => voxelDatabase;
     public Material chunkMaterial;
+    public GameObject enemyPrefab;
+    public GameObject playerPrefab;
 
     public Material baseVoxelMaterial;
     private Dictionary<VoxelAtlas, Material> materialCache = new();
@@ -37,8 +41,10 @@ public class World : MonoBehaviour
         SetVoxel(new Vector3Int(0, 0, 0), 2);
         activeVoxel = voxelDatabase.GetVoxel(1);
 
+
         IMapGenerator mg = GetComponent<IMapGenerator>();
         mg!.GenerateMap();
+
     }
 
     void CreateChunk(Vector3Int coord)
@@ -168,6 +174,7 @@ public class World : MonoBehaviour
 
         GameObject go = new GameObject($"Chunk {coord}");
         go.transform.position = coord * Chunk.Size;
+        go.layer = LayerMask.NameToLayer("Terrain");
 
         ChunkRenderer renderer = go.AddComponent<ChunkRenderer>();
         renderer.Initialize(chunk, this);

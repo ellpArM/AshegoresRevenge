@@ -4,17 +4,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class FightingEntity : MonoBehaviour
 {
-
+    //[SerializeField, HideInInspector]
+    [SerializeField]
+    private string guid;
+    public EntitiesDatabase database;
+    public string Guid => guid;
     public string visibleName;
     [Header("Card Data")]
     public int attackPower = 100;
     protected int currentHealth = 0;
     public int maxHealth;
-    public int speed = 100;
-    public int speedCount = 500;
 
     [Header("References")]
     [SerializeField] public SpriteRenderer cardSprite;
@@ -59,7 +66,24 @@ public class FightingEntity : MonoBehaviour
     {
         UpdateVisuals();
     }
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        if (PrefabUtility.IsPartOfPrefabAsset(this))
+        {
+            string path = AssetDatabase.GetAssetPath(this);
+            string newGuid = AssetDatabase.AssetPathToGUID(path);
 
+            if (guid != newGuid)
+            {
+                guid = newGuid;
+                EditorUtility.SetDirty(this);
+            }
+            if (database)
+                database.Register(this);
+        }
+    }
+#endif
     void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))

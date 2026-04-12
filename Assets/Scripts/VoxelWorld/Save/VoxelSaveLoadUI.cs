@@ -22,14 +22,14 @@ public class VoxelSaveLoadUI : MonoBehaviour
     {
         string path = FileDialogUtil.SaveFile("VoxelWorld");
         if (!string.IsNullOrEmpty(path))
-            VoxelSaveLoadManager.Save(path, world, database);
+            VoxelSaveLoadManager.Save(path, world);
     }
 
     void OnLoad()
     {
         string path = FileDialogUtil.OpenFile();
         if (!string.IsNullOrEmpty(path))
-            VoxelSaveLoadManager.Load(path, world, database);
+            VoxelSaveLoadManager.Load(path, world);
         VoxelPaletteUI.instance.RefreshUI();
     }
 }

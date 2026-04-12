@@ -64,7 +64,7 @@ public class AttackSkill : BaseSkill
     private IEnumerator WaitForTargetAndAttack()
     {
         BattleManager.Instance.SetPlayerInput(false);
-        List<FightingEntity> enemies = BattleManager.Instance.enemyField.GetCards();
+        List<FightingEntity> enemies = BattleManager.Instance.enemyField.GetEntities();
 
         HighLightUnits(enemies);
 

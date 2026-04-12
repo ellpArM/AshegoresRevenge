@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoxelPlayerMover : MonoBehaviour
+public class VoxelPlayerMover : MonoBehaviour, ISaveableWorldEntity
 {
     public float moveSpeed = 3f;
 
     private Coroutine moveRoutine;
+    SelectionCircle selectionCircle;
+    LayerMask layerMask;
+    private void Start()
+    {
+        FindAnyObjectByType<VoxelCameraController>().target = transform;
+        selectionCircle = GetComponentInChildren<SelectionCircle>();
+        selectionCircle.Show(SelectionState.Green);
+        layerMask = LayerMask.GetMask("Terrain");
+    }
 
     void Update()
     {
@@ -20,7 +29,7 @@ public class VoxelPlayerMover : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit))
+        if (!Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
             return;
 
         Vector3Int clickedVoxel = Vector3Int.FloorToInt(hit.point - hit.normal * 0.1f);
@@ -56,5 +65,24 @@ public class VoxelPlayerMover : MonoBehaviour
                 yield return null;
             }
         }
+    }
+    public WorldEntitySaveData Save()
+    {
+        return new WorldEntitySaveData
+        {
+            type = "Player",
+            id = 0,
+            position = transform.position,
+            jsonData = ""
+        };
+    }
+
+    public void Load(WorldEntitySaveData data)
+    {
+        transform.position = data.position;
+    }
+    public void StopMovement()
+    {
+        StopAllCoroutines();
     }
 }

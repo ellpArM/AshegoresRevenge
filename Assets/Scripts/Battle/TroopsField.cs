@@ -11,13 +11,13 @@ public class TroopsField : MonoBehaviour
     public Transform spawnPoint;
     public float moveDuration = 0.5f;
 
-    private List<FightingEntity> cardsOnField = new List<FightingEntity>();
+    private List<FightingEntity> entitiesOnField = new List<FightingEntity>();
     private Dictionary<FightingEntity, Transform> cardToPosition = new Dictionary<FightingEntity, Transform>();
     private HashSet<Transform> occupiedPositions = new HashSet<Transform>();
 
-    public IEnumerator AddCard(FightingEntity card, bool setPosition = true)
+    public IEnumerator AddEntity(FightingEntity entity, bool setPosition = true)
     {
-        if (card == null)
+        if (entity == null)
             yield break;
 
         Transform freeSlot = FindFreePosition();
@@ -27,15 +27,15 @@ public class TroopsField : MonoBehaviour
             yield break;
         }
 
-        cardsOnField.Add(card);
-        cardToPosition[card] = freeSlot;
+        entitiesOnField.Add(entity);
+        cardToPosition[entity] = freeSlot;
         occupiedPositions.Add(freeSlot);
 
         // Place card at spawn point and animate move to target
         if(setPosition)
-            card.transform.position = spawnPoint.position;
-        yield return StartCoroutine(MoveCardToPosition(card, freeSlot.position));
-        card.troopsField = this;
+            entity.transform.position = spawnPoint.position;
+        yield return StartCoroutine(MoveCardToPosition(entity, freeSlot.position));
+        entity.troopsField = this;
     }
     public IEnumerator ReasignPositions(FightingEntity card)
     {
@@ -53,7 +53,7 @@ public class TroopsField : MonoBehaviour
 
     internal void AddSummonedCard(FightingEntity minionCard)
     {
-        cardsOnField.Add(minionCard);
+        entitiesOnField.Add(minionCard);
         minionCard.troopsField = this;
     }
 
@@ -68,7 +68,7 @@ public class TroopsField : MonoBehaviour
             cardToPosition.Remove(card);
         }
 
-        cardsOnField.Remove(card);
+        entitiesOnField.Remove(card);
     }
     private Transform FindFreePosition()
     {
@@ -97,9 +97,9 @@ public class TroopsField : MonoBehaviour
         card.transform.position = targetPosition;
     }
 
-    public List<FightingEntity> GetCards()
+    public List<FightingEntity> GetEntities()
     {
-        return cardsOnField;
+        return entitiesOnField;
     }
 
     private IEnumerator MoveCard(FightingEntity card, Vector3 targetPosition, float duration)
@@ -126,7 +126,7 @@ public class TroopsField : MonoBehaviour
     public bool AllHeroesDefeated()
     {
         // Extract only the HeroInstances
-        var heroes = cardsOnField
+        var heroes = entitiesOnField
             .Select(c => c as HeroEntity)
             .Where(h => h != null)
             .ToList();

@@ -9,9 +9,6 @@ public class FreezeEffect : StatusEffect
     {
         base.Initialize(targetUnit, origin, power);
         EffectsManager.instance.CreateFloatingText(target.transform.position, "Frozen", Color.black);
-        originalSpeed = target.speed;
-        target.speed -= Mathf.RoundToInt(target.speed * 0.5f);
-        target.speedCount += 100;
     }
     public override string GetDescription()
     {
@@ -35,7 +32,6 @@ public class FreezeEffect : StatusEffect
 
     protected override void OnExpire()
     {
-        target.speed = originalSpeed;
         base.OnExpire();
     }
 }

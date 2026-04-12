@@ -41,9 +41,9 @@ public class BattleManager : MonoBehaviour
     public CameraPathPoint[] enterCameraPath;
     public CameraPathPoint[] exitCameraPath;
     private int currentStageIndex = 0;
-    public GameBoard[] allStages;
+    public EncounterData[] allStages;
     public Transform roomOrigin;
-    GameBoard currentRoom;
+    EncounterData currentRoom;
     public Image blackFade;
     public Camera cam;
     public FreeCameraControl camController;
@@ -97,7 +97,7 @@ public class BattleManager : MonoBehaviour
 
     public List<FightingEntity> GetEnemies()
     {
-        return enemyField.GetCards();
+        return enemyField.GetEntities();
     }
 
     internal HeroEntity GetHeroOfelement(ElementType element)
@@ -123,15 +123,15 @@ public class BattleManager : MonoBehaviour
             //hero.SetCardData(hero);
             hero.troopsField = playerField;
             PlayerHeroes.Add(hero);
-            yield return playerField.AddCard(hero);
+            yield return playerField.AddEntity(hero);
             playerDeck.availableElements.Add(hero.mainElement);
         }
 
-        // Spawn enemy wave
-        waveCounter++;
-        InfoPanel.instance.UpdateWavesCount(waveCounter, maxWavesCount);
-
-        yield return enemySpawner.SpawnWaveCoroutine();
+        //// Spawn enemy wave
+        //waveCounter++;
+        //InfoPanel.instance.UpdateWavesCount(waveCounter, maxWavesCount);
+        
+        yield return enemySpawner.SpawnWaveCoroutine(BattleTransitionManager.Instance.CurrentEncounter.enemies);
         waveActive = true;
 
         //StartOfWaveRoutine();
@@ -143,7 +143,7 @@ public class BattleManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitUntil(() => enemyField.GetCards().Count == 0 && waveActive);
+            yield return new WaitUntil(() => enemyField.GetEntities().Count == 0 && waveActive);
 
             yield return new WaitForSeconds(0.5f);
             waveActive = false;
@@ -200,7 +200,7 @@ public class BattleManager : MonoBehaviour
             GameOverScreen.instance.Show();
         }
 
-        FightingEntity[] playerUnits = playerField.GetCards().ToArray();
+        FightingEntity[] playerUnits = playerField.GetEntities().ToArray();
         foreach (var hero in playerUnits)
         {
             if (hero == null) continue;
@@ -209,9 +209,9 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        List<FightingEntity> justHeroes = playerField.GetCards().ToList();
-        List<FightingEntity> allPlayerUnits = playerField.GetCards().ToList();
-        List<FightingEntity> enemies = enemyField.GetCards();
+        List<FightingEntity> justHeroes = playerField.GetEntities().ToList();
+        List<FightingEntity> allPlayerUnits = playerField.GetEntities().ToList();
+        List<FightingEntity> enemies = enemyField.GetEntities();
         foreach (var enemy in enemies)
         {
             SkillSelector selector = enemy.GetComponent<SkillSelector>();
@@ -234,7 +234,7 @@ public class BattleManager : MonoBehaviour
         foreach (var hero in justHeroes)
             hero.ShowSelector(SelectionState.Active);
 
-        yield return new WaitUntil(() => playerInput.EndTurnPressed || enemyField.GetCards().Count == 0);
+        yield return new WaitUntil(() => playerInput.EndTurnPressed || enemyField.GetEntities().Count == 0);
         playerInput.EndTurnPressed = false;
 
         if (actionsThisTurn > 0)
@@ -244,7 +244,7 @@ public class BattleManager : MonoBehaviour
         foreach (var hero in justHeroes)
             hero.HideSelector();
 
-        if (enemyField.GetCards().Count > 0)
+        if (enemyField.GetEntities().Count > 0)
             StartCoroutine(SummonsTurnSimple());
         else
             yield return SimpleWaveTransition();
@@ -252,8 +252,8 @@ public class BattleManager : MonoBehaviour
     private IEnumerator SummonsTurnSimple()
     {
         Debug.Log("Player minions turn start");
-        List<FightingEntity> enemyCards = enemyField.GetCards();
-        List<FightingEntity> summonCards = playerField.GetCards().ToList();
+        List<FightingEntity> enemyCards = enemyField.GetEntities();
+        List<FightingEntity> summonCards = playerField.GetEntities().ToList();
         summonCards.RemoveAll(card =>
         {
             HeroEntity hero = card as HeroEntity;
@@ -269,7 +269,7 @@ public class BattleManager : MonoBehaviour
         foreach (var summon in summonCards)
         {
             summon.ShowSelector(SelectionState.Active);
-            enemyCards = enemyField.GetCards();
+            enemyCards = enemyField.GetEntities();
             if (summon == null) continue;
             if (enemyCards.Count == 0) break;
 
@@ -286,15 +286,15 @@ public class BattleManager : MonoBehaviour
         foreach (var summon in summonCards)
             summon.HideSelector();
 
-        if (enemyField.GetCards().Count > 0)
+        if (enemyField.GetEntities().Count > 0)
             StartCoroutine(EnemyTurnSimple());
         else
             yield return SimpleWaveTransition();
     }
     private IEnumerator EnemyTurnSimple()
     {
-        List<FightingEntity> enemyCards = enemyField.GetCards().ToList();
-        List<FightingEntity> playerCards = playerField.GetCards().ToList();
+        List<FightingEntity> enemyCards = enemyField.GetEntities().ToList();
+        List<FightingEntity> playerCards = playerField.GetEntities().ToList();
         playerCards.RemoveAll(card =>
         {
             HeroEntity hero = card as HeroEntity;
@@ -309,7 +309,7 @@ public class BattleManager : MonoBehaviour
             yield return StartCoroutine(enemy.ProcessPassivesTurnStart());
         }
 
-        enemyCards = enemyField.GetCards().ToList(); // Rebuild the list after potential removals
+        enemyCards = enemyField.GetEntities().ToList(); // Rebuild the list after potential removals
         enemyCards.RemoveAll(e => e.GetComponent<FreezeEffect>() != null); // make frozen units skip action
 
         if(enemyCards.Count > 0)
@@ -365,40 +365,10 @@ public class BattleManager : MonoBehaviour
     }
     private IEnumerator SimpleWaveTransition()
     {
-            yield return new WaitForSeconds(0.5f);
-            waveActive = false;
+        yield return new WaitForSeconds(0.5f);
+        waveActive = false;
 
-            HealOnWaveClear();
-            int enemyCount = 3;
-            waveCounter++;
-            if (waveCounter is (2 or 4 or 8))
-                enemyCount = 4;
-            if (waveCounter is (5 or 9))
-                enemyCount = 5;
-
-            enemySpawner.healthScale += hpScaleIncPerWave;
-            enemySpawner.damageScale += dmgScaleIncPerWave;
-            if (waveCounter < maxWavesCount)
-            {
-                InfoPanel.instance.UpdateWavesCount(waveCounter, maxWavesCount);
-                yield return StartCoroutine(enemySpawner.SpawnWaveCoroutine(enemyCount));
-                waveActive = true;
-
-                yield return StartCoroutine(PlayerTurnSimple());
-            }
-            else if (waveCounter == maxWavesCount)
-            {
-                InfoPanel.instance.UpdateWavesCount(waveCounter, maxWavesCount);
-                yield return enemySpawner.SpawnBossCoroutine();
-                waveActive = true;
-                playerDeck.DrawUntilHandIsFull(maxCardsInHand);
-                yield return StartCoroutine(PlayerTurnSimple());
-            }
-            else
-            {
-                yield return StartCoroutine(EndLevel());
-            }
-        
+        BattleTransitionManager.Instance.ReturnToWorld(true);
     }
     public void SelectTarget(FightingEntity target)
     {
@@ -448,7 +418,7 @@ public class BattleManager : MonoBehaviour
 
     private void ResetAllAttacks()
     {
-        foreach (var c in playerField.GetCards())
+        foreach (var c in playerField.GetEntities())
         {
             if (c != null) c.HasActedThisTurn = false;
         }
@@ -742,29 +712,32 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator LoadNextRoomEnvironment()
     {
-        GameBoard roomPrefab = allStages[currentStageIndex];
-        if (currentRoom != null)
-            Destroy(currentRoom.gameObject);
 
-        currentRoom = Instantiate(roomPrefab, roomOrigin);
+        yield return null;
 
-        playerField.fieldPositions = currentRoom.playerLocations.ToList();
-        playerField.spawnPoint = currentRoom.playerEnterLocation;
-        enemyField.fieldPositions = currentRoom.enemyLocations.ToList();
-        enemyField.spawnPoint = currentRoom.enemyEnterLocation;
-        exitPathPoints = currentRoom.exitPath;
-        enterCameraPath = currentRoom.enterCameraPath;
-        exitCameraPath = currentRoom.exitCameraPath;
-        RenderSettings.skybox = currentRoom.skybox;
-        enemySpawner.BossPrefab = currentRoom.StageBoss;
-        enemySpawner.enemies = currentRoom.enemies.ToList();
+        //EncounterData roomPrefab = allStages[currentStageIndex];
+        //if (currentRoom != null)
+        //    Destroy(currentRoom.gameObject);
 
-        playerField.ClearPositions();
-        foreach (var hero in PlayerHeroes)
-        {
-            hero.transform.position = currentRoom.playerEnterLocation.position;
-            yield return playerField.ReasignPositions(hero);
-        }
+        //currentRoom = Instantiate(roomPrefab, roomOrigin);
+        yield return null;
+        //playerField.fieldPositions = currentRoom.playerLocations.ToList();
+        //playerField.spawnPoint = currentRoom.playerEnterLocation;
+        //enemyField.fieldPositions = currentRoom.enemyLocations.ToList();
+        //enemyField.spawnPoint = currentRoom.enemyEnterLocation;
+        //exitPathPoints = currentRoom.exitPath;
+        //enterCameraPath = currentRoom.enterCameraPath;
+        //exitCameraPath = currentRoom.exitCameraPath;
+        //RenderSettings.skybox = currentRoom.skybox;
+        //enemySpawner.BossPrefab = currentRoom.StageBoss;
+        //enemySpawner.enemies = currentRoom.enemies.ToList();
+
+        //playerField.ClearPositions();
+        //foreach (var hero in PlayerHeroes)
+        //{
+        //    hero.transform.position = currentRoom.playerEnterLocation.position;
+        //    yield return playerField.ReasignPositions(hero);
+        //}
 
         //yield return new WaitForSeconds(1f);
     }

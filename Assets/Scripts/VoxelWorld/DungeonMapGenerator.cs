@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 {
-    public Transform player;
-    public Transform boss;
+    public GameObject playerPrefab;
+    public GameObject bossPrefab;
+    public GameObject enemyPrefab;
 
     public int roomCount = 12;
     public int minRoomSize = 4;
@@ -15,6 +16,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
     public int floorVoxelId = 1;
     public int wallVoxelId = 2;
+    int nextEnemyId = 1;
 
     private List<Room> rooms = new();
 
@@ -35,6 +37,11 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
     public void GenerateMap()
     {
+        // if has path we are returning from Battle scene and BattleTransitionManager will handle restoring world
+        // else assume we have to generate new world
+        if (BattleTransitionManager.Instance.GetPath() != null)
+            return;
+
         World.instance.BeginVoxelBatch();
 
         rooms.Clear();
@@ -42,6 +49,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
         GenerateLinearRooms();
         GenerateBranches();
         BuildWalls();
+        SpawnEnemies();
         PlaceActors();
 
         World.instance.EndVoxelBatch();
@@ -190,25 +198,70 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
         Room start = rooms[0];
         Room end = rooms[rooms.Count - 1];
 
-        if (player != null)
+        //if (player != null)
+        //{
+        //    player.position = new Vector3(
+        //        start.center.x + 0.5f,
+        //        1,
+        //        start.center.y + 0.5f
+        //    );
+        //}
+        if (playerPrefab != null)
         {
-            player.position = new Vector3(
-                start.center.x + 0.5f,
-                1,
-                start.center.y + 0.5f
-            );
+            Instantiate(playerPrefab,
+                new Vector3(start.center.x + 0.5f, 1, start.center.y + 0.5f),
+                Quaternion.identity);
         }
 
-        if (boss != null)
+        //if (boss != null)
+        //{
+        //    boss.position = new Vector3(
+        //        end.center.x + 0.5f,
+        //        1,
+        //        end.center.y + 0.5f
+        //    );
+        //    var enemy = boss.GetComponent<EnemyWorldEntity>();
+        //    if (enemy != null)
+        //        enemy.enemyId = nextEnemyId++;
+        //}
+        if (bossPrefab != null)
         {
-            boss.position = new Vector3(
-                end.center.x + 0.5f,
-                1,
-                end.center.y + 0.5f
-            );
+            var bossObj = Instantiate(bossPrefab,
+                new Vector3(end.center.x + 0.5f, 1, end.center.y + 0.5f),
+                Quaternion.identity);
+
+            var enemy = bossObj.GetComponent<EnemyWorldEntity>();
+            if (enemy != null)
+            {
+                enemy.enemyId = GenerateUniqueEnemyId();
+            }
         }
     }
+    int GenerateUniqueEnemyId()
+    {
+        return nextEnemyId++;
+    }
+    void SpawnEnemies()
+    {
+        if (enemyPrefab == null)
+            return;
 
+        for (int i = 1; i < rooms.Count - 1; i++)
+        {
+            Room room = rooms[i];
+
+            Vector3 spawnPos = new Vector3(
+                room.center.x + 0.5f,
+                1f,
+                room.center.y + 0.5f
+            );
+
+            var enemyObj = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            var enemy = enemyObj.GetComponent<EnemyWorldEntity>();
+            if (enemy != null)
+                enemy.enemyId = GenerateUniqueEnemyId();
+        }
+    }
     bool Overlaps(Room candidate)
     {
         foreach (var room in rooms)

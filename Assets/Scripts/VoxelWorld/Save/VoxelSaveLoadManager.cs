@@ -1,45 +1,26 @@
 using System.IO;
 using UnityEngine;
+public interface ISaveableWorldEntity
+{
+    WorldEntitySaveData Save();
+    void Load(WorldEntitySaveData data);
+}
 
+[System.Serializable]
+public class WorldEntitySaveData
+{
+    public string type;
+    public int id;
+    public Vector3 position;
+
+    public string jsonData;
+}
 public static class VoxelSaveLoadManager
 {
-    public static void Save(string path, World world, VoxelDatabase database)
+    public static void Save(string path, World world)
     {
         VoxelSaveFile save = new();
 
-        // Atlases
-        foreach (var atlas in database.Atlases)
-        {
-            save.atlases.Add(new AtlasSaveData
-            {
-                id = 1,//atlas.id,
-                name = atlas.name,
-                texturePath = atlas.texturePath,
-                gridSize = atlas.gridSize,
-                tilesX = atlas.gridSize,
-                tilesY = atlas.gridSize
-            });
-        }
-
-        // Voxels
-        foreach (var v in database.voxelDefinitions)
-        {
-            save.voxels.Add(new VoxelDefSaveData
-            {
-                id = 1,// v.id,
-                name = v.name,
-                isSolid = v.isSolid,
-                atlasId = 1,//v.atlas.id,
-                faceTiles = v.faceTiles,
-                //south = v.GetFaceUV(VoxelFace.South),
-                //east = v.GetFaceUV(VoxelFace.East),
-                //west = v.GetFaceUV(VoxelFace.West),
-                //top = v.GetFaceUV(VoxelFace.Top),
-                //bottom = v.GetFaceUV(VoxelFace.Bottom)
-            });
-        }
-
-        // Chunks
         foreach (var pair in world.Chunks)
         {
             save.chunks.Add(new ChunkSaveData
@@ -49,33 +30,53 @@ public static class VoxelSaveLoadManager
             });
         }
 
+        var entities = Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
+        foreach (var e in entities)
+        {
+            if (e is ISaveableWorldEntity saveable)
+            {
+                save.entities.Add(saveable.Save());
+            }
+        }
+
         File.WriteAllText(path, JsonUtility.ToJson(save, true));
     }
 
-    public static void Load(string path, World world, VoxelDatabase database)
+    public static void Load(string path, World world, int skipId = -1)
     {
         string json = File.ReadAllText(path);
         VoxelSaveFile save = JsonUtility.FromJson<VoxelSaveFile>(json);
 
         world.Clear();
 
-        database.Clear();
-
-        // Atlases
-        foreach (var a in save.atlases)
-            database.CreateAtlasFromSave(a);
-
-        // Voxels
-        foreach (var v in save.voxels)
-            database.CreateVoxelFromSave(v);
-
-        database.RebuildIndex();
-        // Chunks
         foreach (var c in save.chunks)
         {
             ChunkRenderer r = world.GetOrCreateChunk(c.coord);
             r.ChunkData.DeserializeVoxels(c.voxels);
             r.RebuildMesh();
+        }
+
+        // Load entities
+        foreach (var entityData in save.entities)
+        {
+            GameObject obj = null;
+            if (entityData.id == skipId)
+                continue; // defeated enemy. do not restore
+            switch (entityData.type)
+            {
+                case "Enemy":
+                    obj = Object.Instantiate(world.enemyPrefab);
+                    break;
+                case "Player":
+                    obj = Object.Instantiate(world.playerPrefab);
+                    break;
+            }
+
+            if (obj == null)
+                continue;
+
+            obj.GetComponent<ISaveableWorldEntity>()!.Load(entityData);
         }
     }
 }
