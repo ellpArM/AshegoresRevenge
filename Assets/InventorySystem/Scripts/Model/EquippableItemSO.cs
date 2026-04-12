@@ -9,12 +9,16 @@ namespace Inventory.Model
         [SerializeField]
         public string ActionName => "Equip";
 
+        [SerializeField]
+        private EquipmentSlot slot;
+        public EquipmentSlot Slot => slot;
+
         [field: SerializeField]
         public AudioClip actionSFX { get; private set; }
 
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
         {
-            AgentWeapon weaponSystem = character.GetComponent<AgentWeapon>();
+            EquipmentSystem weaponSystem = character.GetComponent<EquipmentSystem>();
             if (weaponSystem != null)
             {
                 weaponSystem.SetWeapon(this, itemState == null ? DefaultParametersList : itemState);

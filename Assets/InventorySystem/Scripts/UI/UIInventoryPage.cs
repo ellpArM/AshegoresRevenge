@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.EventSystems;
+using Inventory.Model;
 
 namespace Inventory.UI
 {
@@ -15,6 +17,9 @@ namespace Inventory.UI
         [SerializeField] MouseFollower mouseFollower;
         [SerializeField] ItemActionPanel actionPanel;
 
+        [SerializeField] GameObject tabs;
+        [SerializeField] GameObject information;
+
         List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
         private int currentlyDraggedItemIndex = -1;
@@ -22,11 +27,26 @@ namespace Inventory.UI
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
         public event Action<int, int> OnSwapItems;
 
+        [SerializeField] List<UIInventoryItem> equipmentUI;
+        private Dictionary<EquipmentSlot, int> equipmentSlots = new Dictionary<EquipmentSlot, int>();
+        [SerializeField] EquipmentSystem equipmentSystem;
+
         private void Awake()
         {
+            equipmentSlots[EquipmentSlot.Wand] = 0;
+            equipmentSlots[EquipmentSlot.Spellbook] = 1;
+            equipmentSlots[EquipmentSlot.Hat] = 2;
+            equipmentSlots[EquipmentSlot.Robes] = 3;
+            equipmentSlots[EquipmentSlot.Amulet] = 4;
             Hide();
             mouseFollower.Toggle(false);
             itemDescription.ResetDescription();
+        }
+
+        public void UpdateEquipmentUI(EquipmentSlot slot, ItemSO item)
+        {
+            
+            equipmentUI[equipmentSlots[slot]].SetData(item.ItemImage, 0);
         }
 
         public void InitializeInventoryUI(int inventorySize)
@@ -48,6 +68,37 @@ namespace Inventory.UI
                 uiItem.OnItemEndDrag += HandleEndDrag;
                 uiItem.OnRightMouseBtnClick += HandleShowItemActions;
             }
+            foreach (Transform child in tabs.transform)
+            {
+                UITabs c = child.GetComponent<UITabs>();
+                c.OnTabClicked += SwitchTab;
+            }
+        }
+
+        private void SwitchTab(GameObject tab, GameObject button)
+        {
+            foreach (Transform child in tabs.transform)
+            {
+                ChangeBrightness(child, 1.00f);
+            }
+            foreach (Transform child in information.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            tab.SetActive(true);
+            ChangeBrightness(button.transform, 0.65f);
+        }
+
+        private void ChangeBrightness(Transform obj,float val)
+        {
+            Image im = obj.GetComponent<Image>();
+            if (im == null) return;
+            Color c = im.color;
+            float h, s, v;
+            Color.RGBToHSV(c, out h, out s, out v);
+            v = val;
+            c = Color.HSVToRGB(h, s, v);
+            im.color = c;
         }
 
         internal void ResetAllItems()
