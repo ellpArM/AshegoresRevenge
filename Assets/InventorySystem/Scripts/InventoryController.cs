@@ -17,6 +17,8 @@ namespace Inventory
 
         [SerializeField] InventorySO inventoryData;
 
+        [SerializeField] EquipmentSystem equipmentSystem;
+
         public List<InventoryItem> initialItems = new List<InventoryItem>();
 
         public void Start()
@@ -30,11 +32,17 @@ namespace Inventory
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUI;
             inventoryData.RemoveActionMenu += RemoveActionMenu;
+            equipmentSystem.UpdateInventory += UpdateEquipmentUI;
             foreach(InventoryItem item in initialItems)
             {
                 if (item.IsEmpty) continue;
                 inventoryData.AddItem(item);
             }
+        }
+
+        private void UpdateEquipmentUI(EquipmentSlot slot, ItemSO item)
+        {
+            inventoryPage.UpdateEquipmentUI(slot, item);
         }
 
         private void RemoveActionMenu()
