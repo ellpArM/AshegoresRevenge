@@ -1,6 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct VoxelRun
+{
+    public int id;
+    public int count;
+}
 public class Chunk
 {
     public const int Size = 32;
@@ -42,33 +49,66 @@ public class Chunk
                y >= 0 && y < Size &&
                z >= 0 && z < Size;
     }
-    public int[] SerializeVoxels()
+    public VoxelRun[] SerializeVoxels()
     {
         int size = Size;
-        int[] data = new int[size * size * size];
+        List<VoxelRun> runs = new List<VoxelRun>();
 
-        int i = 0;
+        int currentId = voxels[0, 0, 0].VoxelId;
+        int count = 0;
+
         for (int x = 0; x < size; x++)
-            for (int y = 0; y < size; y++)
-                for (int z = 0; z < size; z++)
-                    data[i++] = voxels[x, y, z].VoxelId;
-
-        return data;
-    }
-    public void DeserializeVoxels(int[] data)
-    {
-        int size = Size;
-
-        if (data.Length != size * size * size)
         {
-            Debug.LogError("Voxel data size mismatch during deserialization.");
-            return;
+            for (int y = 0; y < size; y++)
+            {
+                for (int z = 0; z < size; z++)
+                {
+                    int id = voxels[x, y, z].VoxelId;
+
+                    if (id == currentId)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        runs.Add(new VoxelRun { id = currentId, count = count });
+                        currentId = id;
+                        count = 1;
+                    }
+                }
+            }
         }
 
-        int i = 0;
-        for (int x = 0; x < size; x++)
-            for (int y = 0; y < size; y++)
-                for (int z = 0; z < size; z++)
-                    voxels[x, y, z] = new Voxel { VoxelId = data[i++] };
+        // add last run
+        runs.Add(new VoxelRun { id = currentId, count = count });
+
+        return runs.ToArray();
+    }
+    public void DeserializeVoxels(VoxelRun[] runs)
+    {
+        int size = Size;
+
+        int x = 0, y = 0, z = 0;
+
+        foreach (var run in runs)
+        {
+            for (int i = 0; i < run.count; i++)
+            {
+                voxels[x, y, z] = new Voxel(run.id);
+
+                // advance index
+                z++;
+                if (z >= size)
+                {
+                    z = 0;
+                    y++;
+                    if (y >= size)
+                    {
+                        y = 0;
+                        x++;
+                    }
+                }
+            }
+        }
     }
 }

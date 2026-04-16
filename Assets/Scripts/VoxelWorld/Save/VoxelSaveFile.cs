@@ -44,5 +44,5 @@ public class VoxelDefSaveData
 public class ChunkSaveData
 {
     public Vector3Int coord;
-    public int[] voxels;
+    public VoxelRun[] voxels;
 }

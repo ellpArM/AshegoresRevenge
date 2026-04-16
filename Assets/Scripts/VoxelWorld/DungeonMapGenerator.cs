@@ -71,7 +71,10 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
             rooms.Add(next);
 
-            CarveCorridor(previous.center, next.center);
+            Vector2Int startEdge = GetEdgePoint(previous, next);
+            Vector2Int endEdge = GetEdgePoint(next, previous);
+
+            CarveCorridor(startEdge, endEdge);
 
             previous = next;
         }
@@ -133,38 +136,96 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
     void CarveCorridor(Vector2Int a, Vector2Int b)
     {
+
         Vector2Int current = a;
 
-        while (current.x != b.x)
+        // --- X phase ---
+        if (a.x < b.x)
         {
-            CarveCorridorSegment(current, true);
-            current.x += (b.x > current.x) ? 1 : -1;
+            for (int x = a.x; x <= b.x; x++)
+            {
+                current.x = x;
+                CarveCorridorSegment(current, Vector2Int.right);
+            }
+        }
+        else if (a.x > b.x)
+        {
+            for (int x = a.x; x >= b.x; x--)
+            {
+                current.x = x;
+                CarveCorridorSegment(current, Vector2Int.left);
+            }
         }
 
-        while (current.y != b.y)
+        // --- Y phase ---
+        if (a.y < b.y)
         {
-            CarveCorridorSegment(current, false);
-            current.y += (b.y > current.y) ? 1 : -1;
+            for (int y = current.y; y <= b.y; y++)
+            {
+                current.y = y;
+                CarveCorridorSegment(current, Vector2Int.up);
+            }
+        }
+        else if (a.y > b.y)
+        {
+            for (int y = current.y; y >= b.y; y--)
+            {
+                current.y = y;
+                CarveCorridorSegment(current, Vector2Int.down);
+            }
         }
     }
-    void CarveCorridorSegment(Vector2Int pos, bool horizontal)
+    void CarveCorridorSegment(Vector2Int pos, Vector2Int direction)
     {
-        int start = -(corridorWidth / 2);
-        int end = start + corridorWidth - 1;
+        int floorY = 0;
+        int wallHeight = 2;
 
-        for (int i = start; i <= end; i++)
+        Vector2Int perp = new Vector2Int(-direction.y, direction.x);
+
+        // --- DEFINE CORRIDOR BOUNDS ---
+        int half = corridorWidth / 2;
+
+        int minOffset = -half;
+        int maxOffset = half;
+
+        // Fix asymmetry for even widths
+        if (corridorWidth % 2 == 0)
         {
-            Vector3Int voxel;
+            maxOffset -= 1;
+        }
 
-            if (horizontal)
-                voxel = new Vector3Int(pos.x, 0, pos.y + i);
-            else
-                voxel = new Vector3Int(pos.x + i, 0, pos.y);
+        // --- FLOOR + CLEAR ---
+        for (int o = minOffset; o <= maxOffset; o++)
+        {
+            Vector2Int offset = pos + perp * o;
 
-            World.instance.SetVoxelBatched(voxel, floorVoxelId);
+            // floor
+            World.instance.SetVoxelBatched(new Vector3Int(offset.x, floorY, offset.y),floorVoxelId);
+
+            // clear space
+            for (int h = 1; h <= wallHeight; h++)
+            {
+                World.instance.SetVoxelBatched(new Vector3Int(offset.x, floorY + h, offset.y), 0);
+            }
+        }
+
+        // --- WALLS (based on SAME bounds) ---
+        Vector2Int leftWall = pos + perp * (minOffset - 1);
+        Vector2Int rightWall = pos + perp * (maxOffset + 1);
+
+        BuildWall(leftWall, floorY, wallHeight);
+        BuildWall(rightWall, floorY, wallHeight);
+    }
+    void BuildWall(Vector2Int pos, int baseY, int height)
+    {
+        for (int h = 1; h <= height; h++)
+        {
+            World.instance.SetVoxelBatched(
+                new Vector3Int(pos.x, baseY + h, pos.y),
+                wallVoxelId
+            );
         }
     }
-
     void BuildWalls()
     {
         HashSet<Vector3Int> walls = new();
@@ -189,7 +250,6 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
             World.instance.SetVoxelBatched(wall, wallVoxelId);
         }
     }
-
     void PlaceActors()
     {
         if (rooms.Count == 0)
@@ -198,14 +258,6 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
         Room start = rooms[0];
         Room end = rooms[rooms.Count - 1];
 
-        //if (player != null)
-        //{
-        //    player.position = new Vector3(
-        //        start.center.x + 0.5f,
-        //        1,
-        //        start.center.y + 0.5f
-        //    );
-        //}
         if (playerPrefab != null)
         {
             Instantiate(playerPrefab,
@@ -213,17 +265,6 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
                 Quaternion.identity);
         }
 
-        //if (boss != null)
-        //{
-        //    boss.position = new Vector3(
-        //        end.center.x + 0.5f,
-        //        1,
-        //        end.center.y + 0.5f
-        //    );
-        //    var enemy = boss.GetComponent<EnemyWorldEntity>();
-        //    if (enemy != null)
-        //        enemy.enemyId = nextEnemyId++;
-        //}
         if (bossPrefab != null)
         {
             var bossObj = Instantiate(bossPrefab,
@@ -307,7 +348,46 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
             if (branch != null)
             {
                 rooms.Add(branch);
-                CarveCorridor(source.center, branch.center);
+                //CarveCorridor(source.center, branch.center);
+
+                Vector2Int startEdge = GetEdgePoint(source, branch);
+                Vector2Int endEdge = GetEdgePoint(branch, source);
+
+                CarveCorridor(startEdge, endEdge);
+            }
+        }
+    }
+    Vector2Int GetEdgePoint(Room from, Room to)
+    {
+        Vector2Int fromCenter = from.center;
+        Vector2Int toCenter = to.center;
+
+        Vector2Int delta = toCenter - fromCenter;
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            if (delta.x > 0)
+            {
+                // RIGHT
+                return new Vector2Int(from.rect.xMax, fromCenter.y);
+            }
+            else
+            {
+                // LEFT
+                return new Vector2Int(from.rect.xMin - 1, fromCenter.y);
+            }
+        }
+        else
+        {
+            if (delta.y > 0)
+            {
+                // TOP
+                return new Vector2Int(fromCenter.x, from.rect.yMax);
+            }
+            else
+            {
+                // BOTTOM
+                return new Vector2Int(fromCenter.x, from.rect.yMin - 1);
             }
         }
     }
