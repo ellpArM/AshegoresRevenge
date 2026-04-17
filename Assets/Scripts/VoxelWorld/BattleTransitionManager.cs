@@ -19,6 +19,7 @@ public class BattleTransitionManager : MonoBehaviour
         }
 
         Instance = this;
+        PlayerDataManager.instance = GetComponent<PlayerDataManager>();
         DontDestroyOnLoad(gameObject);
     }
     public string GetPath()

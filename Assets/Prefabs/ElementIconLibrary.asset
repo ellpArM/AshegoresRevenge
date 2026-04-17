@@ -19,17 +19,17 @@ MonoBehaviour:
     sfxOnUse: {fileID: 0}
   - element: 1
     icon: {fileID: 5208024241582667449, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-    elementalProjectilePrefab: {fileID: 0}
+    elementalProjectilePrefab: {fileID: 6709276644064086281, guid: 1a41c48e83829a74b925e29165124719, type: 3}
     sfxOnUse: {fileID: 0}
   - element: 2
     icon: {fileID: -7105074764738127781, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-    elementalProjectilePrefab: {fileID: 0}
+    elementalProjectilePrefab: {fileID: 6709276644064086281, guid: 1a41c48e83829a74b925e29165124719, type: 3}
     sfxOnUse: {fileID: 0}
   - element: 3
     icon: {fileID: -1562093178560388313, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-    elementalProjectilePrefab: {fileID: 0}
+    elementalProjectilePrefab: {fileID: 6709276644064086281, guid: 1a41c48e83829a74b925e29165124719, type: 3}
     sfxOnUse: {fileID: 0}
   - element: 5
     icon: {fileID: -8694565044806487079, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-    elementalProjectilePrefab: {fileID: 0}
+    elementalProjectilePrefab: {fileID: 6709276644064086281, guid: 1a41c48e83829a74b925e29165124719, type: 3}
     sfxOnUse: {fileID: 0}

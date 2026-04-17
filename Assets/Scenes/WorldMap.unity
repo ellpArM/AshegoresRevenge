@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 40124658}
   - component: {fileID: 40124657}
   - component: {fileID: 40124656}
+  - component: {fileID: 40124659}
   m_Layer: 0
   m_Name: BattleTransferManager
   m_TagString: Untagged
@@ -317,6 +318,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &40124659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40124655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5768865a32ad38e498306a756a178204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &58814129
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +402,7 @@ MonoBehaviour:
   corridorLength: 12
   floorVoxelId: 1
   wallVoxelId: 2
+  startingHeroes: {fileID: 11400000, guid: ab3f39249f245bc4886a93d05293c31f, type: 2}
 --- !u!1 &151859871
 GameObject:
   m_ObjectHideFlags: 0

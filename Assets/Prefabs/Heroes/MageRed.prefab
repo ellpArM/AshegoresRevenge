@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2247bf87d240e4bbed512ced381718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid: 
+  database: {fileID: 11400000, guid: eda8660a038fbe642b43aa736314c65c, type: 2}
   visibleName: 
   attackPower: 100
   maxHealth: 30
@@ -354,7 +356,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.7, z: 0.1}
+  m_Size: {x: 1, y: 2, z: 0.1}
   m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!1 &8612068103122048513
 GameObject:

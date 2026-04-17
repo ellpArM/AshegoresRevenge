@@ -16,6 +16,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
     public int floorVoxelId = 1;
     public int wallVoxelId = 2;
+    public HeroSelectionData startingHeroes;
     int nextEnemyId = 1;
 
     private List<Room> rooms = new();
@@ -51,6 +52,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
         BuildWalls();
         SpawnEnemies();
         PlaceActors();
+        GenerateHeroData();
 
         World.instance.EndVoxelBatch();
     }
@@ -78,6 +80,12 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
             previous = next;
         }
+    }
+    public void GenerateHeroData()
+    {
+        foreach (var hero in startingHeroes.selectedHeroes)
+            PlayerDataManager.instance.AddToParty(hero.GetComponent<HeroEntity>());
+        //startingHeroes.selectedHeroes;
     }
 
     Room TryCreateConnectedRoom(Room previous)

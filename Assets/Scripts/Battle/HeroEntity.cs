@@ -50,4 +50,19 @@ public class HeroEntity : FightingEntity
         currentHealth = maxHealth / 2;
         BattleManager.Instance.AddElementToDeck(mainElement);
     }
+    public void ApplyData(CharacterData data)
+    {
+        maxHealth = data.maxHP;
+        SetHealth(data.currentHP);
+        spellPower = data.spellPower;
+    }
+    public void SetData()
+    {
+        CharacterData data = PlayerDataManager.instance.GetHeroData(Guid);
+        if (data == null)
+            data = PlayerDataManager.instance.AddToParty(this);
+        data.maxHP = maxHealth;
+        data.currentHP = currentHealth;
+        data.spellPower = spellPower;
+    }
 }

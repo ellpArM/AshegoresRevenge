@@ -125,16 +125,17 @@ public class BattleManager : MonoBehaviour
             PlayerHeroes.Add(hero);
             yield return playerField.AddEntity(hero);
             playerDeck.availableElements.Add(hero.mainElement);
-        }
 
-        //// Spawn enemy wave
-        //waveCounter++;
-        //InfoPanel.instance.UpdateWavesCount(waveCounter, maxWavesCount);
+            CharacterData data = PlayerDataManager.instance.GetHeroData(hero.Guid);
+            if(data != null)
+            {
+                hero.ApplyData(data);
+            }
+
+        }
         
         yield return enemySpawner.SpawnWaveCoroutine(BattleTransitionManager.Instance.CurrentEncounter.enemies);
         waveActive = true;
-
-        //StartOfWaveRoutine();
 
         playerDeck.DrawUntilHandIsFull(maxCardsInHand);
         yield return StartCoroutine(PlayerTurnSimple()); // trying out simple turn order
@@ -367,6 +368,11 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         waveActive = false;
+
+        foreach (var hero in PlayerHeroes)
+        {
+            hero.SetData();            
+        }
 
         BattleTransitionManager.Instance.ReturnToWorld(true);
     }

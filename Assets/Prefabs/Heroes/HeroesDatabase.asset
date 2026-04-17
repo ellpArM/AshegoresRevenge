@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e08b8cd4f00660140bc9e82552b0b3b6, type: 3}
-  m_Name: HeroSelectionData
+  m_Script: {fileID: 11500000, guid: 2a7ccd5a6cf7e194bb83257b698c238d, type: 3}
+  m_Name: HeroesDatabase
   m_EditorClassIdentifier: 
-  selectedHeroes:
+  entities:
   - {fileID: 6709276644064086281, guid: c8f6ddc21784e114195f5cce6c42194f, type: 3}
   - {fileID: 6709276644064086281, guid: 2193f62c06a629a4babe332b6bd60c78, type: 3}
   - {fileID: 6709276644064086281, guid: 907c1366db2458142b2aa62d597e68a0, type: 3}
-  hasSelection: 0
