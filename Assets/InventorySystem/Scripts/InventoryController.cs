@@ -17,9 +17,11 @@ namespace Inventory
 
         [SerializeField] InventorySO inventoryData;
 
-        [SerializeField] EquipmentSystem equipmentSystem;
+        [SerializeField] List<EquipmentSystem> equipmentSystem = new List<EquipmentSystem>();
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
+
+        public EquipmentSystem curEquipment;
 
         public void Start()
         {
@@ -32,7 +34,8 @@ namespace Inventory
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUI;
             inventoryData.RemoveActionMenu += RemoveActionMenu;
-            equipmentSystem.UpdateInventory += UpdateEquipmentUI;
+            foreach(EquipmentSystem sys in equipmentSystem) sys.UpdateInventory += UpdateEquipmentUI;
+            
             foreach(InventoryItem item in initialItems)
             {
                 if (item.IsEmpty) continue;
@@ -106,7 +109,7 @@ namespace Inventory
             IItemAction itemAction = inventoryItem.item as IItemAction;
             if (itemAction != null)
             {
-                itemAction.PerformAction(player, inventoryItem.itemState);
+                itemAction.PerformAction(curEquipment, inventoryItem.itemState);
             }
         }
 

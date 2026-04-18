@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.EventSystems;
 using Inventory.Model;
+using System.Linq;
 
 namespace Inventory.UI
 {
@@ -16,6 +17,7 @@ namespace Inventory.UI
         [SerializeField] UIInventoryDescription itemDescription;
         [SerializeField] MouseFollower mouseFollower;
         [SerializeField] ItemActionPanel actionPanel;
+        [SerializeField] InventoryController inventoryController;
 
         [SerializeField] GameObject tabs;
         [SerializeField] GameObject information;
@@ -27,7 +29,12 @@ namespace Inventory.UI
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
         public event Action<int, int> OnSwapItems;
 
-        [SerializeField] List<UIInventoryItem> equipmentUI;
+        [SerializeField] List<UIInventoryItem> equipmentUI1;
+        [SerializeField] List<UIInventoryItem> equipmentUI2;
+        [SerializeField] List<UIInventoryItem> equipmentUI3;
+        [SerializeField] EquipmentSystem pg1;
+        [SerializeField] EquipmentSystem pg2;
+        [SerializeField] EquipmentSystem pg3;
         private Dictionary<EquipmentSlot, int> equipmentSlots = new Dictionary<EquipmentSlot, int>();
         [SerializeField] EquipmentSystem equipmentSystem;
 
@@ -45,8 +52,11 @@ namespace Inventory.UI
 
         public void UpdateEquipmentUI(EquipmentSlot slot, ItemSO item)
         {
-            
-            equipmentUI[equipmentSlots[slot]].SetData(item.ItemImage, 0);
+            EquipmentSystem curEquip = inventoryController.curEquipment;
+            Debug.Log(curEquip);
+            if (curEquip == pg1) equipmentUI1[equipmentSlots[slot]].SetData(item.ItemImage, 0);
+            else if(curEquip == pg2) equipmentUI2[equipmentSlots[slot]].SetData(item.ItemImage, 0);
+            else if(curEquip == pg3) equipmentUI3[equipmentSlots[slot]].SetData(item.ItemImage, 0);
         }
 
         public void InitializeInventoryUI(int inventorySize)
@@ -75,7 +85,7 @@ namespace Inventory.UI
             }
         }
 
-        private void SwitchTab(GameObject tab, GameObject button)
+        private void SwitchTab(GameObject tab, GameObject button, EquipmentSystem eS)
         {
             foreach (Transform child in tabs.transform)
             {
@@ -87,6 +97,7 @@ namespace Inventory.UI
             }
             tab.SetActive(true);
             ChangeBrightness(button.transform, 0.65f);
+            inventoryController.curEquipment = eS;
         }
 
         private void ChangeBrightness(Transform obj,float val)

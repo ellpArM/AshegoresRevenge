@@ -22,3 +22,6 @@ MonoBehaviour:
     value: 100
   slot: 0
   <actionSFX>k__BackingField: {fileID: 0}
+  statModifiers:
+  - stat: 1
+    value: 100

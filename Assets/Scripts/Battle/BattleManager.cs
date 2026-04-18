@@ -129,6 +129,7 @@ public class BattleManager : MonoBehaviour
             CharacterData data = PlayerDataManager.instance.GetHeroData(hero.Guid);
             if(data != null)
             {
+                data.RefreshStats();
                 hero.ApplyData(data);
             }
 

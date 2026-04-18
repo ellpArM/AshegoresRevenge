@@ -9,6 +9,10 @@ public class HeroEntity : FightingEntity
     public int spellPower = 100;
     
     public bool isDefeated = false;
+
+    [Header("References")]
+    public EquipmentSystem equipmentSystem;
+
     public override void Initialize()
     {
         base.Initialize();

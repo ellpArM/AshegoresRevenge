@@ -3,20 +3,13 @@ using UnityEngine;
 
 namespace Inventory.Model
 {
-    [CreateAssetMenu(fileName = "EquippableItemSO", menuName = "Items/EquippableItemSO")]
-    public class EquippableItemSO : ItemSO, IDestroyableItem, IItemAction
+    [CreateAssetMenu(fileName = "SpellbookSO", menuName = "Items/SpellbookSO")]
+    public class SpellbookSO : EquippableItemSO, IDestroyableItem, IItemAction
     {
         [SerializeField]
-        public string ActionName => "Equip";
+        private EquipmentSlot slot = EquipmentSlot.Spellbook;
 
-        [SerializeField]
-        private EquipmentSlot slot;
-        public EquipmentSlot Slot => slot;
 
-        [field: SerializeField]
-        public AudioClip actionSFX { get; private set; }
-
-        public List<StatModifier> statModifiers;
 
         public bool PerformAction(EquipmentSystem weaponSystem, List<ItemParameter> itemState = null)
         {
@@ -29,4 +22,3 @@ namespace Inventory.Model
         }
     }
 }
-

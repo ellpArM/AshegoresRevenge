@@ -252,6 +252,7 @@ MonoBehaviour:
   mainElement: 2
   spellPower: 100
   isDefeated: 0
+  equipmentSystem: {fileID: 11400000, guid: bbefbadeea3f3d040891e804fe205870, type: 2}
 --- !u!212 &4964113359520524644
 SpriteRenderer:
   m_ObjectHideFlags: 0
