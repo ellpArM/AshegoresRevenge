@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
@@ -6,6 +5,7 @@ using System;
 using UnityEngine.EventSystems;
 using Inventory.Model;
 using System.Linq;
+using UnityEngine;
 
 namespace Inventory.UI
 {
@@ -28,6 +28,10 @@ namespace Inventory.UI
 
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
         public event Action<int, int> OnSwapItems;
+
+        // new events for equipment UI interactions
+        public event Action<EquipmentSystem, EquipmentSlot> OnEquipmentDescriptionRequested;
+        public event Action<EquipmentSystem, EquipmentSlot, Transform> OnEquipmentActionRequested;
 
         [SerializeField] List<UIInventoryItem> equipmentUI1;
         [SerializeField] List<UIInventoryItem> equipmentUI2;
@@ -54,9 +58,21 @@ namespace Inventory.UI
         {
             EquipmentSystem curEquip = inventoryController.curEquipment;
             Debug.Log(curEquip);
-            if (curEquip == pg1) equipmentUI1[equipmentSlots[slot]].SetData(item.ItemImage, 0);
-            else if(curEquip == pg2) equipmentUI2[equipmentSlots[slot]].SetData(item.ItemImage, 0);
-            else if(curEquip == pg3) equipmentUI3[equipmentSlots[slot]].SetData(item.ItemImage, 0);
+
+            int idx = equipmentSlots[slot];
+
+            // If item is null, clear the UI slot
+            if (item == null)
+            {
+                if (curEquip == pg1 && equipmentUI1 != null && idx < equipmentUI1.Count) equipmentUI1[idx].ResetData();
+                else if (curEquip == pg2 && equipmentUI2 != null && idx < equipmentUI2.Count) equipmentUI2[idx].ResetData();
+                else if (curEquip == pg3 && equipmentUI3 != null && idx < equipmentUI3.Count) equipmentUI3[idx].ResetData();
+                return;
+            }
+
+            if (curEquip == pg1 && equipmentUI1 != null && idx < equipmentUI1.Count) equipmentUI1[idx].SetData(item.ItemImage, 0);
+            else if (curEquip == pg2 && equipmentUI2 != null && idx < equipmentUI2.Count) equipmentUI2[idx].SetData(item.ItemImage, 0);
+            else if (curEquip == pg3 && equipmentUI3 != null && idx < equipmentUI3.Count) equipmentUI3[idx].SetData(item.ItemImage, 0);
         }
 
         public void InitializeInventoryUI(int inventorySize)
@@ -83,6 +99,25 @@ namespace Inventory.UI
                 UITabs c = child.GetComponent<UITabs>();
                 c.OnTabClicked += SwitchTab;
             }
+
+            // Wire equipment UI lists so they behave like inventory items
+            SetupEquipmentUI(equipmentUI1, pg1);
+            SetupEquipmentUI(equipmentUI2, pg2);
+            SetupEquipmentUI(equipmentUI3, pg3);
+        }
+
+        private void SetupEquipmentUI(List<UIInventoryItem> uiList, EquipmentSystem eqSystem)
+        {
+            if (uiList == null || uiList.Count == 0 || eqSystem == null) return;
+
+            // attach handlers for each equipment UI slot
+            foreach (var uiItem in uiList)
+            {
+                // capture local reference to avoid closure issues
+                UIInventoryItem localItem = uiItem;
+                localItem.OnItemClicked += (it) => HandleEquipmentSelection(localItem, uiList, eqSystem);
+                localItem.OnRightMouseBtnClick += (it) => HandleEquipmentShowActions(localItem, uiList, eqSystem);
+            }
         }
 
         private void SwitchTab(GameObject tab, GameObject button, EquipmentSystem eS)
@@ -97,7 +132,13 @@ namespace Inventory.UI
             }
             tab.SetActive(true);
             ChangeBrightness(button.transform, 0.65f);
-            inventoryController.curEquipment = eS;
+
+            // set current equipment system on controller
+            if (eS != null)
+                inventoryController.curEquipment = eS;
+
+            // request a full UI refresh for the just-opened equipment tab
+            inventoryController.RefreshEquipmentTab(eS);
         }
 
         private void ChangeBrightness(Transform obj,float val)
@@ -216,12 +257,76 @@ namespace Inventory.UI
             actionPanel.transform.position = listOfUIItems[itemIndex].transform.position;
         }
 
+        // New: show action panel anchored to an arbitrary transform (used for equipment slots)
+        public void ShowActionAt(Transform anchorTransform)
+        {
+            if (anchorTransform == null) return;
+            actionPanel.Toggle(true);
+            actionPanel.transform.position = anchorTransform.position;
+        }
+
+        // New: used by InventoryController to set description for equipment slots
+        public void UpdateEquipmentDescription(Sprite itemImage, string name, string description)
+        {
+            itemDescription.SetDescription(itemImage, name, description);
+        }
+
+        // Public helper to clear an equipment UI slot (used when unequipping/dropping)
+        public void ClearEquipmentSlot(EquipmentSlot slot)
+        {
+            int idx = equipmentSlots[slot];
+            EquipmentSystem curEquip = inventoryController.curEquipment;
+
+            if (curEquip == pg1 && equipmentUI1 != null && idx < equipmentUI1.Count) equipmentUI1[idx].ResetData();
+            else if (curEquip == pg2 && equipmentUI2 != null && idx < equipmentUI2.Count) equipmentUI2[idx].ResetData();
+            else if (curEquip == pg3 && equipmentUI3 != null && idx < equipmentUI3.Count) equipmentUI3[idx].ResetData();
+        }
+
+        // equipment click handler: show description via event then update selection visuals
+        private void HandleEquipmentSelection(UIInventoryItem inventoryItemUI, List<UIInventoryItem> uiList, EquipmentSystem eqSystem)
+        {
+            int index = uiList.IndexOf(inventoryItemUI);
+            if (index == -1) return;
+
+            // find slot enum from index mapping
+            EquipmentSlot slot = equipmentSlots.First(kv => kv.Value == index).Key;
+
+            // notify controller to show description for this equipment slot
+            OnEquipmentDescriptionRequested?.Invoke(eqSystem, slot);
+
+            // visual selection
+            DeselectAllItems();
+            inventoryItemUI.Select();
+        }
+
+        // equipment right-click handler: request action menu (unequip/drop) and provide anchor transform
+        private void HandleEquipmentShowActions(UIInventoryItem inventoryItemUI, List<UIInventoryItem> uiList, EquipmentSystem eqSystem)
+        {
+            int index = uiList.IndexOf(inventoryItemUI);
+            if (index == -1) return;
+
+            EquipmentSlot slot = equipmentSlots.First(kv => kv.Value == index).Key;
+
+            // ask controller to populate actions for this equipment slot
+            OnEquipmentActionRequested?.Invoke(eqSystem, slot, inventoryItemUI.transform);
+        }
+
         private void DeselectAllItems()
         {
             foreach (UIInventoryItem item in listOfUIItems)
             {
                 item.Deselect();
             }
+            // also deselect equipment UI items
+            void DeselectList(List<UIInventoryItem> list)
+            {
+                if (list == null) return;
+                foreach (var it in list) it.Deselect();
+            }
+            DeselectList(equipmentUI1);
+            DeselectList(equipmentUI2);
+            DeselectList(equipmentUI3);
+
             actionPanel.Toggle(false);
         }
 

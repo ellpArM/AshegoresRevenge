@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
@@ -6,6 +5,8 @@ using System;
 using Inventory.UI;
 using Inventory.Model;
 using System.Text;
+using UnityEngine;
+using System.Linq;
 
 namespace Inventory
 {
@@ -69,6 +70,10 @@ namespace Inventory
             inventoryPage.OnSwapItems += HandleSwapItems;
             inventoryPage.OnStartDragging += HandleDragging;
             inventoryPage.OnItemActionRequested += HandleItemActionRequest;
+
+            // subscribe to equipment UI events
+            inventoryPage.OnEquipmentDescriptionRequested += HandleEquipmentDescriptionRequest;
+            inventoryPage.OnEquipmentActionRequested += HandleEquipmentActionRequest;
         }
 
         private void HandleItemActionRequest(int itemIndex)
@@ -139,6 +144,84 @@ namespace Inventory
             inventoryPage.UpdateDescription(itemIndex, item.ItemImage, item.name, description);
 
 
+        }
+
+        // New: handle equipment slot left-click -> show description
+        private void HandleEquipmentDescriptionRequest(EquipmentSystem eqSystem, EquipmentSlot slot)
+        {
+            EquippableItemSO item = eqSystem.GetEquippedItem(slot);
+            if (item == null)
+            {
+                inventoryPage.ResetSelection();
+                return;
+            }
+
+            // simple description for equipped item (no itemState access here)
+            string desc = item.Description;
+            inventoryPage.UpdateEquipmentDescription(item.ItemImage, item.Name, desc);
+        }
+
+        // New: handle equipment slot right-click -> show actions (Unequip / Drop)
+        private void HandleEquipmentActionRequest(EquipmentSystem eqSystem, EquipmentSlot slot, Transform anchor)
+        {
+            EquippableItemSO item = eqSystem.GetEquippedItem(slot);
+            if (item == null) return;
+
+            // position action panel at the clicked equipment UI slot
+            inventoryPage.ShowActionAt(anchor);
+
+            // add Unequip action
+            inventoryPage.AddAction("Unequip", () =>
+            {
+                eqSystem.Unequip(slot);
+                // clear UI slot immediately so visuals reflect the change
+                inventoryPage.ClearEquipmentSlot(slot);
+                inventoryPage.ResetSelection();
+            });
+
+            // add Drop action: Unequip (which moves item into inventory) then remove the newly added instance
+            inventoryPage.AddAction("Drop", () =>
+            {
+                // remember item reference
+                ItemSO itemRef = item;
+                // Unequip moves item into inventory
+                eqSystem.Unequip(slot);
+
+                // Try to find first inventory slot that contains this item and remove one quantity.
+                int foundIndex = FindFirstInventoryIndexOfItem(itemRef);
+                if (foundIndex != -1)
+                {
+                    inventoryData.RemoveItem(foundIndex, 1);
+                }
+
+                // clear UI slot immediately
+                inventoryPage.ClearEquipmentSlot(slot);
+                inventoryPage.ResetSelection();
+            });
+        }
+
+        // Public: refresh all equipment UI boxes for the given equipment system (used when opening a tab)
+        public void RefreshEquipmentTab(EquipmentSystem eq)
+        {
+            if (eq == null) return;
+
+            foreach (EquipmentSlot slot in Enum.GetValues(typeof(EquipmentSlot)))
+            {
+                ItemSO item = eq.GetEquippedItem(slot);
+                inventoryPage.UpdateEquipmentUI(slot, item);
+            }
+        }
+
+        // helper to find first inventory index matching an item
+        private int FindFirstInventoryIndexOfItem(ItemSO item)
+        {
+            var state = inventoryData.GetCurrentInventoryState();
+            foreach (var kv in state)
+            {
+                if (kv.Value.item != null && kv.Value.item.ID == item.ID)
+                    return kv.Key;
+            }
+            return -1;
         }
 
         private string PrepareDescription(InventoryItem inventoryItem)
