@@ -1735,6 +1735,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1524434336}
     m_Modifications:
+    - target: {fileID: 399958762002249371, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
+      propertyPath: m_MinHeight
+      value: 651.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 399958762002249371, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 531872462256250307, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_MinHeight
       value: 400
@@ -2241,19 +2249,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4171012718043275742, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4171012718043275742, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4171012718043275742, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 930.6537
       objectReference: {fileID: 0}
     - target: {fileID: 4171012718043275742, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 741.82
       objectReference: {fileID: 0}
     - target: {fileID: 4171012718043275742, guid: 89bf6b8496e465f4eb35f4fc338c98a0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5883,8 +5891,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 277.21927, y: -392.65002}
-  m_SizeDelta: {x: 554.43854, y: 261.7667}
+  m_AnchoredPosition: {x: 277.21927, y: -456.79333}
+  m_SizeDelta: {x: 554.43854, y: 304.5289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1441064954
 PrefabInstance:

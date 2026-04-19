@@ -30,6 +30,7 @@ public class CharacterData
     public int spellPower;
 
     public EquipmentSystem equipmentSystem;
+    public List<GameObject> spells;
 
     public void RefreshStats()
     {
@@ -54,6 +55,11 @@ public class CharacterData
                         spellPower += mod.value;
                         break;
                 }
+            }
+
+            if (item is SpellbookSO spellbook && spellbook.spells != null)
+            {
+                spells.AddRange(spellbook.spells);
             }
         }
 

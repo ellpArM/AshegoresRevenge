@@ -111,6 +111,7 @@ public class BattleManager : MonoBehaviour
     }
     private IEnumerator GameStartRoutine()
     {
+        allSkills = GetComponentsInChildren<BaseSkill>().ToList();
         camController.enabled = false;
         yield return StartCoroutine(LoadNextRoomEnvironment());
         yield return StartCoroutine(MoveCamera(enterCameraPath));
@@ -131,6 +132,7 @@ public class BattleManager : MonoBehaviour
             {
                 data.RefreshStats();
                 hero.ApplyData(data);
+                AddSpells(data.spells);
             }
 
         }
@@ -141,6 +143,17 @@ public class BattleManager : MonoBehaviour
         playerDeck.DrawUntilHandIsFull(maxCardsInHand);
         yield return StartCoroutine(PlayerTurnSimple()); // trying out simple turn order
     }
+
+    private void AddSpells(List<GameObject> spells)
+    {
+        foreach (GameObject spell in spells)
+        {
+            BaseSkill skill = spell.GetComponent<BaseSkill>();
+            if (!allSkills.Contains(skill))
+                allSkills.Add(skill);
+        }
+    }
+
     private IEnumerator WaveMonitorRoutine()
     {
         while (true)
