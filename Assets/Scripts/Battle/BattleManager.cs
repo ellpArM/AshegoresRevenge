@@ -60,8 +60,10 @@ public class BattleManager : MonoBehaviour
     [Header("Turn Settings")]
     [SerializeField] private float enemyTurnDuration = 2f;
 
-    [Header("Global Skills")]
-    public List<BaseSkill> allSkills = new List<BaseSkill>();
+    //[Header("Global Skills")]
+    //skill prefab must be instantiated or they can't start CoRoutines
+    //public List<BaseSkill> allSkills = new List<BaseSkill>();
+    public GameObject skillsContainer;
 
     private List<ElementType> selectedElements = new List<ElementType>();
 
@@ -90,7 +92,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        allSkills = GetComponentsInChildren<BaseSkill>().ToList();
+        //allSkills = GetComponentsInChildren<BaseSkill>().ToList();
         StartCoroutine(GameStartRoutine());
         //StartCoroutine(WaveMonitorRoutine());
     }
@@ -111,7 +113,7 @@ public class BattleManager : MonoBehaviour
     }
     private IEnumerator GameStartRoutine()
     {
-        allSkills = GetComponentsInChildren<BaseSkill>().ToList();
+        //allSkills = GetComponentsInChildren<BaseSkill>().ToList();
         camController.enabled = false;
         yield return StartCoroutine(LoadNextRoomEnvironment());
         yield return StartCoroutine(MoveCamera(enterCameraPath));
@@ -132,7 +134,8 @@ public class BattleManager : MonoBehaviour
             {
                 data.RefreshStats();
                 hero.ApplyData(data);
-                AddSpells(data.spells);
+                if(data.spells != null)
+                    AddSpells(data.spells);
             }
 
         }
@@ -149,8 +152,10 @@ public class BattleManager : MonoBehaviour
         foreach (GameObject spell in spells)
         {
             BaseSkill skill = spell.GetComponent<BaseSkill>();
-            if (!allSkills.Contains(skill))
-                allSkills.Add(skill);
+            Instantiate(skill, skillsContainer.transform);
+            
+            //if (!allSkills.Contains(skill))
+            //    allSkills.Add(skill);
         }
     }
 
@@ -494,7 +499,7 @@ public class BattleManager : MonoBehaviour
     {
         List<BaseSkill> result = new List<BaseSkill>();
 
-        foreach (var skill in allSkills)
+        foreach (var skill in skillsContainer.GetComponentsInChildren<BaseSkill>())
         {
             if (skill.requiredElements.Count != combo.Count)
                 continue;

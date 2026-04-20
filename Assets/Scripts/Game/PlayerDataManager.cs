@@ -30,7 +30,7 @@ public class CharacterData
     public int spellPower;
 
     public EquipmentSystem equipmentSystem;
-    public List<GameObject> spells;
+    public List<GameObject> spells = new();
 
     public void RefreshStats()
     {

@@ -568,7 +568,7 @@ MonoBehaviour:
   hpScaleIncPerStage: 0.25
   dmgScaleIncPerStage: 0.15
   enemyTurnDuration: 0.25
-  allSkills: []
+  skillsContainer: {fileID: 1211102845}
   skillCardParent: {fileID: 785106961}
   skillCardPrefab: {fileID: 335086097788171298, guid: 9e3425b9ee1d5d8448e675c87b35ba10, type: 3}
   actionsText: {fileID: 791288816}
@@ -3354,6 +3354,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3888285316096645545, guid: 41268c77d3d45ca4493f884f82a5c4f1, type: 3}
   m_PrefabInstance: {fileID: 1211102843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1211102845 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3875543213905387267, guid: 41268c77d3d45ca4493f884f82a5c4f1, type: 3}
+  m_PrefabInstance: {fileID: 1211102843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1215714611
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,9 +4018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616b028ba8a29dd4bbcb9b7893c1d031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 30
-  depth: 30
-  height: 0
   mapFile: battle_scene_halls
   groundVoxelId: 1
 --- !u!114 &1576825534

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class VoxelPlayerMover : MonoBehaviour, ISaveableWorldEntity
@@ -26,6 +27,9 @@ public class VoxelPlayerMover : MonoBehaviour, ISaveableWorldEntity
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             TryMove();

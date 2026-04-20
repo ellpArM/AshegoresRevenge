@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdd0a33011b2b1429c966b4168560bd, type: 3}
+  m_Name: SpellbookSO
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Test Spell book
+  <Description>k__BackingField: testing
+  <ItemImage>k__BackingField: {fileID: 2201761652463569855, guid: 710f5bdbf0ea88649b2ede61d38e4465, type: 3}
+  <DefaultParametersList>k__BackingField: []
+  slot: 1
+  <actionSFX>k__BackingField: {fileID: 0}
+  statModifiers:
+  - stat: 0
+    value: 0
+  slot: 1
+  spells:
+  - {fileID: 1173466741511955171, guid: 9dc144ac4d1a4584db35d914fe9ca2cd, type: 3}
+  - {fileID: 1173466741511955171, guid: f170b5368f7432c40b8a94ac4c71204a, type: 3}
+  - {fileID: 1173466741511955171, guid: 1b8d833d9fa6d44488f38ca0e162e321, type: 3}
