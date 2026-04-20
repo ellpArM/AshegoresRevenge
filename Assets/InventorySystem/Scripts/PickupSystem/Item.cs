@@ -23,7 +23,18 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        //GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
+        GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
+    }
+
+    void Update()
+    {
+        if (Camera.main != null)
+        {
+            transform.LookAt(Camera.main.transform);
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            transform.Rotate(0, 180f, 0);
+        }
     }
 
     public void DestroyItem()
