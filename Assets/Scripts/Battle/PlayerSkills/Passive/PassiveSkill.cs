@@ -34,5 +34,5 @@ public abstract class PassiveSkill : MonoBehaviour
         return "";
     }
 
-    public virtual void InitializeFromCaster(FightingEntity mainHero) { }
+    public virtual void InitializeFromCaster(HeroEntity mainHero) { }
 }

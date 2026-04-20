@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1173466741511955171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496969293787346866}
+  - component: {fileID: 7990476186781905602}
+  - component: {fileID: 931301378282377963}
+  m_Layer: 0
+  m_Name: FireShield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496969293787346866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173466741511955171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7990476186781905602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173466741511955171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd7e61bcc55e184eb53661ba2a35ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Shield
+  description: 'Appies fire shield to all allies.
+
+    <passive_info>'
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  requiredElements: 00000000
+  soundCharge: {fileID: 0}
+  effectPrefab: {fileID: 6709276644064086281, guid: 072ca98f94c442544b06ab562c54cfb5, type: 3}
+  elementsLib: {fileID: 11400000, guid: bf601cc590b5dc84ab9f25aaa9380d3a, type: 2}
+  elementalRiseHeight: 4
+  elementalLaunchDuration: 0.4
+  mergeDelay: 0.3
+  effectDuration: 0.6
+  passiveToGrant: {fileID: 931301378282377963}
+  mainElement: 0
+  effectSound: {fileID: 0}
+--- !u!114 &931301378282377963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173466741511955171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf4ac3c359bf6f4ebd87f343be959d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castDescription: 
+  shieldAmount: 5
+  maxShieldAmount: 5
+  strongAgainst: 2
+  weakAgainst: 1
+  visualPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
+  shieldBarPrefab: {fileID: 181281477184934585, guid: d43cc89afc3c67b46ac186a4bcce7cbd, type: 3}
+  worldVisualOffset: {x: 0, y: 2, z: 0}
+  uiBarOffset: {x: 0, y: 40, z: 0}

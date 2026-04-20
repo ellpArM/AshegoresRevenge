@@ -539,8 +539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 1
-  actionsThisTurn: 3
-  maxActionsPerTurn: 3
+  actionsThisTurn: 5
+  maxActionsPerTurn: 5
   maxCardsInHand: 5
   skybox: {fileID: 0}
   playerDeck: {fileID: 1029937652}
