@@ -1,8 +1,8 @@
-using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine;
 
 namespace Inventory.UI
 {
@@ -19,17 +19,33 @@ namespace Inventory.UI
 
         public void ResetDescription()
         {
-            itemImage.gameObject.SetActive(false);
-            title.text = "";
-            description.text = "";
+            // Use UnityEngine.Object null checks so destroyed native objects evaluate to null safely
+            if (itemImage != null)
+            {
+                if (itemImage.gameObject != null)
+                    itemImage.gameObject.SetActive(false);
+            }
+
+            if (title != null)
+                title.text = "";
+
+            if (description != null)
+                description.text = "";
         }
 
         public void SetDescription(Sprite sprite, string itemName, string itemDescription)
         {
-            itemImage.gameObject.SetActive(true);
-            itemImage.sprite = sprite;
-            title.text = itemName;
-            description.text = itemDescription;
+            if (itemImage != null && itemImage.gameObject != null)
+            {
+                itemImage.gameObject.SetActive(true);
+                itemImage.sprite = sprite;
+            }
+
+            if (title != null)
+                title.text = itemName ?? "";
+
+            if (description != null)
+                description.text = itemDescription ?? "";
         }
     }
 }

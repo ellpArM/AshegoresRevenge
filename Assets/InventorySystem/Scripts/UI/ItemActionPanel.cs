@@ -18,8 +18,13 @@ namespace Inventory.UI
 
         public void Toggle(bool val)
         {
+            // guard against destroyed Unity object (this == null covers the "destroyed" state)
+            if (this == null) return;
+
             if (val == true)
                 RemoveOldButtons();
+
+            // this.gameObject is safe now because 'this' is not destroyed
             gameObject.SetActive(val);
         }
 

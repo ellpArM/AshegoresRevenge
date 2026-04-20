@@ -19,13 +19,20 @@ namespace Inventory.Model
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
         public event Action RemoveActionMenu;
 
+        private bool isInitialized = false;
+
         public void Initialize()
         {
-            inventoryItems = new List<InventoryItem>();
-            for (int i = 0; i < Size; i++)
+            if (!isInitialized)
             {
-                inventoryItems.Add(InventoryItem.GetEmptyItem());
+                isInitialized = true;
+                inventoryItems = new List<InventoryItem>();
+                for (int i = 0; i < Size; i++)
+                {
+                    inventoryItems.Add(InventoryItem.GetEmptyItem());
+                }
             }
+            
         }
 
         internal void AddItem(InventoryItem item)
