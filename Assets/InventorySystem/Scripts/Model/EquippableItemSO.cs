@@ -16,9 +16,10 @@ namespace Inventory.Model
         [field: SerializeField]
         public AudioClip actionSFX { get; private set; }
 
-        public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
+        public List<StatModifier> statModifiers;
+
+        public bool PerformAction(EquipmentSystem weaponSystem, List<ItemParameter> itemState = null)
         {
-            EquipmentSystem weaponSystem = character.GetComponent<EquipmentSystem>();
             if (weaponSystem != null)
             {
                 weaponSystem.SetWeapon(this, itemState == null ? DefaultParametersList : itemState);

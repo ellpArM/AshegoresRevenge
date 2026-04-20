@@ -12,9 +12,11 @@ public class PickupSystem : MonoBehaviour
     [SerializeField]
     private InventorySO inventoryData;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Item item = collision.GetComponent<Item>();
+        Debug.Log("ITEM PICKUP");
+        Item item = other.GetComponent<Item>();
+        
         if (item != null)
         {
             int remainder = inventoryData.AddItem(item.InventoryItem, item.Quantity);
@@ -24,4 +26,5 @@ public class PickupSystem : MonoBehaviour
                 item.Quantity = remainder;
         }
     }
+
 }

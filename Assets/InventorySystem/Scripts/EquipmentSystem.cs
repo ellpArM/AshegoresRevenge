@@ -12,8 +12,8 @@ public enum EquipmentSlot
     Amulet
 }
 
-
-public class EquipmentSystem : MonoBehaviour
+[CreateAssetMenu(fileName = "EquipmentSystem", menuName = "Scriptable Objects/EquipmentSystem")]
+public class EquipmentSystem : ScriptableObject
 {
     [SerializeField]
     private InventorySO inventoryData;
@@ -42,7 +42,7 @@ public class EquipmentSystem : MonoBehaviour
         itemStates[slot] = new List<ItemParameter>(itemState);
         
 
-        ModifyParameters(slot);
+        //ModifyParameters(slot);
         UpdateInventory?.Invoke(slot, item);
     }
 
@@ -92,5 +92,10 @@ public class EquipmentSystem : MonoBehaviour
             equippedItems.Remove(slot);
             itemStates.Remove(slot);
         }
+    }
+
+    public Dictionary<EquipmentSlot, EquippableItemSO> GetEquipment()
+    {
+        return equippedItems;
     }
 }

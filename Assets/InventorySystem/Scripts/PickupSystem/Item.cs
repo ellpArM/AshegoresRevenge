@@ -23,12 +23,12 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
+        //GetComponent<SpriteRenderer>().sprite = InventoryItem.ItemImage;
     }
 
     public void DestroyItem()
     {
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         StartCoroutine(AnimateItemPickup());
 
     }

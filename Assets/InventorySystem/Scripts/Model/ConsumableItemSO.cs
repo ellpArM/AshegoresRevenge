@@ -18,13 +18,14 @@ namespace Inventory.Model
         [field: SerializeField]
         public AudioClip actionSFX {get; private set;}
 
-        public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
+        public bool PerformAction(EquipmentSystem weaponSystem, List<ItemParameter> itemState = null)
         {
-            foreach (ModifierData data in modifiersData)
-            {
-                data.statModifier.AffectCharacter(character, data.value);
-            }
-            return true;
+            //foreach (ModifierData data in modifiersData)
+            //{
+            //    data.statModifier.AffectCharacter(character, data.value);
+            //}
+            //return true;
+            return false;
         }
     }
 
@@ -37,7 +38,7 @@ namespace Inventory.Model
     {
         public string ActionName { get; }
         public AudioClip actionSFX  { get; }
-        bool PerformAction(GameObject character, List<ItemParameter> itemState);
+        bool PerformAction(EquipmentSystem equipmentSystem, List<ItemParameter> itemState);
     }
 
     [Serializable]
