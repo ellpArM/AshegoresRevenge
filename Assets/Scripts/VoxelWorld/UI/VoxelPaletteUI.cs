@@ -29,6 +29,13 @@ public class VoxelPaletteUI : MonoBehaviour
 
     [Header("References")]
     public VoxelController voxelController;
+
+    [SerializeField] private int maxVisible = 10;
+
+    private List<VoxelDefinition> visibleVoxels = new();
+    private List<VoxelButtonUI> buttons = new();
+
+    private int selectedIndex = -1;
     private void Awake()
     {
         instance = this;
@@ -76,6 +83,37 @@ public class VoxelPaletteUI : MonoBehaviour
     private void Update()
     {
         RefreshUndoRedoButtons();
+        HandleHotkeys();
+        HandleScrollInput();
+    }
+    void HandleHotkeys()
+    {
+        for (int i = 0; i < visibleVoxels.Count; i++)
+        {
+            KeyCode key = (i == 9) ? KeyCode.Alpha0 : KeyCode.Alpha1 + i;
+
+            if (Input.GetKeyDown(key))
+            {
+                //SelectVoxel(visibleVoxels[i]);
+                SelectIndex(i);
+            }
+        }
+    }
+    void HandleScrollInput()
+    {
+        float scroll = Input.mouseScrollDelta.y;
+
+        if (Mathf.Abs(scroll) < 0.01f)
+            return;
+
+        if (scroll > 0)
+        {
+            SelectIndex(selectedIndex + 1);
+        }
+        else if (scroll < 0)
+        {
+            SelectIndex(selectedIndex - 1);
+        }
     }
 
     void UpdateBrushLabels()
@@ -120,17 +158,64 @@ public class VoxelPaletteUI : MonoBehaviour
         foreach (Transform c in voxelListRoot)
             Destroy(c.gameObject);
 
-        foreach (var voxel in Database.voxelDefinitions)
+        visibleVoxels.Clear();
+        buttons.Clear();
+
+        int count = Mathf.Min(maxVisible, Database.voxelDefinitions.Count);
+
+        for (int i = 0; i < count; i++)
         {
-            Button b = Instantiate(voxelButtonPrefab, voxelListRoot);
-            b.GetComponentInChildren<TextMeshProUGUI>().text = voxel.voxelName;
-            b.onClick.AddListener(() => SelectVoxel(voxel));
+            var voxel = Database.voxelDefinitions[i];
+            visibleVoxels.Add(voxel);
+
+            var obj = Instantiate(voxelButtonPrefab.gameObject, voxelListRoot);
+            var buttonUI = obj.GetComponent<VoxelButtonUI>();
+            buttonUI.GetComponent<Button>().onClick.AddListener(() => SelectVoxel(voxel));
+
+            buttonUI.Setup(voxel, i, SelectVoxel);
+
+            buttons.Add(buttonUI);
         }
+        if (visibleVoxels.Count > 0)
+        {
+            SelectIndex(0);
+        }
+    }
+    void SelectIndex(int index)
+    {
+        if (visibleVoxels.Count == 0)
+            return;
+
+        // Loop index
+        if (index < 0)
+            index = visibleVoxels.Count - 1;
+        else if (index >= visibleVoxels.Count)
+            index = 0;
+
+        selectedIndex = index;
+
+        var selectedVoxel = visibleVoxels[index];
+
+        // Update visuals
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            buttons[i].SetSelected(i == selectedIndex);
+        }
+
+        // Apply selection
+        SelectVoxel(selectedVoxel);
     }
 
     void SelectVoxel(VoxelDefinition voxel)
     {
         world.SetActiveVoxel(voxel);
         FindFirstObjectByType<VoxelController>().SetActiveVoxel(voxel);
+
+        int index = visibleVoxels.IndexOf(voxel);
+        if (index != -1 && index != selectedIndex)
+        {
+            SelectIndex(index);
+            return;
+        }
     }
 }

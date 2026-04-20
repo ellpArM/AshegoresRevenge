@@ -54,7 +54,7 @@ public class VoxelController : MonoBehaviour
             undoManager.PopUndo();
         }
 
-        bool removing = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        bool removing = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
         Vector3Int origin = removing ? hitPos : placePos;
 
         preview.Build(origin, brush, voxelDatabase, removing);

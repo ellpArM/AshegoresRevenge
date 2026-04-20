@@ -17,7 +17,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb957fc69484e744fa2292426ed8e635, type: 2}
   - {fileID: 11400000, guid: a43af86686e5d9343a34bfe118cce8fb, type: 2}
   voxelDefinitions:
-  - {fileID: 11400000, guid: 4d49ae2848eadfc4fab8ed574b1d0c56, type: 2}
-  - {fileID: 11400000, guid: 8325b7cedacdb9042911c6cb2d25b038, type: 2}
+  - {fileID: 11400000, guid: 6a1784cab2b08c943a8fabee4404222f, type: 2}
   - {fileID: 11400000, guid: e832edd830d833043bb0fd08765bf263, type: 2}
+  - {fileID: 11400000, guid: 4d49ae2848eadfc4fab8ed574b1d0c56, type: 2}
+  - {fileID: 11400000, guid: 8e1e3c32101a2854c9c9f11353e6726f, type: 2}
+  - {fileID: 11400000, guid: 8325b7cedacdb9042911c6cb2d25b038, type: 2}
   - {fileID: 11400000, guid: 926341b6d5a0b474698e7c4be8e6c6b6, type: 2}
+  - {fileID: 11400000, guid: e6c91e569571aab49bb39667eec2bc6e, type: 2}
+  - {fileID: 11400000, guid: d4afe77b0b56b35408c23b0075857209, type: 2}
+  - {fileID: 11400000, guid: 6e7cb9ad91449724da2677d80b98c2ac, type: 2}
+  - {fileID: 11400000, guid: dd713766937646544be6b6ebc3517a99, type: 2}

@@ -41,10 +41,8 @@ public class World : MonoBehaviour
         SetVoxel(new Vector3Int(0, 0, 0), 2);
         activeVoxel = voxelDatabase.GetVoxel(1);
 
-
         IMapGenerator mg = GetComponent<IMapGenerator>();
-        mg!.GenerateMap();
-
+        mg?.GenerateMap();
     }
 
     void CreateChunk(Vector3Int coord)

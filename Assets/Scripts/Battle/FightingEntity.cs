@@ -129,10 +129,6 @@ public class FightingEntity : MonoBehaviour
     {
         if (hpBar)
             hpBar.SetValue(currentHealth, maxHealth);
-
-        // I think I'll reomve baseCard. Right sprite will come from prefab of the object
-        //if (cardSprite != null && baseCard != null && baseCard.artwork != null)
-        //    cardSprite.sprite = baseCard.artwork;
     }
 
     internal void SetHealth(int value)

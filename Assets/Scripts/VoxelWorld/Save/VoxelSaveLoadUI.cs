@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class VoxelSaveLoadUI : MonoBehaviour
@@ -7,6 +8,7 @@ public class VoxelSaveLoadUI : MonoBehaviour
     public Button loadButton;
     public Button exportObjButton;
     public Button openVoxelEditorButton;
+    public Button exitButton;
 
     public GameObject voxelEditorWindow;
     public World world;
@@ -15,7 +17,8 @@ public class VoxelSaveLoadUI : MonoBehaviour
     void Start()
     {
         saveButton.onClick.AddListener(OnSave);
-        loadButton.onClick.AddListener(OnLoad);      
+        loadButton.onClick.AddListener(OnLoad);
+        exitButton.onClick.AddListener(Exit);      
     }
 
     void OnSave()
@@ -31,5 +34,9 @@ public class VoxelSaveLoadUI : MonoBehaviour
         if (!string.IsNullOrEmpty(path))
             VoxelSaveLoadManager.Load(path, world);
         VoxelPaletteUI.instance.RefreshUI();
+    }
+    public void Exit()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

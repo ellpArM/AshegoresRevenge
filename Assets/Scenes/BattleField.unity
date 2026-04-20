@@ -4016,6 +4016,7 @@ MonoBehaviour:
   width: 30
   depth: 30
   height: 0
+  mapFile: battle_scene_halls
   groundVoxelId: 1
 --- !u!114 &1576825534
 MonoBehaviour:

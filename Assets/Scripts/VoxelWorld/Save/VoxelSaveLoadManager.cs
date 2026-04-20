@@ -42,10 +42,14 @@ public static class VoxelSaveLoadManager
 
         File.WriteAllText(path, JsonUtility.ToJson(save, true));
     }
-
     public static void Load(string path, World world, int skipId = -1)
     {
         string json = File.ReadAllText(path);
+        LoadJson(json, world, skipId);
+    }
+
+    public static void LoadJson(string json, World world, int skipId = -1)
+    {
         VoxelSaveFile save = JsonUtility.FromJson<VoxelSaveFile>(json);
 
         world.Clear();
