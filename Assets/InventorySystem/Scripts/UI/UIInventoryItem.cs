@@ -25,24 +25,56 @@ namespace Inventory.UI
         }
         public void ResetData()
         {
-            itemImage.gameObject.SetActive(false);
+            // guard against destroyed/missing UI components
+            if (itemImage != null)
+            {
+                // UnityEngine.Object equality handles destroyed objects in editor/runtime
+                if (itemImage.gameObject != null)
+                    itemImage.gameObject.SetActive(false);
+            }
+
+            if (quantityTxt != null)
+                quantityTxt.text = "0";
+
             empty = true;
         }
         public void Deselect()
         {
-            borderImage.enabled = false;
+            if (borderImage != null)
+                borderImage.enabled = false;
         }
         public void SetData(Sprite sprite, int quantity)
         {
-            itemImage.gameObject.SetActive(true);
-            itemImage.sprite = sprite;
-            quantityTxt.text = quantity + "";
+            if (sprite == null)
+            {
+                // ensure we don't access destroyed objects
+                if (itemImage != null && itemImage.gameObject != null)
+                    itemImage.gameObject.SetActive(false);
+
+                if (quantityTxt != null)
+                    quantityTxt.text = "0";
+
+                empty = true;
+                return;
+            }
+
+            if (itemImage != null && itemImage.gameObject != null)
+            {
+                itemImage.gameObject.SetActive(true);
+                itemImage.sprite = sprite;
+                itemImage.preserveAspect = true;
+            }
+
+            if (quantityTxt != null)
+                quantityTxt.text = quantity.ToString();
+
             empty = false;
         }
 
         public void Select()
         {
-            borderImage.enabled = true;
+            if (borderImage != null)
+                borderImage.enabled = true;
         }
 
         public void OnPointerClick(PointerEventData pointerData)

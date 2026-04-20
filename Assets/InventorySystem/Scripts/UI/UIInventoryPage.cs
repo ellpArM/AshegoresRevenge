@@ -315,25 +315,37 @@ namespace Inventory.UI
         {
             foreach (UIInventoryItem item in listOfUIItems)
             {
-                item.Deselect();
+                // UIInventoryItem overrides Unity's == so destroyed objects evaluate to null
+                if (item != null)
+                    item.Deselect();
             }
+
             // also deselect equipment UI items
             void DeselectList(List<UIInventoryItem> list)
             {
                 if (list == null) return;
-                foreach (var it in list) it.Deselect();
+                foreach (var it in list)
+                    if (it != null)
+                        it.Deselect();
             }
             DeselectList(equipmentUI1);
             DeselectList(equipmentUI2);
             DeselectList(equipmentUI3);
 
-            actionPanel.Toggle(false);
+            // Guard calls to actionPanel so we don't call into a destroyed UI component
+            if (actionPanel != null)
+                actionPanel.Toggle(false);
         }
 
         public void Hide()
         {
-            actionPanel.Toggle(false);
-            gameObject.SetActive(false);
+            if (actionPanel != null)
+                actionPanel.Toggle(false);
+
+            // Guard gameObject access too (rare, but defensive)
+            if (this != null && gameObject != null)
+                gameObject.SetActive(false);
+
             ResetDraggedItem();
         }
     }
