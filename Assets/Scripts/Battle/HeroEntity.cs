@@ -16,6 +16,20 @@ public class HeroEntity : FightingEntity
     public override void Initialize()
     {
         base.Initialize();
+
+        try
+        {
+            var cardSprite = GetCardVisual();
+            if (cardSprite != null && equipmentSystem != null)
+            {
+                equipmentSystem.SetOwnerCardSprite(cardSprite);
+            }
+        }
+        catch
+        {
+
+        }
+
         UpdateVisuals();
     }
     public override void UpdateVisuals()

@@ -80,6 +80,7 @@ public class PlayerDataManager : MonoBehaviour
             spellPower = hero.spellPower, 
             baseSpellPower = hero.spellPower, 
             equipmentSystem = hero.equipmentSystem});
+        hero.equipmentSystem.SetOwnerCardSprite(hero.GetCardVisual());
         return party[hero.Guid];
     }
     public CharacterData GetHeroData(string guid)

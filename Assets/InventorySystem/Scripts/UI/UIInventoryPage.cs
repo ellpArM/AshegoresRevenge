@@ -1,11 +1,12 @@
-using System.Collections.Generic;
-using UnityEngine.UI;
-using TMPro;
-using System;
-using UnityEngine.EventSystems;
 using Inventory.Model;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace Inventory.UI
 {
@@ -39,6 +40,9 @@ namespace Inventory.UI
         [SerializeField] EquipmentSystem pg1;
         [SerializeField] EquipmentSystem pg2;
         [SerializeField] EquipmentSystem pg3;
+        [SerializeField] Image equipUI1Image;
+        [SerializeField] Image equipUI2Image;
+        [SerializeField] Image equipUI3Image;
         private Dictionary<EquipmentSlot, int> equipmentSlots = new Dictionary<EquipmentSlot, int>();
         [SerializeField] EquipmentSystem equipmentSystem;
 
@@ -104,6 +108,14 @@ namespace Inventory.UI
             SetupEquipmentUI(equipmentUI1, pg1);
             SetupEquipmentUI(equipmentUI2, pg2);
             SetupEquipmentUI(equipmentUI3, pg3);
+        }
+
+        public void RefreshEquipmentBackground()
+        {
+            EquipmentSystem curEquip = inventoryController.curEquipment;
+            if (curEquip == pg1 && equipmentUI1 != null) equipUI1Image.sprite = curEquip.OwnerCardSprite;
+            else if (curEquip == pg2 && equipmentUI2 != null) equipUI2Image.sprite = curEquip.OwnerCardSprite;
+            else if (curEquip == pg3 && equipmentUI3 != null) equipUI3Image.sprite = curEquip.OwnerCardSprite;
         }
 
         private void SetupEquipmentUI(List<UIInventoryItem> uiList, EquipmentSystem eqSystem)

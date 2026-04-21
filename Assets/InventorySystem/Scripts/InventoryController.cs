@@ -210,6 +210,7 @@ namespace Inventory
                 ItemSO item = eq.GetEquippedItem(slot);
                 inventoryPage.UpdateEquipmentUI(slot, item);
             }
+            inventoryPage.RefreshEquipmentBackground();
         }
 
         // helper to find first inventory index matching an item
