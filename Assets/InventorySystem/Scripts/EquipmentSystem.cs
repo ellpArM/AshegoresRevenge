@@ -29,6 +29,15 @@ public class EquipmentSystem : ScriptableObject
 
     public event Action<EquipmentSlot, EquippableItemSO> UpdateInventory;
 
+    // Runtime-only reference to the owning hero's card sprite (set at runtime by the hero)
+    // Not serialized: updated when the hero spawns / initializes
+    public Sprite OwnerCardSprite { get; private set; }
+
+    public void SetOwnerCardSprite(Sprite s)
+    {
+        OwnerCardSprite = s;
+    }
+
     public void SetWeapon(EquippableItemSO item, List<ItemParameter> itemState)
     {
         EquipmentSlot slot = item.Slot;
