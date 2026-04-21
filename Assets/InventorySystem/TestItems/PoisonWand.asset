@@ -16,7 +16,7 @@ MonoBehaviour:
   <MaxStackSize>k__BackingField: 1
   <Name>k__BackingField: Poison Wand
   <Description>k__BackingField: Cool wand
-  <ItemImage>k__BackingField: {fileID: 7735313862770517139, guid: 6d9168395da8ced41b8e8fed91480fdd, type: 3}
+  <ItemImage>k__BackingField: {fileID: 21300000, guid: 8cfd4e69fd8970f44a59fb9243ef6346, type: 3}
   <DefaultParametersList>k__BackingField:
   - itemParameter: {fileID: 11400000, guid: cc79d95da2c7dad44acc9c47bc1770ac, type: 2}
     value: 100
