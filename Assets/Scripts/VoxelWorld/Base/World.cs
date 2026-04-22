@@ -38,11 +38,19 @@ public class World : MonoBehaviour
         chunkMaterial.mainTexture = atlas.Texture;
 
         //CreateChunk(Vector3Int.zero);
-        SetVoxel(new Vector3Int(0, 0, 0), 2);
         activeVoxel = voxelDatabase.GetVoxel(1);
 
         IMapGenerator mg = GetComponent<IMapGenerator>();
-        mg?.GenerateMap();
+        if (mg != null)
+            mg?.GenerateMap();
+        else
+            GenerateDefaultPlane();
+    }
+    void GenerateDefaultPlane()
+    {
+        for (int i = -8; i < 8; i++) 
+            for (int j = -8; j < 8; j++)
+                SetVoxel(new Vector3Int(i, 0, j), 2);
     }
 
     void CreateChunk(Vector3Int coord)

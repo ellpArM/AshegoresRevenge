@@ -468,8 +468,10 @@ MonoBehaviour:
 
     Space/Shift - move up/down
 
-    Ctrl+click - remove
-    block
+    Ctrl+Left click
+    - remove block
+
+    Ctrl+Right click - replace block
 
     E - toggle mouse cursor
 
@@ -4734,6 +4736,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974998769}
   m_CullTransparentMesh: 1
+--- !u!1 &2064913590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2064913592}
+  - component: {fileID: 2064913591}
+  m_Layer: 0
+  m_Name: FileDialogReceiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2064913591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064913590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961f9c44d00de0d4a895bcc7faf87423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2064913592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064913590}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 132.23602, y: 706.5979, z: 4.764046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4748,3 +4794,4 @@ SceneRoots:
   - {fileID: 151859875}
   - {fileID: 1800999386}
   - {fileID: 1166912952}
+  - {fileID: 2064913592}

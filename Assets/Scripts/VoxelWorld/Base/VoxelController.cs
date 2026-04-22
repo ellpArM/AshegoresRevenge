@@ -67,6 +67,10 @@ public class VoxelController : MonoBehaviour
         {
             RemoveBrush(hitPos);
         }
+        else if (Input.GetMouseButtonDown(1) && removing)
+        {
+            ReplaceBrush(hitPos);
+        }
 
 
     }
@@ -100,7 +104,22 @@ public class VoxelController : MonoBehaviour
         {
             Vector3Int pos = origin + offset;
             currentAction.AddChange(pos, world.GetVoxelId(pos), brush.voxelId);
-            world.SetVoxelBatched(pos, brush.voxelId);
+            if (world.GetVoxel(pos).VoxelId == 0) // replace only Air
+                world.SetVoxelBatched(pos, brush.voxelId);
+        }
+        world.EndVoxelBatch();
+        undoManager.Push(currentAction);
+    }
+    void ReplaceBrush(Vector3Int origin)
+    {
+        VoxelAction currentAction = new();
+        world.BeginVoxelBatch();
+        foreach (var offset in brush.GetOffsets())
+        {
+            Vector3Int pos = origin + offset;
+            currentAction.AddChange(pos, world.GetVoxelId(pos), brush.voxelId);
+            if (world.GetVoxel(pos).VoxelId > 0)
+                world.SetVoxelBatched(pos, brush.voxelId);
         }
         world.EndVoxelBatch();
         undoManager.Push(currentAction);

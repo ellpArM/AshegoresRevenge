@@ -42,6 +42,32 @@ public static class VoxelSaveLoadManager
 
         File.WriteAllText(path, JsonUtility.ToJson(save, true));
     }
+    public static string JsonData(World world)
+    {
+        VoxelSaveFile save = new();
+
+        foreach (var pair in world.Chunks)
+        {
+            save.chunks.Add(new ChunkSaveData
+            {
+                coord = pair.Key,
+                voxels = pair.Value.ChunkData.SerializeVoxels()
+            });
+        }
+
+        var entities = Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
+        foreach (var e in entities)
+        {
+            if (e is ISaveableWorldEntity saveable)
+            {
+                save.entities.Add(saveable.Save());
+            }
+        }
+
+        return JsonUtility.ToJson(save, true);
+        //File.WriteAllText(path, JsonUtility.ToJson(save, true));
+    }
     public static void Load(string path, World world, int skipId = -1)
     {
         string json = File.ReadAllText(path);
