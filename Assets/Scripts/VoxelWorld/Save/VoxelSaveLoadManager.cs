@@ -10,7 +10,8 @@ public interface ISaveableWorldEntity
 public class WorldEntitySaveData
 {
     public string type;
-    public int id;
+    //public int dbId; // id for finding entity in database
+    public int id; // id of object instance
     public Vector3 position;
 
     public string jsonData;
@@ -74,7 +75,7 @@ public static class VoxelSaveLoadManager
         LoadJson(json, world, skipId);
     }
 
-    public static void LoadJson(string json, World world, int skipId = -1)
+    public static void LoadJson(string json, World world = null, int skipId = -1)
     {
         VoxelSaveFile save = JsonUtility.FromJson<VoxelSaveFile>(json);
 
@@ -93,6 +94,7 @@ public static class VoxelSaveLoadManager
             GameObject obj = null;
             if (entityData.id == skipId)
                 continue; // defeated enemy. do not restore
+
             switch (entityData.type)
             {
                 case "Enemy":
@@ -101,12 +103,25 @@ public static class VoxelSaveLoadManager
                 case "Player":
                     obj = Object.Instantiate(world.playerPrefab);
                     break;
+
+                default:
+                    GameObject prefab = world.entitiesDB.GetPrefab(entityData.type);
+                    if (prefab)
+                    {
+                        obj = Object.Instantiate(prefab);
+                        var placed = obj.GetComponent<PlacedEntity>();
+                        if (placed == null)
+                            placed = obj.AddComponent<PlacedEntity>();
+                    }
+                    break;
             }
 
             if (obj == null)
                 continue;
 
-            obj.GetComponent<ISaveableWorldEntity>()!.Load(entityData);
+            var saveable = obj.GetComponent<ISaveableWorldEntity>();
+            if (saveable != null)
+                saveable.Load(entityData);
         }
     }
 }

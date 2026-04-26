@@ -14,9 +14,11 @@ public class World : MonoBehaviour
     public Dictionary<Vector3Int, ChunkRenderer> Chunks => chunks;
     public VoxelDatabase voxelDatabase;
     public VoxelDatabase VoxelDatabase => voxelDatabase;
+    public EntitiesEditorDatabase entitiesDB;
     public Material chunkMaterial;
     public GameObject enemyPrefab;
     public GameObject playerPrefab;
+    public bool selfInitialize = true;
 
     public Material baseVoxelMaterial;
     private Dictionary<VoxelAtlas, Material> materialCache = new();
@@ -27,10 +29,10 @@ public class World : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        voxelDatabase.Initialize();
     }
     void Start()
     {
-        voxelDatabase.Initialize();
 
         atlas = new VoxelAtlas();
         //atlas.Build(voxelDatabase);
@@ -40,6 +42,13 @@ public class World : MonoBehaviour
         //CreateChunk(Vector3Int.zero);
         activeVoxel = voxelDatabase.GetVoxel(1);
 
+        if (selfInitialize)
+        {
+            Initialize();
+        }
+    }
+    public void Initialize()
+    {
         IMapGenerator mg = GetComponent<IMapGenerator>();
         if (mg != null)
             mg?.GenerateMap();
@@ -285,8 +294,16 @@ public class World : MonoBehaviour
             if (pair.Value != null)
                 Destroy(pair.Value.gameObject);
         }
-
         chunks.Clear();
+
+        var entities = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        foreach (var e in entities)
+        {
+            if (e is IMapEntity mapEntity)
+            {
+                Destroy(((MonoBehaviour)mapEntity).gameObject);
+            }
+        }
     }
     private void ApplyTransparencySettings(Material mat, float transparency)
     {

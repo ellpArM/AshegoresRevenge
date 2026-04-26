@@ -33,6 +33,7 @@ public static class FileDialogUtil
         {
             var data = System.IO.File.ReadAllText(path);
             Debug.Log(data);
+            VoxelSaveLoadManager.LoadJson(data, World.instance);
         }
 
 #elif UNITY_STANDALONE_WIN
@@ -43,6 +44,7 @@ public static class FileDialogUtil
         {
             var data = System.IO.File.ReadAllText(paths[0]);
             Debug.Log(data);
+            VoxelSaveLoadManager.LoadJson(data, World.instance);
         }
 
 #elif UNITY_WEBGL

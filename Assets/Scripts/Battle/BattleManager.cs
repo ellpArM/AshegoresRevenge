@@ -140,7 +140,7 @@ public class BattleManager : MonoBehaviour
 
         }
         
-        yield return enemySpawner.SpawnWaveCoroutine(BattleTransitionManager.Instance.CurrentEncounter.enemies);
+        yield return enemySpawner.SpawnWaveCoroutine(BattleTransitionManager.instance.CurrentEncounter.enemies);
         waveActive = true;
 
         playerDeck.DrawUntilHandIsFull(maxCardsInHand);
@@ -393,7 +393,7 @@ public class BattleManager : MonoBehaviour
             hero.SetData();            
         }
 
-        BattleTransitionManager.Instance.ReturnToWorld(true);
+        BattleTransitionManager.instance.ReturnToWorld(true);
     }
     public void SelectTarget(FightingEntity target)
     {
@@ -739,7 +739,11 @@ public class BattleManager : MonoBehaviour
     {
 
         yield return null;
+        //BattleTransitionManager.instance.CurrentEncounter.enemies
+        World.instance.Initialize();
 
+        playerField.SetPositions(true);
+        enemyField.SetPositions(false);
         //EncounterData roomPrefab = allStages[currentStageIndex];
         //if (currentRoom != null)
         //    Destroy(currentRoom.gameObject);

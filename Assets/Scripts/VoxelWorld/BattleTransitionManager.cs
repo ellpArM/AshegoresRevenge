@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class BattleTransitionManager : MonoBehaviour
 {
-    public static BattleTransitionManager Instance;
+    public static BattleTransitionManager instance;
 
     public EncounterData CurrentEncounter;
 
@@ -12,13 +12,13 @@ public class BattleTransitionManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        instance = this;
         PlayerDataManager.instance = GetComponent<PlayerDataManager>();
         DontDestroyOnLoad(gameObject);
     }

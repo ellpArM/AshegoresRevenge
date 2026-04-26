@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TroopsField : MonoBehaviour
 {
@@ -36,6 +37,21 @@ public class TroopsField : MonoBehaviour
             entity.transform.position = spawnPoint.position;
         yield return StartCoroutine(MoveCardToPosition(entity, freeSlot.position));
         entity.troopsField = this;
+    }
+    public void SetPositions(bool forPlayer)
+    {
+        SpawnPointEntity[] spawners = FindObjectsByType<SpawnPointEntity>(FindObjectsSortMode.None);
+        FieldPositionEntity[] positions = FindObjectsByType<FieldPositionEntity>(FindObjectsSortMode.None);
+        if (forPlayer)
+        {
+            spawnPoint = spawners.Where(x => x.team == SpawnPointEntity.Team.Player).FirstOrDefault().transform;
+            fieldPositions = positions.Where(x => x.team == FieldPositionEntity.Team.Player).OrderBy(x => x.transform.position.x).Select(x => x.transform).ToList();
+        }
+        else
+        {
+            spawnPoint = spawners.Where(x => x.team == SpawnPointEntity.Team.Enemy).FirstOrDefault().transform;
+            fieldPositions = positions.Where(x => x.team == FieldPositionEntity.Team.Enemy).OrderByDescending(x => x.transform.position.x).Select(x => x.transform).ToList();
+        }
     }
     public IEnumerator ReasignPositions(FightingEntity card)
     {

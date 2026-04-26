@@ -361,9 +361,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voxelDatabase: {fileID: 11400000, guid: 7c261397fb183d64aa72a3b454619324, type: 2}
+  entitiesDB: {fileID: 0}
   chunkMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
   enemyPrefab: {fileID: 5381485913029500763, guid: 512a4228c4932c245a0fe2778341e399, type: 3}
   playerPrefab: {fileID: 5103983338533060610, guid: 9c5aa7cbdf333754e80fbe57d65153c2, type: 3}
+  selfInitialize: 1
   baseVoxelMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
 --- !u!4 &58814131
 Transform:
@@ -396,10 +398,10 @@ MonoBehaviour:
   bossPrefab: {fileID: 6574091447322922131, guid: 85cf8a49ed7f9d141965d25dc628f0c4, type: 3}
   enemyPrefab: {fileID: 5381485913029500763, guid: 512a4228c4932c245a0fe2778341e399, type: 3}
   roomCount: 10
-  minRoomSize: 6
-  maxRoomSize: 9
+  minRoomSize: 8
+  maxRoomSize: 12
   corridorWidth: 2
-  corridorLength: 12
+  corridorLength: 15
   floorVoxelId: 1
   wallVoxelId: 2
   startingHeroes: {fileID: 11400000, guid: ab3f39249f245bc4886a93d05293c31f, type: 2}

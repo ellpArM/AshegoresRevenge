@@ -68,15 +68,7 @@
                 },
                 {
                     "id": 0,
-                    "count": 20
-                },
-                {
-                    "id": 1,
-                    "count": 1
-                },
-                {
-                    "id": 0,
-                    "count": 10
+                    "count": 31
                 },
                 {
                     "id": 5,
@@ -224,15 +216,7 @@
                 },
                 {
                     "id": 0,
-                    "count": 18
-                },
-                {
-                    "id": 1,
-                    "count": 1
-                },
-                {
-                    "id": 0,
-                    "count": 12
+                    "count": 31
                 },
                 {
                     "id": 5,
@@ -1978,15 +1962,7 @@
                 },
                 {
                     "id": 0,
-                    "count": 18
-                },
-                {
-                    "id": 1,
-                    "count": 1
-                },
-                {
-                    "id": 0,
-                    "count": 12
+                    "count": 31
                 },
                 {
                     "id": 5,
@@ -2656,5 +2632,127 @@
             ]
         }
     ],
-    "entities": []
+    "entities": [
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": -1.5,
+                "y": 1.5,
+                "z": 4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": -3.5,
+                "y": 1.5,
+                "z": 7.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 6.5,
+                "y": 1.5,
+                "z": 7.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "PlayerPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": -7.5,
+                "y": 1.5,
+                "z": -4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 8.5,
+                "y": 1.5,
+                "z": 4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "PlayerSpawnPoint",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": -9.5,
+                "y": 1.5,
+                "z": -11.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 1.5,
+                "y": 1.5,
+                "z": 7.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "PlayerPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 0.5,
+                "y": 1.5,
+                "z": -4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "PlayerPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": -3.5,
+                "y": 1.5,
+                "z": -4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemySpawnLocation",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 9.5,
+                "y": 1.5,
+                "z": 13.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "dbId": 0,
+            "id": 0,
+            "position": {
+                "x": 3.5,
+                "y": 1.5,
+                "z": 4.5
+            },
+            "jsonData": ""
+        }
+    ]
 }

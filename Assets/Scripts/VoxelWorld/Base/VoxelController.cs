@@ -16,6 +16,14 @@ public class VoxelController : MonoBehaviour
     private VoxelUndoManager undoManager = new();
     public bool CanUndo => undoManager.CanUndo;
     public bool CanRedo => undoManager.CanRedo;
+    private void OnDisable()
+    {
+        preview.enabled = false;
+    }
+    private void OnEnable()
+    {
+        preview.enabled = true;
+    }
     void Update()
     {
         bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);

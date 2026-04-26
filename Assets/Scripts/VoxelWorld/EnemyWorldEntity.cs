@@ -20,14 +20,15 @@ public class EnemyWorldEntity : MonoBehaviour, ISaveableWorldEntity
 
     private void Start()
     {
-        enemies = new FightingEntity[Random.Range(0,3) + 1];
-        for (int i = 0; i < enemies.Length; i++)
+        if(enemies.Length == 0)
         {
-            enemies[i] = entitiesDB.GetRandom().GetComponent<FightingEntity>();
+            enemies = new FightingEntity[Random.Range(0, 3) + 1];
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i] = entitiesDB.GetRandom().GetComponent<FightingEntity>();
+            }
+            GenerateVisuals();
         }
-        //selectionCircle = GetComponentInChildren<SelectionCircle>();
-        //selectionCircle.Show(SelectionState.Red);
-        GenerateVisuals();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,7 +42,7 @@ public class EnemyWorldEntity : MonoBehaviour, ISaveableWorldEntity
 
         triggered = true;
 
-        BattleTransitionManager.Instance.StartBattle(this, other.transform);
+        BattleTransitionManager.instance.StartBattle(this, other.transform);
     }
     public WorldEntitySaveData Save()
     {
@@ -76,6 +77,7 @@ public class EnemyWorldEntity : MonoBehaviour, ISaveableWorldEntity
         {
             enemies[i] = EntitiesDatabaseBootstrap.instance.Get(extra.enemyIds[i]).GetComponent<FightingEntity>();
         }
+        GenerateVisuals();
     }
     void GenerateVisuals()
     {

@@ -40,7 +40,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
     {
         // if has path we are returning from Battle scene and BattleTransitionManager will handle restoring world
         // else assume we have to generate new world
-        if (BattleTransitionManager.Instance.GetPath() != null)
+        if (BattleTransitionManager.instance.GetPath() != null)
             return;
 
         World.instance.BeginVoxelBatch();

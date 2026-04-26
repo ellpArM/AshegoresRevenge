@@ -150,9 +150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voxelDatabase: {fileID: 11400000, guid: 7c261397fb183d64aa72a3b454619324, type: 2}
+  entitiesDB: {fileID: 0}
   chunkMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
   enemyPrefab: {fileID: 5381485913029500763, guid: 512a4228c4932c245a0fe2778341e399, type: 3}
   playerPrefab: {fileID: 5103983338533060610, guid: 9c5aa7cbdf333754e80fbe57d65153c2, type: 3}
+  selfInitialize: 1
   baseVoxelMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
 --- !u!4 &58814131
 Transform:
@@ -181,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616b028ba8a29dd4bbcb9b7893c1d031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapFile: battle_scene_halls
+  mapFile: {fileID: 4900000, guid: 1cfa68901113ce04c921250506b17160, type: 3}
   groundVoxelId: 1
 --- !u!1 &151859871
 GameObject:

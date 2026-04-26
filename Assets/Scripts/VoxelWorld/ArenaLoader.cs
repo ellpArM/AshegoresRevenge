@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class ArenaLoader : MonoBehaviour, IMapGenerator
 {
+    public static ArenaLoader instance;
     [Header("Arena Size")]
     //public int width = 20;
     //public int depth = 20;
     //public int height = 0;
-    public string mapFile;
+    public TextAsset mapFile;
 
     [Header("Voxel")]
     public int groundVoxelId = 1; // stone or floor
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void GenerateMap()
     {
@@ -26,9 +31,9 @@ public class ArenaLoader : MonoBehaviour, IMapGenerator
 
     void GenerateArena()
     {
-        TextAsset jsonFile = Resources.Load<TextAsset>("MapData/" + mapFile);
+        //TextAsset jsonFile = Resources.Load<TextAsset>("MapData/" + mapFile);
 
-        VoxelSaveLoadManager.LoadJson(jsonFile.text, World.instance);
+        VoxelSaveLoadManager.LoadJson(mapFile.text, World.instance);
         //int halfW = width / 2;
         //int halfD = depth / 2;
 
