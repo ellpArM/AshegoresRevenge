@@ -35,11 +35,21 @@ namespace Inventory.Model
             
         }
 
+        public void ForceInitialize()
+        {
+            isInitialized = true;
+            inventoryItems = new List<InventoryItem>();
+            for (int i = 0; i < Size; i++)
+            {
+                inventoryItems.Add(InventoryItem.GetEmptyItem());
+            }
+        }
+
         internal void AddItem(InventoryItem item)
         {
             AddItem(item.item, item.quantity);
         }
-
+        
         public int AddItem(ItemSO item, int quantity, List<ItemParameter> itemState = null)
         {
             if(item.IsStackable == false)

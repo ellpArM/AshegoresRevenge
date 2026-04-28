@@ -24,6 +24,7 @@ namespace Inventory
 
         public EquipmentSystem curEquipment;
 
+
         public void Start()
         {
             PrepareUI();
@@ -132,6 +133,7 @@ namespace Inventory
 
         private void HandleDescriptionRequest(int itemIndex)
         {
+            inventoryPage.ClearSpellIcons();
             InventoryItem invItem = inventoryData.GetItemAt(itemIndex);
             if (invItem.IsEmpty)
             {
@@ -143,17 +145,29 @@ namespace Inventory
             string description = PrepareDescription(invItem);
             inventoryPage.UpdateDescription(itemIndex, item.ItemImage, item.name, description);
 
-
+            if (item is SpellbookSO spellbook)
+            {
+                // Replace PopulateSpellIcons and Spells with the actual method/property names
+                inventoryPage.PopulateSpellbookUI(spellbook);
+            }
         }
 
         // New: handle equipment slot left-click -> show description
         private void HandleEquipmentDescriptionRequest(EquipmentSystem eqSystem, EquipmentSlot slot)
         {
+            inventoryPage.ClearSpellIcons();
             EquippableItemSO item = eqSystem.GetEquippedItem(slot);
             if (item == null)
             {
                 inventoryPage.ResetSelection();
                 return;
+            }
+            Debug.Log(item);
+            // if the equipped item is a Spellbook, populate spell icons in the UI
+            if (item is SpellbookSO spellbook)
+            {
+                // Replace PopulateSpellIcons and Spells with the actual method/property names
+                inventoryPage.PopulateSpellbookUI(spellbook);
             }
 
             // simple description for equipped item (no itemState access here)

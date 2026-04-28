@@ -12,6 +12,8 @@ namespace Inventory.UI
         [SerializeField] TMP_Text title;
         [SerializeField] TMP_Text description;
 
+        [SerializeField] UIInventoryPage page;
+
         public void Awake()
         {
             ResetDescription();
@@ -31,10 +33,12 @@ namespace Inventory.UI
 
             if (description != null)
                 description.text = "";
+            page.ClearSpellIcons();
         }
 
         public void SetDescription(Sprite sprite, string itemName, string itemDescription)
         {
+            
             if (itemImage != null && itemImage.gameObject != null)
             {
                 itemImage.gameObject.SetActive(true);

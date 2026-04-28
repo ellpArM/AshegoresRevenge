@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,6 +22,14 @@ namespace Inventory.UI
 
         [SerializeField] GameObject tabs;
         [SerializeField] GameObject information;
+
+        [SerializeField] private Image equipmentPortrait;
+
+        // NEW: spellbook UI references
+        [Header("Spellbook UI")]
+        [SerializeField] private GameObject spellIconPrefab;            // prefab containing `UISpellInfo` (Image + script)
+        [SerializeField] private Transform spellIconParent;            // parent where icons will be instantiated
+        [SerializeField] private GameObject spellDescriptionObject;    // target description UI (UISpellDescription)
 
         List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
@@ -55,6 +64,65 @@ namespace Inventory.UI
             Hide();
             mouseFollower.Toggle(false);
             itemDescription.ResetDescription();
+        }
+
+        // NEW: Populate the spell icon area from a SpellbookSO
+        // Instantiates `spellIconPrefab` under `spellIconParent` for each GameObject in spellbook.spells,
+        // assigns the BaseSkill reference and the spell description object, then updates the icon.
+        public void PopulateSpellbookUI(SpellbookSO spellbook)
+        {
+            // Defensive checks
+            if (spellIconPrefab == null || spellIconParent == null || spellDescriptionObject == null || spellbook == null)
+                return;
+
+            // Clear existing icons
+            ClearSpellIcons();
+
+            foreach (var spellGO in spellbook.spells)
+            {
+                if (spellGO == null) continue;
+
+                // Instantiate an icon entry (the prefab should contain UISpellInfo component)
+                GameObject iconInstance = Instantiate(spellIconPrefab, spellIconParent);
+                if (iconInstance == null) continue;
+
+                UISpellInfo info = iconInstance.GetComponent<UISpellInfo>();
+                if (info == null)
+                {
+                    // If prefab doesn't match expectations, destroy instance and continue
+                    Destroy(iconInstance);
+                    continue;
+                }
+
+                // Try to get the BaseSkill component from the spell prefab (root or children)
+                BaseSkill skill = spellGO.GetComponent<BaseSkill>() ?? spellGO.GetComponentInChildren<BaseSkill>();
+                if (skill == null)
+                {
+                    // No skill found, destroy icon and continue
+                    Destroy(iconInstance);
+                    continue;
+                }
+
+                // Assign the BaseSkill reference and the description object
+                info.spell = skill;
+                info.spellDescription = spellDescriptionObject;
+                info.GetComponent<Image>().sprite = skill.skillIcon;
+
+                // Update the UI (sets sprite etc.)
+                info.SetSpellInfo();
+            }
+        }
+
+        // NEW: Remove existing instantiated spell icons
+        public void ClearSpellIcons()
+        {
+            if (spellIconParent == null) return;
+            for (int i = spellIconParent.childCount - 1; i >= 0; i--)
+            {
+                var child = spellIconParent.GetChild(i);
+                if (child != null)
+                    Destroy(child.gameObject);
+            }
         }
 
         public void UpdateEquipmentUI(EquipmentSlot slot, ItemSO item)
@@ -150,6 +218,7 @@ namespace Inventory.UI
 
             // request a full UI refresh for the just-opened equipment tab
             inventoryController.RefreshEquipmentTab(eS);
+            actionPanel.Toggle(false);
         }
 
         private void ChangeBrightness(Transform obj,float val)
