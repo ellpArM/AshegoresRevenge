@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PoisonArrow
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 1
+  <PersistentID>k__BackingField: 3f9f5dfb-8cf9-4951-b2f2-a06aa93500ba
   <MaxStackSize>k__BackingField: 99
   <Name>k__BackingField: 
   <Description>k__BackingField: PEW PEW PEW

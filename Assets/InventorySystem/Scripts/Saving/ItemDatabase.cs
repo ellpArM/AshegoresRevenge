@@ -9,9 +9,34 @@ public class ItemDatabase : ScriptableObject
 
     private bool initialized = false;
 
+
+    void Awake()
+    {
+        var items = Resources.LoadAll<ItemSO>("Items");
+
+        Debug.Log("ItemDatabase loaded: " + items.Length);
+
+        foreach (var item in items)
+        {
+            Debug.Log(
+                item.name +
+                " | ID: " + item.PersistentID
+            );
+        }
+    }
+
+    // Ensure runtime-only fields are reset when scriptable object is enabled (domain reload / scene load)
+    private void OnEnable()
+    {
+        // Don't rely on the serialized 'initialized' across domain reloads,
+        // force reinitialization of runtime structures.
+        initialized = false;
+        lookup = null;
+    }
+
     public void Initialize()
     {
-        if (initialized)
+        if (initialized && lookup != null)
             return;
 
         lookup = new Dictionary<string, ItemSO>();
@@ -41,10 +66,11 @@ public class ItemDatabase : ScriptableObject
 
     public ItemSO GetItem(string id)
     {
-        if (!initialized)
+        // Ensure lookup is initialized even if 'initialized' got serialized as true
+        if (!initialized || lookup == null)
             Initialize();
 
-        if (lookup.TryGetValue(id, out var item))
+        if (lookup != null && lookup.TryGetValue(id, out var item))
             return item;
 
         Debug.LogError($"Item not found: {id}");

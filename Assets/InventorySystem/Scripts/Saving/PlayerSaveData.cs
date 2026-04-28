@@ -6,5 +6,5 @@ public class PlayerSaveData
 {
     public List<InventoryItemSaveData> inventory;
 
-    public List<EquipmentSaveData> equipment;
+    public List<HeroEquipmentSaveData> heroEquipment;
 }

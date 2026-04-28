@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d634acf37e4a44bb9e7438eb11e007, type: 3}
-  m_Name: Red
+  m_Script: {fileID: 11500000, guid: 88f3632e243dd9f4082acfe198595028, type: 3}
+  m_Name: ItemDatabase
   m_EditorClassIdentifier: 
-  heroID: Hero_3
-  inventoryData: {fileID: 11400000, guid: ab1fa6ca7714feb45871cc151f5a766d, type: 2}
-  parametersToModify: []
