@@ -14,8 +14,14 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
     public int corridorWidth = 2;
     public int corridorLength = 6;
 
+    [Header("Voxels Used")]
+    public int roomEdgeVoxelId = 5;
+    public int roomEdgeWidth = 1;
     public int floorVoxelId = 1;
-    public int wallVoxelId = 2;
+    public int wallVoxelId = 2; 
+    public int wallBottomVoxelId = 3;
+    public int wallTopVoxelId = 4;
+    public int corridorFloorVoxelId = 6;
     public HeroSelectionData startingHeroes;
     int nextEnemyId = 1;
 
@@ -134,9 +140,17 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
         {
             for (int z = rect.yMin; z < rect.yMax; z++)
             {
+                bool isEdge =
+                    x < rect.xMin + roomEdgeWidth ||
+                    x >= rect.xMax - roomEdgeWidth ||
+                    z < rect.yMin + roomEdgeWidth ||
+                    z >= rect.yMax - roomEdgeWidth;
+
+                int voxel = isEdge ? roomEdgeVoxelId : floorVoxelId;
+
                 World.instance.SetVoxelBatched(
                     new Vector3Int(x, 0, z),
-                    floorVoxelId
+                    voxel
                 );
             }
         }
@@ -208,7 +222,7 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
             Vector2Int offset = pos + perp * o;
 
             // floor
-            World.instance.SetVoxelBatched(new Vector3Int(offset.x, floorY, offset.y),floorVoxelId);
+            World.instance.SetVoxelBatched(new Vector3Int(offset.x, floorY, offset.y), corridorFloorVoxelId);
 
             // clear space
             for (int h = 1; h <= wallHeight; h++)
@@ -228,10 +242,16 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
     {
         for (int h = 1; h <= height; h++)
         {
-            World.instance.SetVoxelBatched(
-                new Vector3Int(pos.x, baseY + h, pos.y),
-                wallVoxelId
-            );
+            int voxel;
+
+            if (h == 1)
+                voxel = wallBottomVoxelId;
+            else if (h == height)
+                voxel = wallTopVoxelId;
+            else
+                voxel = wallVoxelId;
+
+            World.instance.SetVoxelBatched(new Vector3Int(pos.x, baseY + h, pos.y), voxel);
         }
     }
     void BuildWalls()
@@ -255,7 +275,17 @@ public class DungeonMapGenerator : MonoBehaviour, IMapGenerator
 
         foreach (var wall in walls)
         {
-            World.instance.SetVoxelBatched(wall, wallVoxelId);
+            int y = wall.y;
+
+            int voxel;
+            if (y == 1)
+                voxel = wallBottomVoxelId;
+            else if (y == 2)
+                voxel = wallTopVoxelId;
+            else
+                voxel = wallVoxelId;
+
+            World.instance.SetVoxelBatched(wall, voxel);
         }
     }
     void PlaceActors()
