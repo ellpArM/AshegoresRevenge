@@ -894,62 +894,142 @@
     ],
     "entities": [
         {
-            "type": "EnemyPosition",
-            "id": 0,
-            "position": {
-                "x": -1.5,
-                "y": 1.5,
-                "z": 2.5
-            },
-            "jsonData": ""
-        },
-        {
-            "type": "EnemyPosition",
-            "id": 0,
-            "position": {
-                "x": -3.5,
-                "y": 1.5,
-                "z": 5.5
-            },
-            "jsonData": ""
-        },
-        {
-            "type": "PlayerPosition",
-            "id": 0,
-            "position": {
-                "x": 1.5,
-                "y": 1.5,
-                "z": -4.5
-            },
-            "jsonData": ""
-        },
-        {
-            "type": "EnemyPosition",
-            "id": 0,
-            "position": {
-                "x": 2.5,
-                "y": 1.5,
-                "z": 2.5
-            },
-            "jsonData": ""
-        },
-        {
-            "type": "EnemyPosition",
-            "id": 0,
-            "position": {
-                "x": -5.5,
-                "y": 1.5,
-                "z": 2.5
-            },
-            "jsonData": ""
-        },
-        {
             "type": "PlayerSpawnPoint",
             "id": 0,
             "position": {
                 "x": -1.5,
                 "y": 1.5,
                 "z": -10.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -7.5,
+                "y": 1.5,
+                "z": -9.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 8.5,
+                "y": 1.5,
+                "z": -9.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -8.5,
+                "y": 1.5,
+                "z": 8.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 10.5,
+                "y": 2.5,
+                "z": -7.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 9.5,
+                "y": 2.5,
+                "z": -2.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 9.5,
+                "y": 2.5,
+                "z": 4.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 9.5,
+                "y": 2.5,
+                "z": 8.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "EnemyPosition",
+            "id": 0,
+            "position": {
+                "x": 0.5,
+                "y": 1.5,
+                "z": 5.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -10.5,
+                "y": 2.5,
+                "z": 0.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -10.5,
+                "y": 2.5,
+                "z": -8.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -10.5,
+                "y": 2.5,
+                "z": 9.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "PlayerPosition",
+            "id": 0,
+            "position": {
+                "x": -4.5,
+                "y": 1.5,
+                "z": -4.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemySpawnLocation",
+            "id": 0,
+            "position": {
+                "x": 0.5,
+                "y": 1.5,
+                "z": 10.5
             },
             "jsonData": ""
         },
@@ -967,9 +1047,39 @@
             "type": "EnemyPosition",
             "id": 0,
             "position": {
-                "x": 0.5,
+                "x": -5.5,
+                "y": 1.5,
+                "z": 2.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "id": 0,
+            "position": {
+                "x": 2.5,
+                "y": 1.5,
+                "z": 2.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "id": 0,
+            "position": {
+                "x": -3.5,
                 "y": 1.5,
                 "z": 5.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "EnemyPosition",
+            "id": 0,
+            "position": {
+                "x": -1.5,
+                "y": 1.5,
+                "z": 2.5
             },
             "jsonData": ""
         },
@@ -977,11 +1087,21 @@
             "type": "PlayerPosition",
             "id": 0,
             "position": {
-                "x": -4.5,
+                "x": 1.5,
                 "y": 1.5,
                 "z": -4.5
             },
             "jsonData": ""
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 8.5,
+                "y": 2.5,
+                "z": 11.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
         },
         {
             "type": "PlayerPosition",
@@ -994,14 +1114,14 @@
             "jsonData": ""
         },
         {
-            "type": "EnemySpawnLocation",
+            "type": "TreeLargeGreen",
             "id": 0,
             "position": {
-                "x": 0.5,
-                "y": 1.5,
-                "z": 10.5
+                "x": -8.5,
+                "y": 2.5,
+                "z": -3.5
             },
-            "jsonData": ""
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
         }
     ]
 }

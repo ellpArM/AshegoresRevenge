@@ -21,6 +21,7 @@ public static class WebGLFileDialog
     public static void SaveFile(string filename, string data)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
+        Debug.Log("SaveFile - calling SaveFileDialog");
         SaveFileDialog(filename, data);
 #endif
     }

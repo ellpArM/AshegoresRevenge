@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SpellbookSO
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 0
+  <PersistentID>k__BackingField: 50dbdf20-8d9a-473c-bf8d-64ae49bb0a5c
   <MaxStackSize>k__BackingField: 1
   <Name>k__BackingField: Test Spell book
   <Description>k__BackingField: testing

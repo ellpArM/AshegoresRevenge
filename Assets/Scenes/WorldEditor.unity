@@ -341,6 +341,7 @@ MonoBehaviour:
   chunkMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
   enemyPrefab: {fileID: 0}
   playerPrefab: {fileID: 0}
+  selfInitialize: 1
   baseVoxelMaterial: {fileID: 2100000, guid: d9bc78380b293244487434e99a8b4ee3, type: 2}
 --- !u!4 &58814131
 Transform:
@@ -893,7 +894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5809262585186265964, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446137823491006964, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
+      propertyPath: m_HorizontalScrollbarVisibility
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6771355214327120830, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: m_AnchorMax.y
@@ -905,15 +910,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7145599390110427072, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7145599390110427072, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7303704571966601039, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.000015
+      value: 0.00004821703
       objectReference: {fileID: 0}
     - target: {fileID: 7805497447178844731, guid: 6b097d3c78f5f4a4e8718381473cdb94, type: 3}
       propertyPath: controller
@@ -2930,7 +2935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7303704571966601039, guid: 8110b96b262b16844ac9d3dc5115a565, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000008455887
+      value: 0.00004434581
       objectReference: {fileID: 0}
     - target: {fileID: 7569975407966182393, guid: 8110b96b262b16844ac9d3dc5115a565, type: 3}
       propertyPath: m_AnchoredPosition.x

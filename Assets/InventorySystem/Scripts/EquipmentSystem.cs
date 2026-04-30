@@ -15,6 +15,12 @@ public enum EquipmentSlot
 [CreateAssetMenu(fileName = "EquipmentSystem", menuName = "Scriptable Objects/EquipmentSystem")]
 public class EquipmentSystem : ScriptableObject
 {
+
+    [SerializeField]
+    private string heroID;
+
+    public string HeroID => heroID;
+
     [SerializeField]
     private InventorySO inventoryData;
 
@@ -107,4 +113,56 @@ public class EquipmentSystem : ScriptableObject
     {
         return equippedItems;
     }
+    public List<EquipmentSaveData> GetSaveData()
+    {
+        var data =
+            new List<EquipmentSaveData>();
+
+        foreach (var kvp in equippedItems)
+        {
+            data.Add(
+                new EquipmentSaveData
+                {
+                    slot = kvp.Key,
+                    itemID =
+                        kvp.Value.PersistentID,
+                    itemState =
+                        new List<ItemParameter>(
+                            itemStates[kvp.Key]
+                        )
+                }
+            );
+        }
+
+        return data;
+    }
+    public void LoadData(
+        List<EquipmentSaveData> data,
+        ItemDatabase database
+    )
+    {
+        equippedItems.Clear();
+        itemStates.Clear();
+
+        foreach (var saved in data)
+        {
+            var item =
+                database.GetItem(saved.itemID)
+                as EquippableItemSO;
+
+            equippedItems[saved.slot] =
+                item;
+
+            itemStates[saved.slot] =
+                new List<ItemParameter>(
+                    saved.itemState
+                );
+
+            UpdateInventory?.Invoke(
+                saved.slot,
+                item
+            );
+        }
+    }
+
 }

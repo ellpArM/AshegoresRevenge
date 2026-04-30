@@ -13,12 +13,11 @@ mergeInto(LibraryManager.library, {
             reader.onload = function (evt) {
                 var content = evt.target.result;
 
-                // Send data back to Unity
-                unityInstance.SendMessage(
-                    'FileDialogReceiver',   // GameObject name
-                    'OnFileLoaded',         // method name
-                    content                // file text
-                );
+				SendMessage(
+					'FileDialogReceiver',
+					'OnFileLoaded',
+					content
+				);
             };
             reader.readAsText(file);
         };

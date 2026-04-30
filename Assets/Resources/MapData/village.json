@@ -1292,19 +1292,6 @@
         },
         {
             "coord": {
-                "x": -1,
-                "y": -1,
-                "z": 0
-            },
-            "voxels": [
-                {
-                    "id": 0,
-                    "count": 32768
-                }
-            ]
-        },
-        {
-            "coord": {
                 "x": 0,
                 "y": 0,
                 "z": -1
@@ -1375,12 +1362,8 @@
                     "count": 912
                 },
                 {
-                    "id": 2,
-                    "count": 4
-                },
-                {
                     "id": 1,
-                    "count": 5
+                    "count": 9
                 },
                 {
                     "id": 2,
@@ -1439,12 +1422,8 @@
                     "count": 912
                 },
                 {
-                    "id": 2,
-                    "count": 6
-                },
-                {
                     "id": 1,
-                    "count": 2
+                    "count": 8
                 },
                 {
                     "id": 2,
@@ -1503,12 +1482,8 @@
                     "count": 912
                 },
                 {
-                    "id": 2,
-                    "count": 6
-                },
-                {
                     "id": 1,
-                    "count": 2
+                    "count": 8
                 },
                 {
                     "id": 2,
@@ -1579,12 +1554,8 @@
                     "count": 912
                 },
                 {
-                    "id": 2,
-                    "count": 5
-                },
-                {
                     "id": 1,
-                    "count": 2
+                    "count": 7
                 },
                 {
                     "id": 2,
@@ -1628,11 +1599,11 @@
                 },
                 {
                     "id": 2,
-                    "count": 5
+                    "count": 3
                 },
                 {
                     "id": 1,
-                    "count": 3
+                    "count": 5
                 },
                 {
                     "id": 2,
@@ -1941,6 +1912,19 @@
                 {
                     "id": 0,
                     "count": 15328
+                }
+            ]
+        },
+        {
+            "coord": {
+                "x": -1,
+                "y": -1,
+                "z": 0
+            },
+            "voxels": [
+                {
+                    "id": 0,
+                    "count": 32768
                 }
             ]
         },
@@ -2598,14 +2582,204 @@
     ],
     "entities": [
         {
-            "type": "PlayerSpawnPoint",
+            "type": "Vendor",
             "id": 0,
             "position": {
                 "x": -0.5,
                 "y": 1.5,
-                "z": -14.5
+                "z": -10.5
             },
             "jsonData": ""
+        },
+        {
+            "type": "ExitZone",
+            "id": 0,
+            "position": {
+                "x": 4.5,
+                "y": 1.5,
+                "z": -16.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -16.5,
+                "y": 1.5,
+                "z": -9.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -16.5,
+                "y": 2.5,
+                "z": -4.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 16.5,
+                "y": 1.5,
+                "z": -4.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "PlayerMapSpawn",
+            "id": 0,
+            "position": {
+                "x": 6.5,
+                "y": 1.5,
+                "z": -11.5
+            },
+            "jsonData": ""
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -15.5,
+                "y": 2.5,
+                "z": 1.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -15.5,
+                "y": 2.5,
+                "z": -2.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 10.5,
+                "y": 1.5,
+                "z": -15.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 16.5,
+                "y": 1.5,
+                "z": 1.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -16.5,
+                "y": 1.5,
+                "z": -13.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -14.5,
+                "y": 3.5,
+                "z": 13.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 16.5,
+                "y": 1.5,
+                "z": -1.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 13.5,
+                "y": 1.5,
+                "z": -13.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -14.5,
+                "y": 1.5,
+                "z": -6.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 16.5,
+                "y": 1.5,
+                "z": -7.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -14.5,
+                "y": 1.5,
+                "z": -16.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -15.5,
+                "y": 2.5,
+                "z": 7.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": 16.5,
+                "y": 1.5,
+                "z": -11.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
+        },
+        {
+            "type": "TreeLargeGreen",
+            "id": 0,
+            "position": {
+                "x": -14.5,
+                "y": 2.5,
+                "z": 4.5
+            },
+            "jsonData": "{\"blocksPath\":true,\"occupiedOffsets\":[{\"x\":0,\"y\":0,\"z\":0},{\"x\":0,\"y\":1,\"z\":0},{\"x\":0,\"y\":2,\"z\":0}]}"
         }
     ]
 }

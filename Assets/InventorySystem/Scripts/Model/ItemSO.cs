@@ -15,6 +15,9 @@ namespace Inventory.Model
         public int ID => GetInstanceID();
 
         [field: SerializeField]
+        public string PersistentID { get; private set; }
+
+        [field: SerializeField]
         public int MaxStackSize { get; set; } = 1;
 
         [field: SerializeField]
@@ -29,7 +32,18 @@ namespace Inventory.Model
 
         [field: SerializeField]
         public List<ItemParameter> DefaultParametersList { get; set; }
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (string.IsNullOrEmpty(PersistentID))
+            {
+                PersistentID = Guid.NewGuid().ToString();
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+        }
+#endif
     }
+
 
     [Serializable]
     public struct ItemParameter : IEquatable<ItemParameter>

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voxelName: Walls1
   isSolid: 1
-  atlas: {fileID: 11400000, guid: a43af86686e5d9343a34bfe118cce8fb, type: 2}
+  atlas: {fileID: 11400000, guid: eb957fc69484e744fa2292426ed8e635, type: 2}
   faceTiles:
   - {x: 2, y: 4}
   - {x: 2, y: 4}

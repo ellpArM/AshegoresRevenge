@@ -35,11 +35,21 @@ namespace Inventory.Model
             
         }
 
+        public void ForceInitialize()
+        {
+            isInitialized = true;
+            inventoryItems = new List<InventoryItem>();
+            for (int i = 0; i < Size; i++)
+            {
+                inventoryItems.Add(InventoryItem.GetEmptyItem());
+            }
+        }
+
         internal void AddItem(InventoryItem item)
         {
             AddItem(item.item, item.quantity);
         }
-
+        
         public int AddItem(ItemSO item, int quantity, List<ItemParameter> itemState = null)
         {
             if(item.IsStackable == false)
@@ -161,6 +171,61 @@ namespace Inventory.Model
         {
             return inventoryItems[itemIndex];
         }
+
+        public List<InventoryItemSaveData> GetSaveData()
+        {
+            var data =
+                new List<InventoryItemSaveData>();
+
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                var item = inventoryItems[i];
+
+                if (item.IsEmpty)
+                    continue;
+
+                data.Add(
+                    new InventoryItemSaveData
+                    {
+                        slotIndex = i,
+                        itemID = item.item.PersistentID,
+                        quantity = item.quantity,
+                        itemState =
+                            new List<ItemParameter>(
+                                item.itemState
+                            )
+                    }
+                );
+            }
+
+            return data;
+        }
+        public void LoadData(
+            List<InventoryItemSaveData> data,
+            ItemDatabase database
+        )
+        {
+            ForceInitialize();
+
+            foreach (var saved in data)
+            {
+                var item =
+                    database.GetItem(saved.itemID);
+
+                inventoryItems[saved.slotIndex] =
+                    new InventoryItem
+                    {
+                        item = item,
+                        quantity = saved.quantity,
+                        itemState =
+                            new List<ItemParameter>(
+                                saved.itemState
+                            )
+                    };
+            }
+
+            InformAboutChange();
+        }
     }
 
     [Serializable]
@@ -189,5 +254,6 @@ namespace Inventory.Model
                 itemState = new List<ItemParameter>()
             };
     }
+
 
 }

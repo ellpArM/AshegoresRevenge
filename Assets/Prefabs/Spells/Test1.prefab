@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: FireBall(testing)
-  description: 
+  description: Fire Test
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
   requiredElements: 0000000000000000
   soundCharge: {fileID: 0}

@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 809ab50418d57984cbb9057177cd9653, type: 3}
-  m_Name: PoisonWand
+  m_Name: Egg
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 0
+  <PersistentID>k__BackingField: f12e44c4-afc5-48ba-923e-70a54526b13d
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: Poison Wand
-  <Description>k__BackingField: Cool wand
-  <ItemImage>k__BackingField: {fileID: 21300000, guid: 8cfd4e69fd8970f44a59fb9243ef6346, type: 3}
+  <Name>k__BackingField: Egg SpellBook
+  <Description>k__BackingField: Cool egg
+  <ItemImage>k__BackingField: {fileID: -4072622106568590741, guid: 9cb020a1da965aa46b5b622823c48875, type: 3}
   <DefaultParametersList>k__BackingField:
   - itemParameter: {fileID: 11400000, guid: cc79d95da2c7dad44acc9c47bc1770ac, type: 2}
     value: 100
-  slot: 0
+  slot: 1
   <actionSFX>k__BackingField: {fileID: 0}
   statModifiers:
-  - stat: 1
+  - stat: 0
     value: 100

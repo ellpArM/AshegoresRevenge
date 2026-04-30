@@ -1,7 +1,9 @@
 using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 public interface IMapGenerator
 {
@@ -26,6 +28,8 @@ public class World : MonoBehaviour
     private VoxelAtlas atlas;
     private VoxelDefinition activeVoxel;
     private HashSet<Vector3Int> dirtyChunks = new();
+    [HideInInspector]
+    public HashSet<Vector3Int> OccupiedTiles = new();
     private void Awake()
     {
         instance = this;
@@ -57,8 +61,8 @@ public class World : MonoBehaviour
     }
     void GenerateDefaultPlane()
     {
-        for (int i = -8; i < 8; i++) 
-            for (int j = -8; j < 8; j++)
+        for (int i = -15; i < 15; i++) 
+            for (int j = -15; j < 15; j++)
                 SetVoxel(new Vector3Int(i, 0, j), 2);
     }
 
