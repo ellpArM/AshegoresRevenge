@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5278898677840557890}
   - component: {fileID: 6952861829707331195}
-  - component: {fileID: 7023221105722195758}
   m_Layer: 6
   m_Name: Frame
   m_TagString: Untagged
@@ -91,18 +90,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7023221105722195758
+--- !u!1 &3801080796332983668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4446606110489363857}
+  - component: {fileID: 8219013616194494790}
+  m_Layer: 0
+  m_Name: FireBolt-RedMage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4446606110489363857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801080796332983668}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2321591620982656757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8219013616194494790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108260440007961344}
+  m_GameObject: {fileID: 3801080796332983668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c87b6483889f7b4c80fb3e6b2f6f858, type: 3}
+  m_Script: {fileID: 11500000, guid: cc638c17b789053418276356229336da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: fire bolt
+  description: 
+  skillIcon: {fileID: -8694565044806487079, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  requiredElements: 
+  soundCharge: {fileID: 8300000, guid: ac69c2057526c0f428f1b7ef48890792, type: 3}
+  projectilePrefab: {fileID: 5492295935689872714, guid: fb92ca36a1a6d9849862699d15ea2ff9, type: 3}
+  travelDuration: 1.2
+  impactDelay: 0.1
+  baseDamage: 5
+  damageType: 0
+  onHitEffect: {fileID: 0}
+  statusEffect: {fileID: 0}
+  chanceToProc: 0
+  soundLaunch: {fileID: 0}
+  soundHit: {fileID: 0}
 --- !u!1 &6069016087985007266
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +250,7 @@ GameObject:
   - component: {fileID: -6943740390802484920}
   - component: {fileID: 5968432482925449443}
   - component: {fileID: 6046377454803104791}
+  - component: {fileID: 5180586486005401257}
   m_Layer: 6
   m_Name: MagePurple
   m_TagString: Player
@@ -224,6 +271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2321591620982656757}
   - {fileID: 5699561390401600791}
   - {fileID: 5278898677840557890}
   m_Father: {fileID: 0}
@@ -251,6 +299,7 @@ MonoBehaviour:
   activeEffects: []
   mainElement: 1
   spellPower: 100
+  AvailableSkills: []
   isDefeated: 0
   equipmentSystem: {fileID: 11400000, guid: b78be033f2a2f234abbdceb923c7062e, type: 2}
 --- !u!212 &4964113359520524644
@@ -359,6 +408,51 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 0.1}
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &5180586486005401257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709276644064086281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c87b6483889f7b4c80fb3e6b2f6f858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyYaxis: 1
+--- !u!1 &7294451740236299612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2321591620982656757}
+  m_Layer: 0
+  m_Name: Skills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2321591620982656757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7294451740236299612}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2707556, y: 0.22020683, z: 0.5001576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4446606110489363857}
+  m_Father: {fileID: 3856908114468915698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8612068103122048513
 GameObject:
   m_ObjectHideFlags: 0

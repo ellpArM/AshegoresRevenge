@@ -98,7 +98,7 @@ public class FightingEntity : MonoBehaviour
     }
     protected virtual void HandleLeftClick()
     {
-        BattleManager.Instance.SelectTarget(this);
+        BattleManagerNew.Instance.SelectTarget(this);
 
         // Player card clicked
         if (troopsField.CompareTag("PlayerField"))

@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class HeroEntity : FightingEntity
 {
     public ElementType mainElement;
     public int spellPower = 100;
-    
+    public List<BaseSkill> AvailableSkills;
+
     public bool isDefeated = false;
 
     [Header("References")]
@@ -29,6 +31,7 @@ public class HeroEntity : FightingEntity
         {
 
         }
+        AvailableSkills = GetComponentsInChildren<BaseSkill>().ToList();
 
         UpdateVisuals();
     }
@@ -38,7 +41,7 @@ public class HeroEntity : FightingEntity
     }
     protected override void HandleLeftClick()
     {
-        BattleManager.Instance.SelectTarget(this);
+        BattleManagerNew.Instance.SelectTarget(this);
     }
     public override void SelectAsAttacker()
     {

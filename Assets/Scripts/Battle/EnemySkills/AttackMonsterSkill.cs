@@ -59,7 +59,7 @@ public class AttackMonsterSkill : BaseMonsterSkill
 
         animator.SetTrigger("Action");
 
-        BattleManager.Instance.SelectHero(null);
+        BattleManagerNew.Instance.SelectHero(null);
 
         Vector3 originalPosition = transform.position;
 

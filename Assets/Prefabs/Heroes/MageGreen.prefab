@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &354562244539671880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8159838709378958360}
+  m_Layer: 0
+  m_Name: Skills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8159838709378958360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354562244539671880}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2707556, y: 0.22020683, z: 0.5001576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2246057456849456632}
+  m_Father: {fileID: 3856908114468915698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108260440007961344
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +42,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5278898677840557890}
   - component: {fileID: 6952861829707331195}
-  - component: {fileID: 7023221105722195758}
   m_Layer: 6
   m_Name: Frame
   m_TagString: Untagged
@@ -91,18 +122,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7023221105722195758
+--- !u!1 &2616910237995231262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2246057456849456632}
+  - component: {fileID: 8165731231997890150}
+  m_Layer: 0
+  m_Name: FireBolt-RedMage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2246057456849456632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616910237995231262}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8159838709378958360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8165731231997890150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108260440007961344}
+  m_GameObject: {fileID: 2616910237995231262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c87b6483889f7b4c80fb3e6b2f6f858, type: 3}
+  m_Script: {fileID: 11500000, guid: cc638c17b789053418276356229336da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: fire bolt
+  description: 
+  skillIcon: {fileID: -7105074764738127781, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  requiredElements: 
+  soundCharge: {fileID: 8300000, guid: ac69c2057526c0f428f1b7ef48890792, type: 3}
+  projectilePrefab: {fileID: 5492295935689872714, guid: 44535c20d6249a342aeaef85675ce663, type: 3}
+  travelDuration: 0.4
+  impactDelay: 0.1
+  baseDamage: 5
+  damageType: 0
+  onHitEffect: {fileID: 0}
+  statusEffect: {fileID: 0}
+  chanceToProc: 0
+  soundLaunch: {fileID: 0}
+  soundHit: {fileID: 0}
 --- !u!1 &6069016087985007266
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +282,7 @@ GameObject:
   - component: {fileID: -6943740390802484920}
   - component: {fileID: 5968432482925449443}
   - component: {fileID: 6046377454803104791}
+  - component: {fileID: 6721877232998318617}
   m_Layer: 6
   m_Name: MageGreen
   m_TagString: Player
@@ -224,6 +303,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8159838709378958360}
   - {fileID: 5699561390401600791}
   - {fileID: 5278898677840557890}
   m_Father: {fileID: 0}
@@ -251,6 +331,7 @@ MonoBehaviour:
   activeEffects: []
   mainElement: 2
   spellPower: 100
+  AvailableSkills: []
   isDefeated: 0
   equipmentSystem: {fileID: 11400000, guid: bbefbadeea3f3d040891e804fe205870, type: 2}
 --- !u!212 &4964113359520524644
@@ -359,6 +440,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 0.1}
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &6721877232998318617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709276644064086281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c87b6483889f7b4c80fb3e6b2f6f858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyYaxis: 1
 --- !u!1 &8612068103122048513
 GameObject:
   m_ObjectHideFlags: 0

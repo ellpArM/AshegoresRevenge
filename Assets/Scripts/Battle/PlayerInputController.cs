@@ -5,12 +5,14 @@ public class PlayerInputController : MonoBehaviour
 {
     [SerializeField] private Button endTurnButton;
     [SerializeField] private Button drawCardButton;
+    private bool isNewBattleManager;
 
     public bool InputEnabled { get; private set; } = false;
     public bool EndTurnPressed { get; set; } = false;
 
     void Start()
     {
+        isNewBattleManager = BattleManagerNew.Instance != null;
         if (endTurnButton != null)
             endTurnButton.onClick.AddListener(OnEndTurnPressed);
         if (drawCardButton != null)
@@ -27,6 +29,8 @@ public class PlayerInputController : MonoBehaviour
     }
     private void Update()
     {
+        if (isNewBattleManager)
+            return;
         UpdateDrawButtonState();
     }
 
