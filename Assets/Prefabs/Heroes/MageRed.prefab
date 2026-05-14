@@ -30,9 +30,90 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3095637705905712643}
+  - {fileID: 8303026662375471195}
+  - {fileID: 7525073429021465770}
+  - {fileID: 7822806179263946175}
+  - {fileID: 5658252208984415486}
   - {fileID: 5092768086208211821}
+  - {fileID: 7861065117082777214}
+  - {fileID: 1578128708798889653}
   m_Father: {fileID: 3856908114468915698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1986854284595573779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8303026662375471195}
+  - component: {fileID: 8088778234228509049}
+  - component: {fileID: 6547018097708640031}
+  m_Layer: 0
+  m_Name: Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8303026662375471195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986854284595573779}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8088778234228509049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986854284595573779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b26b85233854349b1b1aa4bddfd824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Shield
+  description: 
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  requiredElements: 
+  soundCharge: {fileID: 0}
+  effectPrefab: {fileID: 0}
+  passiveToGrant: {fileID: 6547018097708640031}
+  mainElement: 0
+  effectSound: {fileID: 0}
+--- !u!114 &6547018097708640031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986854284595573779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf4ac3c359bf6f4ebd87f343be959d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castDescription: 
+  shieldAmount: 5
+  maxShieldAmount: 5
+  strongAgainst: 2
+  weakAgainst: 1
+  visualPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
+  shieldBarPrefab: {fileID: 181281477184934585, guid: d43cc89afc3c67b46ac186a4bcce7cbd, type: 3}
+  worldVisualOffset: {x: 0, y: 2, z: 0}
+  uiBarOffset: {x: 0, y: 40, z: 0}
 --- !u!1 &2108260440007961344
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +204,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4205279099311469466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7525073429021465770}
+  - component: {fileID: 4440578281908158093}
+  m_Layer: 0
+  m_Name: FireBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7525073429021465770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205279099311469466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4440578281908158093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205279099311469466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1d8f613cd57844aa1788fca8b985d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  description: 
+  skillIcon: {fileID: 0}
+  requiredElements: 
+  soundCharge: {fileID: 0}
+  projectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
+  travelDuration: 0.4
+  impactDelay: 0.1
+  baseDamage: 5
+  damageType: 0
+  onHitEffect: {fileID: 0}
+  statusEffect: {fileID: 0}
+  chanceToProc: 0
+  soundLaunch: {fileID: 0}
+  soundHit: {fileID: 0}
 --- !u!1 &4334299705539207684
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +274,7 @@ GameObject:
   - component: {fileID: 3095637705905712643}
   - component: {fileID: 8481322576905615510}
   m_Layer: 0
-  m_Name: FireBolt-RedMage
+  m_Name: FireBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +322,37 @@ MonoBehaviour:
   chanceToProc: 0
   soundLaunch: {fileID: 0}
   soundHit: {fileID: 0}
+--- !u!1 &5123545994975230202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7822806179263946175}
+  m_Layer: 0
+  m_Name: Enrage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7822806179263946175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123545994975230202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6069016087985007266
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +625,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyYaxis: 1
+--- !u!1 &6888913458582725012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1578128708798889653}
+  m_Layer: 0
+  m_Name: Uiltimate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1578128708798889653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888913458582725012}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7428439053087720530
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +667,7 @@ GameObject:
   - component: {fileID: 5092768086208211821}
   - component: {fileID: 5651139932765650267}
   m_Layer: 0
-  m_Name: FireBolt-Meteor
+  m_Name: Meteor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,7 +705,7 @@ MonoBehaviour:
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
   requiredElements: 
   soundCharge: {fileID: 0}
-  meteorProjectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
+  meteorProjectilePrefab: {fileID: 5492295935689872714, guid: 25e253b05977d704c8519a697a04d49a, type: 3}
   groundEffectPrefab: {fileID: 5492295935689872714, guid: 4ab35ae6d413d834f89f23b456a36526, type: 3}
   meteorImpactVFX: {fileID: 1714363467411018263, guid: bc3a44295adc6bf44b226d517be2f72b, type: 3}
   baseDamage: 20
@@ -521,6 +723,37 @@ MonoBehaviour:
   BeamPrefab: {fileID: 6772939638736423725, guid: bdd6132a5e5273d459000f13e4d123d3, type: 3}
   statusEffect: {fileID: 0}
   chanceToProc: 0
+--- !u!1 &7535585655859758306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5658252208984415486}
+  m_Layer: 0
+  m_Name: Might
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5658252208984415486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535585655859758306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8612068103122048513
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +864,65 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &8917125956818437962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7861065117082777214}
+  - component: {fileID: 7832435402046295947}
+  m_Layer: 0
+  m_Name: FireStorm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7861065117082777214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917125956818437962}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7832435402046295947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917125956818437962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b443aef0daa427549829e1e62b89c036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Fire storm
+  description: 
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  requiredElements: 
+  soundCharge: {fileID: 0}
+  stormPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
+  baseDamage: 15
+  damageType: 0
+  baseAccuracy: 85
+  statusEffect: {fileID: 0}
+  chanceToProc: 0
+  travelDuration: 1.2
+  returnDuration: 0.8
+  soundStormStart: {fileID: 0}
+  soundStormEnd: {fileID: 0}
 --- !u!1 &9106526032169904341
 GameObject:
   m_ObjectHideFlags: 0
