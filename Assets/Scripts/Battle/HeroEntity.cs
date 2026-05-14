@@ -76,6 +76,7 @@ public class HeroEntity : FightingEntity
         maxHealth = data.maxHP;
         SetHealth(data.currentHP);
         spellPower = data.spellPower;
+        AvailableSkills = data.unlockedSkills;
     }
     public void SetData()
     {
@@ -85,5 +86,6 @@ public class HeroEntity : FightingEntity
         data.maxHP = maxHealth;
         data.currentHP = currentHealth;
         data.spellPower = spellPower;
+        //data.unlockedSkills = AvailableSkills;
     }
 }

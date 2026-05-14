@@ -106,16 +106,23 @@ public class BattleManagerNew : MonoBehaviour
             hero.name = heroSelectionData.selectedHeroes[i].name;
             hero.troopsField = playerField;
             PlayerHeroes.Add(hero);
-            yield return playerField.AddEntity(hero);
+            
             // restore later
             //CharacterData data = PlayerDataManager.instance.GetHeroData(hero.Guid);
-            //if(data != null)
+            //if (data != null)
             //{
             //    data.RefreshStats();
             //    hero.ApplyData(data);
-            //    if(data.spells != null)
-            //        AddSpells(data.spells);
+
             //}
+            //else
+            //{
+            //    hero.SetData();
+            //    hero.ApplyData(PlayerDataManager.instance.GetHeroData(hero.Guid));
+
+            //}
+
+            yield return playerField.AddEntity(hero);
 
         }
         

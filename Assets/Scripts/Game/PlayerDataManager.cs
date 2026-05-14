@@ -28,9 +28,12 @@ public class CharacterData
     public int maxHP;
     public int currentHP;
     public int spellPower;
+    public int level;
+    public int experience;
 
     public EquipmentSystem equipmentSystem;
     public List<GameObject> spells = new();
+    public List<BaseSkill> unlockedSkills = new();
 
     public void RefreshStats()
     {
@@ -79,7 +82,11 @@ public class PlayerDataManager : MonoBehaviour
             currentHP = hero.maxHealth, 
             spellPower = hero.spellPower, 
             baseSpellPower = hero.spellPower, 
-            equipmentSystem = hero.equipmentSystem});
+            equipmentSystem = hero.equipmentSystem,
+            level = 0,
+            experience = 0,
+            unlockedSkills = hero.AvailableSkills
+        });
         hero.equipmentSystem.SetOwnerCardSprite(hero.GetCardVisual());
         return party[hero.Guid];
     }
