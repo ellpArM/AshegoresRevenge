@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4fd50be7758ba4428004da8e780a570, type: 3}
+  m_Name: FireMage
+  m_EditorClassIdentifier: 
+  nodes:
+  - id: base
+    nodeName: Base Skill
+    editorPosition: {x: 0, y: 0}
+    parentIDs: []
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch
+    nodeName: Tier 1
+    editorPosition: {x: 300, y: 0}
+    parentIDs:
+    - base
+    nodeType: 1
+    baseSkill: {fileID: 0}
+  - id: tier2_branch
+    nodeName: Tier 2
+    editorPosition: {x: 600, y: 0}
+    parentIDs:
+    - tier1_branch
+    nodeType: 1
+    baseSkill: {fileID: 0}
+  - id: tier3_branch
+    nodeName: Tier 3
+    editorPosition: {x: 900, y: 0}
+    parentIDs:
+    - tier2_branch
+    nodeType: 1
+    baseSkill: {fileID: 0}
+  - id: ultimate
+    nodeName: Ultimate
+    editorPosition: {x: 1200, y: 0}
+    parentIDs:
+    - tier3_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: base_side_1
+    nodeName: Base Side 1
+    editorPosition: {x: -150, y: -300}
+    parentIDs:
+    - base
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: base_side_2
+    nodeName: Base Side 2
+    editorPosition: {x: -150, y: -150}
+    parentIDs:
+    - base
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: base_side_3
+    nodeName: Base Side 3
+    editorPosition: {x: -150, y: 150}
+    parentIDs:
+    - base
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: base_side_4
+    nodeName: Base Side 4
+    editorPosition: {x: -150, y: 300}
+    parentIDs:
+    - base
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_a
+    nodeName: tier1 Branch A
+    editorPosition: {x: 250, y: -150}
+    parentIDs:
+    - tier1_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_b
+    nodeName: tier1 Branch B
+    editorPosition: {x: 250, y: 150}
+    parentIDs:
+    - tier1_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_a_child_1
+    nodeName: tier1 Branch A Child 1
+    editorPosition: {x: 450, y: -210}
+    parentIDs:
+    - tier1_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_b_child_1
+    nodeName: tier1 Branch B Child 1
+    editorPosition: {x: 132, y: 272}
+    parentIDs:
+    - tier1_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_a_child_2
+    nodeName: tier1 Branch A Child 2
+    editorPosition: {x: 450, y: -90}
+    parentIDs:
+    - tier1_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier1_branch_b_child_2
+    nodeName: tier1 Branch B Child 2
+    editorPosition: {x: 340, y: 264}
+    parentIDs:
+    - tier1_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_a
+    nodeName: tier2 Branch A
+    editorPosition: {x: 550, y: -150}
+    parentIDs:
+    - tier2_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_b
+    nodeName: tier2 Branch B
+    editorPosition: {x: 550, y: 150}
+    parentIDs:
+    - tier2_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_a_child_1
+    nodeName: tier2 Branch A Child 1
+    editorPosition: {x: 750, y: -210}
+    parentIDs:
+    - tier2_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_b_child_1
+    nodeName: tier2 Branch B Child 1
+    editorPosition: {x: 750, y: 90}
+    parentIDs:
+    - tier2_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_a_child_2
+    nodeName: tier2 Branch A Child 2
+    editorPosition: {x: 750, y: -90}
+    parentIDs:
+    - tier2_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier2_branch_b_child_2
+    nodeName: tier2 Branch B Child 2
+    editorPosition: {x: 750, y: 210}
+    parentIDs:
+    - tier2_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_a
+    nodeName: tier3 Branch A
+    editorPosition: {x: 850, y: -150}
+    parentIDs:
+    - tier3_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_b
+    nodeName: tier3 Branch B
+    editorPosition: {x: 850, y: 150}
+    parentIDs:
+    - tier3_branch
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_a_child_1
+    nodeName: tier3 Branch A Child 1
+    editorPosition: {x: 1050, y: -210}
+    parentIDs:
+    - tier3_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_b_child_1
+    nodeName: tier3 Branch B Child 1
+    editorPosition: {x: 1050, y: 90}
+    parentIDs:
+    - tier3_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_a_child_2
+    nodeName: tier3 Branch A Child 2
+    editorPosition: {x: 1050, y: -90}
+    parentIDs:
+    - tier3_branch_a
+    nodeType: 0
+    baseSkill: {fileID: 0}
+  - id: tier3_branch_b_child_2
+    nodeName: tier3 Branch B Child 2
+    editorPosition: {x: 1050, y: 210}
+    parentIDs:
+    - tier3_branch_b
+    nodeType: 0
+    baseSkill: {fileID: 0}

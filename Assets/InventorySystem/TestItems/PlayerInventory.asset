@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems:
   - quantity: 1
-    item: {fileID: 11400000, guid: 78ec810f274f57c40ab505f87d9ee7d3, type: 2}
+    item: {fileID: 11400000, guid: 31104c733cb8c944283f1a943d7b79a7, type: 2}
     itemState:
     - itemParameter: {fileID: 11400000, guid: cc79d95da2c7dad44acc9c47bc1770ac, type: 2}
       value: 100
