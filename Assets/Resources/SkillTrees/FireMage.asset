@@ -201,3 +201,4 @@ MonoBehaviour:
     - tier3_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+  heroSprite: {fileID: 5286291387100924457, guid: dfb9f031ae980dc4b9e48414a98986d5, type: 3}

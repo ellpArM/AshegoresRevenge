@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SkillTreeSO : ScriptableObject
 {
     public List<SkillNode> nodes = new();
+    public Sprite heroSprite;
 
     public enum NodeType
     {

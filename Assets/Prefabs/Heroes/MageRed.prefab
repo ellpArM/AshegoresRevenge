@@ -504,6 +504,7 @@ MonoBehaviour:
   mainElement: 0
   spellPower: 100
   AvailableSkills: []
+  skillTree: {fileID: 11400000, guid: e1247a2543d30274ea13ab90e0891b65, type: 2}
   isDefeated: 0
   equipmentSystem: {fileID: 11400000, guid: 1e16665f646091b46b01fc7f7823a9b3, type: 2}
 --- !u!212 &4964113359520524644

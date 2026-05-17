@@ -34,6 +34,7 @@ public class CharacterData
     public EquipmentSystem equipmentSystem;
     public List<GameObject> spells = new();
     public List<BaseSkill> unlockedSkills = new();
+    public SkillTreeSO skillTree;
 
     public void RefreshStats()
     {
@@ -85,9 +86,11 @@ public class PlayerDataManager : MonoBehaviour
             equipmentSystem = hero.equipmentSystem,
             level = 0,
             experience = 0,
-            unlockedSkills = hero.AvailableSkills
+            unlockedSkills = hero.AvailableSkills,
+            skillTree = hero.skillTree
         });
         hero.equipmentSystem.SetOwnerCardSprite(hero.GetCardVisual());
+        hero.skillTree.heroSprite = hero.GetCardVisual();
         return party[hero.Guid];
     }
     public CharacterData GetHeroData(string guid)

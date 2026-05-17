@@ -10,6 +10,8 @@ public class HeroEntity : FightingEntity
     public int spellPower = 100;
     public List<BaseSkill> AvailableSkills;
 
+    public SkillTreeSO skillTree;
+
     public bool isDefeated = false;
 
     [Header("References")]
