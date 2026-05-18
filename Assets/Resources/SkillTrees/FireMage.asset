@@ -15,8 +15,8 @@ MonoBehaviour:
   nodes:
   - id: base
     nodeName: Base Skill
-    editorPosition: {x: 0, y: 0}
-    unlocked: 0
+    editorPosition: {x: -139, y: 15}
+    unlocked: 1
     parentIDs: []
     nodeType: 0
     baseSkill: {fileID: 561950835319125973, guid: 17d79346451934747b7ef2af01aab780, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
     cost: 1
   - id: base_side_1
     nodeName: Base Side 1
-    editorPosition: {x: -150, y: -300}
+    editorPosition: {x: -136, y: -299}
     unlocked: 0
     parentIDs:
     - base
@@ -68,7 +68,7 @@ MonoBehaviour:
     cost: 1
   - id: base_side_2
     nodeName: Base Side 2
-    editorPosition: {x: -150, y: -150}
+    editorPosition: {x: -230, y: -115}
     unlocked: 0
     parentIDs:
     - base
@@ -95,7 +95,7 @@ MonoBehaviour:
     cost: 1
   - id: tier1_branch_a
     nodeName: tier1 Branch A
-    editorPosition: {x: 250, y: -150}
+    editorPosition: {x: 251, y: -150}
     unlocked: 0
     parentIDs:
     - tier1_branch
