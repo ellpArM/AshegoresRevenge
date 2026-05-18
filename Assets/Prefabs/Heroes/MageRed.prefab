@@ -263,65 +263,6 @@ MonoBehaviour:
   chanceToProc: 0
   soundLaunch: {fileID: 0}
   soundHit: {fileID: 0}
---- !u!1 &4334299705539207684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3095637705905712643}
-  - component: {fileID: 8481322576905615510}
-  m_Layer: 0
-  m_Name: FireBolt
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3095637705905712643
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4334299705539207684}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5188031070029085814}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8481322576905615510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4334299705539207684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc638c17b789053418276356229336da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: fire bolt
-  description: 
-  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-  requiredElements: 
-  soundCharge: {fileID: 8300000, guid: ac69c2057526c0f428f1b7ef48890792, type: 3}
-  projectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
-  travelDuration: 1
-  impactDelay: 0.1
-  baseDamage: 5
-  damageType: 0
-  onHitEffect: {fileID: 0}
-  statusEffect: {fileID: 0}
-  chanceToProc: 0
-  soundLaunch: {fileID: 0}
-  soundHit: {fileID: 0}
 --- !u!1 &5123545994975230202
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +444,8 @@ MonoBehaviour:
   activeEffects: []
   mainElement: 0
   spellPower: 100
-  AvailableSkills: []
+  AvailableSkills:
+  - {fileID: 8481322576905615510}
   skillTree: {fileID: 11400000, guid: e1247a2543d30274ea13ab90e0891b65, type: 2}
   isDefeated: 0
   equipmentSystem: {fileID: 11400000, guid: 1e16665f646091b46b01fc7f7823a9b3, type: 2}
@@ -1088,6 +1030,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2380964794934163813, guid: b9780d69836a34e44976ec1194c67a82, type: 3}
   m_PrefabInstance: {fileID: 7931413158020367474}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8250531553887358787
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5188031070029085814}
+    m_Modifications:
+    - target: {fileID: 5645614123047005511, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_Name
+      value: FireBolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+--- !u!4 &3095637705905712643 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6379960938166690112, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+  m_PrefabInstance: {fileID: 8250531553887358787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8481322576905615510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 561950835319125973, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+  m_PrefabInstance: {fileID: 8250531553887358787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc638c17b789053418276356229336da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8776524797213749399
 PrefabInstance:
   m_ObjectHideFlags: 0

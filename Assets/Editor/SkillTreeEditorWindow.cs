@@ -117,6 +117,11 @@ public class SkillTreeEditorWindow : EditorWindow
                 typeof(BaseSkill),
                 false
             );
+            node.unlocked = GUI.Toggle(
+                new Rect(5, 60, 120, 20),
+                node.unlocked,
+                "Unlocked"
+            );
 
             GUILayout.EndArea();
 

@@ -16,189 +16,244 @@ MonoBehaviour:
   - id: base
     nodeName: Base Skill
     editorPosition: {x: 0, y: 0}
+    unlocked: 0
     parentIDs: []
     nodeType: 0
-    baseSkill: {fileID: 0}
+    baseSkill: {fileID: 561950835319125973, guid: 17d79346451934747b7ef2af01aab780, type: 3}
+    cost: 1
   - id: tier1_branch
     nodeName: Tier 1
     editorPosition: {x: 300, y: 0}
+    unlocked: 0
     parentIDs:
     - base
     nodeType: 1
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch
     nodeName: Tier 2
     editorPosition: {x: 600, y: 0}
+    unlocked: 0
     parentIDs:
     - tier1_branch
     nodeType: 1
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch
     nodeName: Tier 3
     editorPosition: {x: 900, y: 0}
+    unlocked: 0
     parentIDs:
     - tier2_branch
     nodeType: 1
     baseSkill: {fileID: 0}
+    cost: 1
   - id: ultimate
     nodeName: Ultimate
     editorPosition: {x: 1200, y: 0}
+    unlocked: 0
     parentIDs:
     - tier3_branch
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: base_side_1
     nodeName: Base Side 1
     editorPosition: {x: -150, y: -300}
+    unlocked: 0
     parentIDs:
     - base
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: base_side_2
     nodeName: Base Side 2
     editorPosition: {x: -150, y: -150}
+    unlocked: 0
     parentIDs:
     - base
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: base_side_3
     nodeName: Base Side 3
     editorPosition: {x: -150, y: 150}
+    unlocked: 0
     parentIDs:
     - base
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: base_side_4
     nodeName: Base Side 4
     editorPosition: {x: -150, y: 300}
+    unlocked: 0
     parentIDs:
     - base
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier1_branch_a
     nodeName: tier1 Branch A
     editorPosition: {x: 250, y: -150}
+    unlocked: 0
     parentIDs:
     - tier1_branch
     nodeType: 0
-    baseSkill: {fileID: 0}
+    baseSkill: {fileID: 3473416374648382862, guid: 9dc144ac4d1a4584db35d914fe9ca2cd, type: 3}
+    cost: 1
   - id: tier1_branch_b
     nodeName: tier1 Branch B
     editorPosition: {x: 250, y: 150}
+    unlocked: 0
     parentIDs:
     - tier1_branch
     nodeType: 0
-    baseSkill: {fileID: 0}
+    baseSkill: {fileID: 7990476186781905602, guid: 8d5f408ae12751e4884778f7e93f77fa, type: 3}
+    cost: 1
   - id: tier1_branch_a_child_1
     nodeName: tier1 Branch A Child 1
-    editorPosition: {x: 450, y: -210}
+    editorPosition: {x: 136, y: -271}
+    unlocked: 0
     parentIDs:
     - tier1_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier1_branch_b_child_1
     nodeName: tier1 Branch B Child 1
     editorPosition: {x: 132, y: 272}
+    unlocked: 0
     parentIDs:
     - tier1_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier1_branch_a_child_2
     nodeName: tier1 Branch A Child 2
-    editorPosition: {x: 450, y: -90}
+    editorPosition: {x: 403, y: -272}
+    unlocked: 0
     parentIDs:
     - tier1_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier1_branch_b_child_2
     nodeName: tier1 Branch B Child 2
     editorPosition: {x: 340, y: 264}
+    unlocked: 0
     parentIDs:
     - tier1_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch_a
     nodeName: tier2 Branch A
     editorPosition: {x: 550, y: -150}
+    unlocked: 0
     parentIDs:
     - tier2_branch
     nodeType: 0
-    baseSkill: {fileID: 0}
+    baseSkill: {fileID: 3473416374648382862, guid: cd9352dd1e27e3e4893223746637f0f5, type: 3}
+    cost: 1
   - id: tier2_branch_b
     nodeName: tier2 Branch B
     editorPosition: {x: 550, y: 150}
+    unlocked: 0
     parentIDs:
     - tier2_branch
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch_a_child_1
     nodeName: tier2 Branch A Child 1
-    editorPosition: {x: 750, y: -210}
+    editorPosition: {x: 636, y: -307}
+    unlocked: 0
     parentIDs:
     - tier2_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch_b_child_1
     nodeName: tier2 Branch B Child 1
     editorPosition: {x: 750, y: 90}
+    unlocked: 0
     parentIDs:
     - tier2_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch_a_child_2
     nodeName: tier2 Branch A Child 2
-    editorPosition: {x: 750, y: -90}
+    editorPosition: {x: 673, y: -220}
+    unlocked: 0
     parentIDs:
     - tier2_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier2_branch_b_child_2
     nodeName: tier2 Branch B Child 2
     editorPosition: {x: 750, y: 210}
+    unlocked: 0
     parentIDs:
     - tier2_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch_a
     nodeName: tier3 Branch A
     editorPosition: {x: 850, y: -150}
+    unlocked: 0
     parentIDs:
     - tier3_branch
     nodeType: 0
-    baseSkill: {fileID: 0}
+    baseSkill: {fileID: 5183872713198415492, guid: 5a2de1e20d1f5a140b8f0595ecef2162, type: 3}
+    cost: 1
   - id: tier3_branch_b
     nodeName: tier3 Branch B
     editorPosition: {x: 850, y: 150}
+    unlocked: 0
     parentIDs:
     - tier3_branch
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch_a_child_1
     nodeName: tier3 Branch A Child 1
-    editorPosition: {x: 1050, y: -210}
+    editorPosition: {x: 921, y: -340}
+    unlocked: 0
     parentIDs:
     - tier3_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch_b_child_1
     nodeName: tier3 Branch B Child 1
     editorPosition: {x: 1050, y: 90}
+    unlocked: 0
     parentIDs:
     - tier3_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch_a_child_2
     nodeName: tier3 Branch A Child 2
-    editorPosition: {x: 1050, y: -90}
+    editorPosition: {x: 922, y: -256}
+    unlocked: 0
     parentIDs:
     - tier3_branch_a
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   - id: tier3_branch_b_child_2
     nodeName: tier3 Branch B Child 2
     editorPosition: {x: 1050, y: 210}
+    unlocked: 0
     parentIDs:
     - tier3_branch_b
     nodeType: 0
     baseSkill: {fileID: 0}
+    cost: 1
   heroSprite: {fileID: 5286291387100924457, guid: dfb9f031ae980dc4b9e48414a98986d5, type: 3}
+  hero: {fileID: 7403856116639826396, guid: c8f6ddc21784e114195f5cce6c42194f, type: 3}

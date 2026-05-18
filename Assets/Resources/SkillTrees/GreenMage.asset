@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes: []
   heroSprite: {fileID: 5286278554885244253, guid: c710cda6dd6c00245b40e1875f491fbf, type: 3}
+  hero: {fileID: 7403856116639826396, guid: 907c1366db2458142b2aa62d597e68a0, type: 3}

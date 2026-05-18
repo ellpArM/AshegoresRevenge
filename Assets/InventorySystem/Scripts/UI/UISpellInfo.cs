@@ -22,6 +22,7 @@ public class UISpellInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             spellDescription.SetActive(false);
         }
+
     }
 
     // Update is called once per frame
