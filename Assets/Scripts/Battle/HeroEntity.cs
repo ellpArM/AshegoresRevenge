@@ -10,6 +10,8 @@ public class HeroEntity : FightingEntity
     public int spellPower = 100;
     public List<BaseSkill> AvailableSkills;
 
+    public SkillTreeSO skillTree;
+
     public bool isDefeated = false;
 
     [Header("References")]
@@ -76,7 +78,7 @@ public class HeroEntity : FightingEntity
         maxHealth = data.maxHP;
         SetHealth(data.currentHP);
         spellPower = data.spellPower;
-        AvailableSkills = data.unlockedSkills;
+        AvailableSkills = data.equippedSkills;
     }
     public void SetData()
     {

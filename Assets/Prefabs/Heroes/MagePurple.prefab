@@ -352,7 +352,9 @@ MonoBehaviour:
   activeEffects: []
   mainElement: 1
   spellPower: 100
-  AvailableSkills: []
+  AvailableSkills:
+  - {fileID: 8219013616194494790}
+  skillTree: {fileID: 11400000, guid: 22d79d15a6933c748b010eb99ea86dd9, type: 2}
   isDefeated: 0
   equipmentSystem: {fileID: 11400000, guid: b78be033f2a2f234abbdceb923c7062e, type: 2}
 --- !u!212 &4964113359520524644

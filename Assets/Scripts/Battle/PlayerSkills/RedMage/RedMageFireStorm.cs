@@ -11,6 +11,10 @@ public class RedMageFireStorm : BaseSkill
     [Header("Damage Settings")]
     public int baseDamage = 15;
     public ElementType damageType;
+    public int levelDamageBonus = 3;
+    public int rageBonus = 3;
+    public int levelRageBons;
+
     public int baseAccuracy = 85;
     public StatusEffect statusEffect;   // The effect to apply
     [Range(0, 100)]
@@ -92,11 +96,6 @@ public class RedMageFireStorm : BaseSkill
             yield return StartCoroutine(enemy.ResolveDeathIfNeeded());
         BattleManagerNew.Instance.SetPlayerInput(true);
     }
-
-    // ---------------------------------------------------------------------
-    // MOTION HELPERS
-    // ---------------------------------------------------------------------
-
     private IEnumerator MoveAndGrow(GameObject obj, Vector3 start, Vector3 end)
     {
         float t = 0f;
