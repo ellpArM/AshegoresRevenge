@@ -102,7 +102,7 @@ public class BattleManagerNew : MonoBehaviour
         // Spawn heroes
         for (int i = 0; i < heroSelectionData.selectedHeroes.Length; i++)
         {
-            HeroEntity hero = Instantiate(heroSelectionData.selectedHeroes[i], playerField.transform).GetComponent<HeroEntity>();
+            HeroEntity hero = Instantiate(heroSelectionData.selectedHeroes[i], playerField.transform.position, Quaternion.identity).GetComponent<HeroEntity>();
             hero.name = heroSelectionData.selectedHeroes[i].name;
             hero.troopsField = playerField;
             PlayerHeroes.Add(hero);

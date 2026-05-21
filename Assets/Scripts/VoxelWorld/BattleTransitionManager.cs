@@ -44,7 +44,7 @@ public class BattleTransitionManager : MonoBehaviour
         CurrentEncounter.enemies = enemy.enemies;
 
         // Load battle
-        SceneManager.LoadScene("BattleField");
+        SceneManager.LoadScene("NewBattlefield");
     }
 
     public void ReturnToWorld(bool playerWon)

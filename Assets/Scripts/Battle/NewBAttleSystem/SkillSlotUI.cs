@@ -1,16 +1,17 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillSlotUI : MonoBehaviour
+public class SkillSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Button skillButton;
     [SerializeField] private Image skillIcon;
     [SerializeField] private TMP_Text skillNameText;
 
     private BaseSkill assignedSkill;
+    private SkillsHolderUI ownerUI;
 
     private void Awake()
     {
@@ -19,9 +20,10 @@ public class SkillSlotUI : MonoBehaviour
             skillButton.onClick.AddListener(OnSkillPressed);
         }
     }
-    public void Initialize(BaseSkill skill)
+    public void Initialize(BaseSkill skill, SkillsHolderUI skillsHolderUI)
     {
         assignedSkill = skill;
+        ownerUI = skillsHolderUI;
 
         if (assignedSkill == null)
         {
@@ -41,6 +43,21 @@ public class SkillSlotUI : MonoBehaviour
         {
             skillNameText.text = assignedSkill.skillName;
         }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (assignedSkill == null || ownerUI == null)
+            return;
+
+        ownerUI.ShowSkillInfo(assignedSkill);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (ownerUI == null)
+            return;
+
+        ownerUI.HideSkillInfo();
     }
 
     private void OnSkillPressed()

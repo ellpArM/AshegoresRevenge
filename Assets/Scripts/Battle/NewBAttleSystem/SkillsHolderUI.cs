@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,11 @@ public class SkillsHolderUI : MonoBehaviour
     [Header("Root Object")]
     [SerializeField] private GameObject rootObject;
 
+    [Header("Skill Info Panel")]
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private TMP_Text skillNameText;
+    [SerializeField] private TMP_Text skillDescriptionText;
+
     private HeroEntity currentHero;
     public static SkillsHolderUI instance;
     public SkillSlotUI skillSlotPrefab;
@@ -21,6 +27,10 @@ public class SkillsHolderUI : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+    private void Start()
+    {
+        HideSkillInfo();
     }
     public void Initialize(HeroEntity hero)
     {
@@ -62,10 +72,12 @@ public class SkillsHolderUI : MonoBehaviour
             );
             slot.transform.localPosition = new Vector3(spawnedSlots.Count * 80,0,0);
 
-            slot.Initialize(skill);
+            //slot.Initialize(skill);
+            slot.Initialize(skill, this);
 
             spawnedSlots.Add(slot);
         }
+        HideSkillInfo();
     }
     private void ClearSkillSlots()
     {
@@ -102,5 +114,25 @@ public class SkillsHolderUI : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+    public void ShowSkillInfo(BaseSkill skill)
+    {
+        if (skill == null)
+            return;
+
+        if (infoPanel != null)
+            infoPanel.SetActive(true);
+
+        if (skillNameText != null)
+            skillNameText.text = skill.skillName;
+
+        if (skillDescriptionText != null)
+            skillDescriptionText.text = skill.description;
+    }
+
+    public void HideSkillInfo()
+    {
+        if (infoPanel != null)
+            infoPanel.SetActive(false);
     }
 }

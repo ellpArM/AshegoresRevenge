@@ -1,6 +1,7 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
 {
@@ -8,11 +9,12 @@ public abstract class BaseSkill : MonoBehaviour
     [TextArea(4,4)]
     public string description;
     public Sprite skillIcon;
+    public int manaCost;
+    public int level;
     public List<ElementType> requiredElements = new List<ElementType>();
     protected Vector3 mergePoint; // some skill need this point
     protected List<GameObject> elementalEffects; // for use in some skills
     public AudioClip soundCharge;
-
     public abstract IEnumerator Execute();
 
     public IEnumerator PostExecute()

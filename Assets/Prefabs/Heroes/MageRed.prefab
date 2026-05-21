@@ -37,6 +37,7 @@ Transform:
   - {fileID: 5092768086208211821}
   - {fileID: 7861065117082777214}
   - {fileID: 1578128708798889653}
+  - {fileID: 3309154146073887899}
   m_Father: {fileID: 3856908114468915698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1986854284595573779
@@ -85,8 +86,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Shield
-  description: 
+  description: 'Surround frenly hero in flames. Adds 5 shield.
+
+    Shield is stronger
+    against nature ataaks and weaker to water attacks.'
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 5
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 0}
   effectPrefab: {fileID: 0}
@@ -248,16 +254,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1d8f613cd57844aa1788fca8b985d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  description: 
-  skillIcon: {fileID: 0}
+  skillName: FireBall
+  description: 'Hit enemy target with fire ball dealing 10 damage to the main target
+    and 5 damage to surrounding targets. Main target is also knowced back.
+
+    Consumes
+    all rage to deal +3 damage per rage'
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 10
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 0}
-  projectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
+  projectilePrefab: {fileID: 5492295935689872714, guid: 25e253b05977d704c8519a697a04d49a, type: 3}
   travelDuration: 0.4
   impactDelay: 0.1
-  baseDamage: 5
+  baseDamage: 10
+  levelDamageBonus: 3
+  rageBonus: 3
+  levelRageBons: 0
   damageType: 0
+  splashRadius: 1.5
+  splashDamage: 2
+  pushDistance: 2
+  pushDuration: 0.5
   onHitEffect: {fileID: 0}
   statusEffect: {fileID: 0}
   chanceToProc: 0
@@ -308,20 +327,143 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: fire bolt
-  description: 
+  description: Launch a bolt of fire dealing 5 damage to the target and generate
+    1 rage. +1 damage for each point of rage.
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 0
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 8300000, guid: ac69c2057526c0f428f1b7ef48890792, type: 3}
   projectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
   travelDuration: 1
   impactDelay: 0.1
   baseDamage: 5
+  rageBonus: 2
+  levelDamageBonus: 3
+  levelRageBonus: 1
   damageType: 0
   onHitEffect: {fileID: 0}
   statusEffect: {fileID: 0}
   chanceToProc: 0
   soundLaunch: {fileID: 0}
   soundHit: {fileID: 0}
+--- !u!1 &4908065487739742772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7243423459918087763}
+  - component: {fileID: 7707785116147505957}
+  - component: {fileID: 8826482309266569715}
+  - component: {fileID: 3783161696411684641}
+  - component: {fileID: 6471730447585684143}
+  m_Layer: 6
+  m_Name: UIContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7243423459918087763
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908065487739742772}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2129217272769804731}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7707785116147505957
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908065487739742772}
+  m_CullTransparentMesh: 1
+--- !u!114 &8826482309266569715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908065487739742772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.019607844}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3783161696411684641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908065487739742772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 7
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &6471730447585684143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4908065487739742772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce7f1354008c0b4bbfbc4d3dd61848e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDatabase: {fileID: 11400000, guid: c6fb008254938714e9e982aacce3f21d, type: 2}
+  uiContainer: {fileID: 7243423459918087763}
 --- !u!1 &5123545994975230202
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7822806179263946175}
+  - component: {fileID: 6780747860340878301}
   m_Layer: 0
   m_Name: Enrage
   m_TagString: Untagged
@@ -353,6 +496,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5188031070029085814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6780747860340878301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123545994975230202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5c3700323e5dc459717b2a5d66d5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Enrage
+  description: Increase Rage by 3.
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 0
+  level: 1
+  requiredElements: 
+  soundCharge: {fileID: 0}
+  incValue: 3
+  effectSound: {fileID: 0}
+  effectPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
+--- !u!1 &5891568554971782792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3309154146073887899}
+  - component: {fileID: 8682424801948179791}
+  m_Layer: 0
+  m_Name: EndTurn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3309154146073887899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891568554971782792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5188031070029085814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8682424801948179791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891568554971782792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60841ec652aabb84c8dbc8f32c64fdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Skip
+  description: End your turn and recover 5 mana
+  skillIcon: {fileID: -1693485935312475804, guid: cebe826289578514b93019fd743cb89c, type: 3}
+  manaCost: 0
+  level: 0
+  requiredElements: 
+  soundCharge: {fileID: 0}
 --- !u!1 &6069016087985007266
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +712,8 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: eda8660a038fbe642b43aa736314c65c, type: 2}
   visibleName: 
   attackPower: 100
-  maxHealth: 30
+  maxHealth: 50
+  maxMana: 30
   cardSprite: {fileID: 8469931686135480976}
   animator: {fileID: 1546159181638551848}
   troopsField: {fileID: 0}
@@ -703,6 +920,8 @@ MonoBehaviour:
   skillName: Meteor
   description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 25
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 0}
   meteorProjectilePrefab: {fileID: 5492295935689872714, guid: 25e253b05977d704c8519a697a04d49a, type: 3}
@@ -732,6 +951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5658252208984415486}
+  - component: {fileID: 6282813810521327801}
   m_Layer: 0
   m_Name: Might
   m_TagString: Untagged
@@ -754,6 +974,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5188031070029085814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6282813810521327801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535585655859758306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9164b1f88fe8be4a91b79bdba006bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Might
+  description: 'Apply Might on a friendly target for 2 turns.
+
+    Might increases
+    damage by 50%'
+  skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 5
+  level: 1
+  requiredElements: 
+  soundCharge: {fileID: 0}
+  soundEffect: {fileID: 0}
+  effectPrefab: {fileID: 0}
 --- !u!1 &8612068103122048513
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +1155,8 @@ MonoBehaviour:
   skillName: Fire storm
   description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 30
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 0}
   stormPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
@@ -954,7 +1200,7 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6430537636595994465}
+  - {fileID: 7243423459918087763}
   m_Father: {fileID: 5278898677840557890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1086,142 +1332,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2380964794934163813, guid: b9780d69836a34e44976ec1194c67a82, type: 3}
   m_PrefabInstance: {fileID: 7931413158020367474}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8776524797213749399
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2129217272769804731}
-    m_Modifications:
-    - target: {fileID: 181281477184934585, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_Name
-      value: HPBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 181281477184934585, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2042399561204207113, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2042399561204207113, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5591559657199352790, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5591559657199352790, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2042399561204207113, guid: 1e3066cc91854ac4ebc64fcc60037506, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3115948033877064229, guid: 1e3066cc91854ac4ebc64fcc60037506, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5591559657199352790, guid: 1e3066cc91854ac4ebc64fcc60037506, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214681682728906579, guid: 1e3066cc91854ac4ebc64fcc60037506, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
---- !u!224 &6430537636595994465 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2373855660703006710, guid: 846e9e305ea5807489a37a5a8ff086e4, type: 3}
-  m_PrefabInstance: {fileID: 8776524797213749399}
   m_PrefabAsset: {fileID: 0}

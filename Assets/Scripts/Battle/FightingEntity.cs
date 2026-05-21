@@ -22,6 +22,8 @@ public class FightingEntity : MonoBehaviour
     public int attackPower = 100;
     protected int currentHealth = 0;
     public int maxHealth;
+    public int maxMana;
+    private int currentMana;
 
     [Header("References")]
     [SerializeField] public SpriteRenderer cardSprite;
@@ -40,6 +42,7 @@ public class FightingEntity : MonoBehaviour
     public CharacterResistances Resistances => resistances;
     public IReadOnlyList<StatusEffect> ActiveEffects => activeEffects.AsReadOnly();
     protected ProgressBar hpBar;
+    protected ProgressBar manaBar;
     private List<PassiveSkill> passiveSkills;
     protected static FightingEntity selectedAttacker;
     protected SelectionCircle selectionCircle;
@@ -57,9 +60,23 @@ public class FightingEntity : MonoBehaviour
     {
         if (currentHealth == 0)
             currentHealth = maxHealth;
+        if(currentMana == 0)
+            currentMana = maxMana;
         Initialize();
-        hpBar = GetComponentInChildren<ProgressBar>();
-        hpBar.SetValue(currentHealth, maxHealth);
+        EntityStatusUI ui = GetComponentInChildren<EntityStatusUI>();
+        if (ui)
+        {
+            hpBar = ui.ConnectUI(EntityUIType.HP).GetComponent<ProgressBar>();
+            hpBar.SetValue(currentHealth, maxHealth);
+            if(maxMana > 0)
+            {
+                manaBar = ui.ConnectUI(EntityUIType.Mana).GetComponent<ProgressBar>();
+                manaBar.SetValue(currentMana, maxMana);
+            }
+        }
+        //hpBar = GetComponentInChildren<ProgressBar>();
+        //manaBar = GetComponentInChildren<ProgressBar>();
+        //manaBar.SetValue(currentHealth, maxHealth);
         passiveSkills = GetComponents<PassiveSkill>().ToList();
     }
     public virtual void Initialize()
@@ -129,6 +146,8 @@ public class FightingEntity : MonoBehaviour
     {
         if (hpBar)
             hpBar.SetValue(currentHealth, maxHealth);
+        if (manaBar)
+            manaBar.SetValue(currentMana, maxMana);
     }
 
     internal void SetHealth(int value)
@@ -293,6 +312,23 @@ public class FightingEntity : MonoBehaviour
             );
         }
     }
+    public void RecoverMana(int amount)
+    {
+        currentMana = Mathf.Min(maxMana, currentMana + amount);
+        UpdateVisuals();
+        if (amount > 0)
+        {
+            // Optional floating text feedback
+            EffectsManager.instance.CreateFloatingText(
+                transform.position + Vector3.up * 1.5f,
+                "+" + amount,
+                Color.blue,
+                1.2f,
+                0.8f,
+                1.2f
+            );
+        }
+    }
     public IEnumerator Despawn()
     {
         yield return StartCoroutine(HandleDestruction());
@@ -404,5 +440,15 @@ public class FightingEntity : MonoBehaviour
     public void ShowSelector(SelectionState state)
     {
         selectionCircle.Show(state);
+    }
+    public void AddPassive(PassiveSkill passive)
+    {
+        if (!passiveSkills.Contains(passive))
+            passiveSkills.Add(passive);
+    }
+    public void RemovePassive(PassiveSkill passive)
+    {
+        if(passiveSkills.Contains(passive))
+            passiveSkills.Remove(passive);
     }
 }

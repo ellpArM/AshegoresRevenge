@@ -1,7 +1,8 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class RedMageFireBolt : BaseSkill
 {
@@ -10,6 +11,9 @@ public class RedMageFireBolt : BaseSkill
     public float travelDuration = 0.4f;
     public float impactDelay = 0.1f;
     public int baseDamage = 5;
+    public int rageBonus = 2;
+    public int levelDamageBonus = 3;
+    public int levelRageBonus = 1;
     public ElementType damageType;
     public GameObject onHitEffect;
     [Header("Status Effect")]
@@ -19,9 +23,14 @@ public class RedMageFireBolt : BaseSkill
     public AudioClip soundLaunch;
     public AudioClip soundHit;
     private List<PassiveSkill> passiveSkills;
+    private HeroEntity mainHero;
+    private void Start()
+    {
+        mainHero = transform.root.GetComponent<HeroEntity>();
+    }
     public override IEnumerator Execute()
     {
-        passiveSkills = GetComponents<PassiveSkill>().ToList();
+        passiveSkills = transform.root.GetComponents<PassiveSkill>().ToList();
         yield return BattleManagerNew.Instance.StartCoroutine(WaitForTargetAndAttack());
         BattleManagerNew.Instance.NotifyPlayerSkillUsed();
     }
@@ -48,7 +57,13 @@ public class RedMageFireBolt : BaseSkill
     }
     public int GetAttackPower()
     {
-        int final = baseDamage;
+        int final = baseDamage + (level - 1) * levelDamageBonus;
+
+        RagePassive rage = mainHero.GetComponent<RagePassive>();
+        if (rage != null)
+        {
+            final += rage.rageValue * (rageBonus + ((level - 1) * levelRageBonus));
+        }
 
         foreach (var passive in passiveSkills)
             final = passive.ModifyAttack(final);
@@ -77,6 +92,15 @@ public class RedMageFireBolt : BaseSkill
 
         HeroEntity hero = BattleManagerNew.Instance.GetHeroOfelement(damageType);
         int damageDealth = target.TakeDamage(Mathf.RoundToInt(GetAttackPower() * (hero.spellPower / 100f)), damageType);
+        if(damageDealth > 0)
+        {
+            RagePassive existing = mainHero.GetComponent<RagePassive>();
+            if (existing == null)
+            {
+                existing = mainHero.AddComponent<RagePassive>();
+            }
+            existing.AddRage(1);
+        }
         if (statusEffect != null && damageDealth > 0)
         {
             int roll = Random.Range(0, 100);

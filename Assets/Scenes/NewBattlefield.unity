@@ -255,7 +255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 540.9, y: -267.2}
+  m_AnchoredPosition: {x: 540.9, y: -488}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40422403
@@ -3010,6 +3010,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 1589076711752116060, guid: 2a68bf93ce0198a43ab34de3ea8e90fd, type: 3}
   soundEffectPrefab: {fileID: 4576910742704189589, guid: e9e42e19f2b773849a7182479947a086, type: 3}
+--- !u!114 &1097477854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 817172579732259172, guid: d3ae59beae8af8e4c97c27e1ead195dc, type: 3}
+  m_PrefabInstance: {fileID: 8811321287598420276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1110206449
 GameObject:
   m_ObjectHideFlags: 0
@@ -4193,6 +4204,7 @@ MonoBehaviour:
   skillName: FireBall(testing)
   description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 0
   requiredElements: 01000000
   soundCharge: {fileID: 8300000, guid: 5e0e36c2051e89b4a824cdde41b091ca, type: 3}
   formedProjectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
@@ -4717,6 +4729,7 @@ MonoBehaviour:
   skillName: FireBall(testing)
   description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
+  manaCost: 0
   requiredElements: 02000000
   soundCharge: {fileID: 8300000, guid: 5e0e36c2051e89b4a824cdde41b091ca, type: 3}
   formedProjectilePrefab: {fileID: 5492295935689872714, guid: 882c74630c4ae7a4aa732b837f786f65, type: 3}
@@ -5494,6 +5507,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6176580012790883497, guid: d3ae59beae8af8e4c97c27e1ead195dc, type: 3}
+      propertyPath: characterPortrait
+      value: 
+      objectReference: {fileID: 1097477854}
     - target: {fileID: 8800862505151732349, guid: d3ae59beae8af8e4c97c27e1ead195dc, type: 3}
       propertyPath: troopsField
       value: 
