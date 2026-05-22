@@ -137,6 +137,7 @@ MonoBehaviour:
   description: 
   skillIcon: {fileID: -8694565044806487079, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
   manaCost: 0
+  level: 1
   requiredElements: 
   soundCharge: {fileID: 8300000, guid: ac69c2057526c0f428f1b7ef48890792, type: 3}
   projectilePrefab: {fileID: 5492295935689872714, guid: fb92ca36a1a6d9849862699d15ea2ff9, type: 3}
@@ -144,6 +145,8 @@ MonoBehaviour:
   impactDelay: 0.1
   baseDamage: 5
   rageBonus: 2
+  levelDamageBonus: 3
+  levelRageBonus: 1
   damageType: 0
   onHitEffect: {fileID: 0}
   statusEffect: {fileID: 0}
@@ -198,6 +201,7 @@ MonoBehaviour:
   description: End your turn and recover 5 mana
   skillIcon: {fileID: -1693485935312475804, guid: cebe826289578514b93019fd743cb89c, type: 3}
   manaCost: 0
+  level: 0
   requiredElements: 
   soundCharge: {fileID: 0}
 --- !u!1 &6069016087985007266

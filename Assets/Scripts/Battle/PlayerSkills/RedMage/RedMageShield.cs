@@ -50,13 +50,10 @@ public class RedMageShield : BaseSkill
                 GameObject.Destroy(existing);
             }
 
-            // Add new passive
             PassiveSkill newPassive = hero.gameObject.AddComponent(passiveToGrant.GetType()) as PassiveSkill;
 
-            // Optional: copy over values from the assigned template
             CopyPassiveValues(passiveToGrant, newPassive);
 
-            // Optional spellPower scaling
             newPassive.InitializeFromCaster(mainHero);
         }
         if (effectSound != null)

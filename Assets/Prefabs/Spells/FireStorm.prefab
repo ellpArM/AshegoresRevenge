@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1173466741511955171
+--- !u!1 &9139404958116815514
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,67 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 496969293787346866}
-  - component: {fileID: 2769485274865093485}
+  - component: {fileID: 4642866660281521348}
+  - component: {fileID: 4250780541900096524}
   m_Layer: 0
-  m_Name: FireBall
+  m_Name: FireStorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &496969293787346866
+--- !u!4 &4642866660281521348
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173466741511955171}
+  m_GameObject: {fileID: 9139404958116815514}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2769485274865093485
+--- !u!114 &4250780541900096524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173466741511955171}
+  m_GameObject: {fileID: 9139404958116815514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c1d8f613cd57844aa1788fca8b985d8, type: 3}
+  m_Script: {fileID: 11500000, guid: b443aef0daa427549829e1e62b89c036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: FireBall
-  description: 'Hit enemy target with fire ball dealing 10 damage to the main target
-    and 5 damage to surrounding targets. Main target is also knowced back.
-
-    Consumes
-    all rage to deal +3 damage per rage'
+  skillName: Fire storm
+  description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-  manaCost: 10
+  manaCost: 30
   level: 1
   requiredElements: 
   soundCharge: {fileID: 0}
-  projectilePrefab: {fileID: 5492295935689872714, guid: 25e253b05977d704c8519a697a04d49a, type: 3}
-  travelDuration: 0.4
-  impactDelay: 0.1
-  baseDamage: 10
+  stormPrefab: {fileID: 6709276644064086281, guid: b3409358e454d12439dd90469f7ccf9e, type: 3}
+  baseDamage: 15
+  damageType: 0
   levelDamageBonus: 3
   rageBonus: 3
   levelRageBons: 0
-  damageType: 0
-  splashRadius: 1.5
-  splashDamage: 2
-  pushDistance: 2
-  pushDuration: 0.5
-  onHitEffect: {fileID: 0}
+  baseAccuracy: 85
   statusEffect: {fileID: 0}
   chanceToProc: 0
-  soundLaunch: {fileID: 0}
-  soundHit: {fileID: 0}
+  travelDuration: 1.2
+  returnDuration: 0.8
+  soundStormStart: {fileID: 0}
+  soundStormEnd: {fileID: 0}

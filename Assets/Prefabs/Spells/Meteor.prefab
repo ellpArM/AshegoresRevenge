@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496969293787346866}
-  - component: {fileID: 5183872713198415492}
+  - component: {fileID: 4885586417701750755}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5183872713198415492
+--- !u!114 &4885586417701750755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,32 +41,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173466741511955171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57283b64081a3447a95944debd53cb3, type: 3}
+  m_Script: {fileID: 11500000, guid: a0ec0e73d659c3441822ba6e9da8aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Meteor
-  description: 'Deal <damage> fire damage. to selected target and half damage to
-    nearby enemies.
-
-    Can cause burn'
+  description: 
   skillIcon: {fileID: 3078762230685488240, guid: f21792f1de6c9c94283ee70ad3ddd214, type: 3}
-  requiredElements: 000000000000000000000000
+  manaCost: 25
+  level: 1
+  requiredElements: 
   soundCharge: {fileID: 0}
   meteorProjectilePrefab: {fileID: 5492295935689872714, guid: 25e253b05977d704c8519a697a04d49a, type: 3}
+  groundEffectPrefab: {fileID: 5492295935689872714, guid: 4ab35ae6d413d834f89f23b456a36526, type: 3}
   meteorImpactVFX: {fileID: 1714363467411018263, guid: bc3a44295adc6bf44b226d517be2f72b, type: 3}
-  baseDamage: 30
+  baseDamage: 20
   damageType: 0
   meteorHeight: 12
   travelDuration: 1
-  damageRadius: 4
+  damageRadius: 2
   areaDamage: 10
-  elementalRiseHeight: 5
-  elementalLaunchDuration: 0.8
-  mergeDelay: 0.5
+  elementalRiseHeight: 2
+  elementalLaunchDuration: 0.4
+  mergeDelay: 0.3
   gatherDuration: 0.3
   soundLaunch: {fileID: 0}
   soundHit: {fileID: 0}
-  elementsLib: {fileID: 11400000, guid: bf601cc590b5dc84ab9f25aaa9380d3a, type: 2}
   BeamPrefab: {fileID: 6772939638736423725, guid: bdd6132a5e5273d459000f13e4d123d3, type: 3}
   statusEffect: {fileID: 0}
   chanceToProc: 0
